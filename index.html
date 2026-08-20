@@ -32,7 +32,7 @@
   }
   h1{font-size:clamp(2.3rem,6.5vw,3.9rem); line-height:1.04; letter-spacing:-.02em; margin:0 0 .6rem; font-weight:600}
   .deck{font-size:clamp(1.1rem,2.4vw,1.35rem); color:var(--muted); font-style:italic; margin:0 0 2rem; max-width:34ch}
-  .lede{font-size:1.06rem; max-width:60ch; margin:0 0 2rem; color:var(--ink)}
+  .lede{font-size:1.06rem; max-width:60ch; margin:0 0 2rem}
   .lede strong{font-weight:600}
 
   .facts{
@@ -55,41 +55,36 @@
   .s{
     background:var(--panel); border:1px solid var(--rule); border-radius:12px;
     padding:1.15rem 1.3rem; box-shadow:var(--shadow);
-    display:grid; grid-template-columns:4.6rem 1fr auto; gap:.35rem 1.3rem; align-items:baseline;
+    display:grid; grid-template-columns:6.5rem 1fr auto; gap:.35rem 1.4rem; align-items:start;
   }
-  .wk{
-    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    font-size:.72rem; letter-spacing:.09em; text-transform:uppercase; color:var(--faint);
-    font-weight:600; grid-row:1/3;
-  }
-  .wk .date{display:block; font-size:.95rem; letter-spacing:0; text-transform:none; color:var(--ink); font-weight:600; margin-top:.15rem}
+  .when{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; padding-top:.1rem}
+  .when .d{display:block; font-size:1rem; font-weight:600; color:var(--ink)}
+  .when .t{display:block; font-size:.78rem; color:var(--faint); margin-top:.15rem}
   .topic{font-size:1.12rem; font-weight:600; letter-spacing:-.01em; margin:0}
+  .detail{font-size:.95rem; color:var(--muted); margin:.3rem 0 0; max-width:58ch}
   .guest{
-    grid-column:2; font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    font-size:.9rem; color:var(--muted); margin:.15rem 0 0;
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:.88rem; color:var(--muted); margin:.55rem 0 0;
   }
   .guest b{color:var(--ink); font-weight:600}
   .tag{
-    grid-column:3; grid-row:1/3; align-self:center;
     font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600;
-    color:var(--accent); background:var(--accent-soft); border:1px solid var(--rule);
-    padding:.28rem .6rem; border-radius:999px; white-space:nowrap;
+    font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600;
+    color:var(--muted); background:var(--chip); border:1px solid var(--rule);
+    padding:.28rem .6rem; border-radius:999px; white-space:nowrap; margin-top:.1rem;
   }
-  .s.tba .topic{color:var(--muted)}
+  .tag.virt{color:var(--accent); background:var(--accent-soft)}
 
-  @media(max-width:36rem){
+  @media(max-width:38rem){
     .s{grid-template-columns:1fr; gap:.2rem}
-    .wk{grid-row:auto}
-    .wk .date{display:inline; margin-left:.5rem}
-    .guest,.tag{grid-column:1}
-    .tag{grid-row:auto; justify-self:start; margin-top:.6rem}
+    .when{display:flex; gap:.5rem; align-items:baseline; margin-bottom:.5rem}
+    .when .d,.when .t{display:inline}
+    .tag{justify-self:start; margin-top:.75rem}
   }
 
   footer{margin-top:3.5rem; padding-top:1.5rem; border-top:1px solid var(--rule);
     font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
     font-size:.85rem; color:var(--faint)}
-  footer a{color:var(--accent)}
 </style>
 
 <div class="wrap">
@@ -100,75 +95,111 @@
   <p class="lede">
     Founders negotiate equity, dilution and terms mostly in the dark — the benchmarks that would tell
     them what "normal" looks like are the one thing nobody in the room shares. This course walks the
-    startup lifecycle stage by stage against data on <strong>40,000+ startups</strong>, and each week a
+    startup lifecycle stage by stage against data on <strong>40,000+ startups</strong>, and each session a
     stage-appropriate investor joins to say what the numbers look like from their side of the table.
   </p>
 
   <ul class="facts">
     <li><b>10 sessions</b></li>
-    <li>Wednesdays <b>4:30–6:30pm PT</b></li>
     <li><b>Sep 2 – Nov 4, 2026</b></li>
-    <li>Live online</li>
+    <li>Berkeley &amp; online</li>
   </ul>
 
   <h2>Schedule &amp; guests</h2>
   <ol class="sessions">
     <li class="s">
-      <div class="wk">Week 1<span class="date">Sep 2</span></div>
-      <p class="topic">Seed &amp; first institutional capital</p>
-      <p class="guest"><b>Rex Salisbury</b> · Cambrian VC</p>
+      <div class="when"><span class="d">Sep 2</span><span class="t">4:30 – 6:30pm</span></div>
+      <div class="body">
+        <p class="topic">Seed &amp; First Institutional Capital</p>
+        <p class="detail">How to think about valuation when you have no revenue, and what seed investors are actually looking for</p>
+        <p class="guest"><b>Rex Salisbury</b> · Cambrian VC</p>
+      </div>
+      <span class="tag">In person</span>
     </li>
     <li class="s">
-      <div class="wk">Week 2<span class="date">Sep 9</span></div>
-      <p class="topic">Accelerators &amp; SAFEs</p>
-      <p class="guest"><b>Christina Gilbert</b> · Y Combinator</p>
+      <div class="when"><span class="d">Sep 9</span><span class="t">4:30 – 6:30pm</span></div>
+      <div class="body">
+        <p class="topic">Accelerators &amp; SAFEs</p>
+        <p class="detail">What an accelerator actually buys you, and how the SAFE became the default instrument for early-stage capital</p>
+        <p class="guest"><b>Christina Gilbert</b> · Y Combinator</p>
+      </div>
+      <span class="tag">In person</span>
     </li>
     <li class="s">
-      <div class="wk">Week 3<span class="date">Sep 16</span></div>
-      <p class="topic">Series A &amp; the institutional transition</p>
-      <p class="guest"><b>Mercedes Bent</b> · Premise</p>
+      <div class="when"><span class="d">Sep 16</span><span class="t">4:30 – 6:30pm</span></div>
+      <div class="body">
+        <p class="topic">Series A &amp; The Institutional Transition</p>
+        <p class="detail">Series A is where governance gets real: you add board members, negotiate pro-rata rights, and face investors who expect a different level of rigor</p>
+        <p class="guest"><b>Mercedes Bent</b> · Premise VC</p>
+      </div>
+      <span class="tag">In person</span>
     </li>
     <li class="s">
-      <div class="wk">Week 4<span class="date">Sep 23</span></div>
-      <p class="topic">Series B &amp; scaling product–market fit</p>
-      <p class="guest"><b>Nnamdi Iregbulem</b> · Lightspeed</p>
+      <div class="when"><span class="d">Sep 23</span><span class="t">4:30 – 6:30pm</span></div>
+      <div class="body">
+        <p class="topic">Series B &amp; Scaling Product-Market-Fit</p>
+        <p class="detail">Series B separates companies that found product-market fit from those that faked it — and it is when down rounds, refreshers, and secondaries enter the conversation</p>
+        <p class="guest"><b>Nnamdi Iregbulem</b> · Lightspeed</p>
+      </div>
+      <span class="tag">In person</span>
     </li>
     <li class="s">
-      <div class="wk">Week 5<span class="date">Sep 30</span></div>
-      <p class="topic">Crypto &amp; the frontier</p>
-      <p class="guest"><b>Ani Pai</b> · Robot Ventures &amp; Dragonfly</p>
+      <div class="when"><span class="d">Sep 30</span><span class="t">4:30 – 6:30pm</span></div>
+      <div class="body">
+        <p class="topic">Crypto, Tokens &amp; Frontier Tech Capital</p>
+        <p class="detail">What changes when equity isn’t the only asset on the table — token warrants, milestone tranches, and how capital-hungry frontier companies actually get funded</p>
+        <p class="guest"><b>Ani Pai</b> · Robot Ventures</p>
+      </div>
+      <span class="tag">In person</span>
     </li>
     <li class="s">
-      <div class="wk">Week 6<span class="date">Oct 7</span></div>
-      <p class="topic">Warrants &amp; strategic investors</p>
-      <p class="guest"><b>Andy Ku</b> · AI Fund &amp; In-Q-Tel</p>
-    </li>
-    <li class="s tba">
-      <div class="wk">Week 7<span class="date">Oct 14</span></div>
-      <p class="topic">Topic to be announced</p>
-      <p class="guest">Guest to be announced</p>
-      <span class="tag">TBA</span>
-    </li>
-    <li class="s tba">
-      <div class="wk">Week 8<span class="date">Oct 21</span></div>
-      <p class="topic">Growth rounds &amp; Series C+</p>
-      <p class="guest">Guest to be announced</p>
-      <span class="tag">TBA</span>
+      <div class="when"><span class="d">Oct 7</span><span class="t">4:30 – 6:30pm</span></div>
+      <div class="body">
+        <p class="topic">Warrants &amp; Strategic Investors</p>
+        <p class="detail">What corporate, government, and studio investors want that financial VCs don’t — and what their paper actually costs you</p>
+        <p class="guest"><b>Andy Ku</b> · AI Fund</p>
+      </div>
+      <span class="tag">In person</span>
     </li>
     <li class="s">
-      <div class="wk">Week 9<span class="date">Oct 28</span></div>
-      <p class="topic">Pre-seed: formation &amp; founder equity</p>
-      <p class="guest"><b>Danielle Strachman</b> · 1517 Fund</p>
+      <div class="when"><span class="d">Oct 21</span><span class="t">4:30 – 6:30pm</span></div>
+      <div class="body">
+        <p class="topic">Writing The First Check</p>
+        <p class="detail">How a pre-seed fund decides with almost no data — and what the economics look like from the other side of the table</p>
+        <p class="guest"><b>Charles Hudson</b> · Precursor Ventures</p>
+      </div>
+      <span class="tag virt">Online</span>
     </li>
-    <li class="s tba">
-      <div class="wk">Week 10<span class="date">Nov 4</span></div>
-      <p class="topic">The public-markets transition</p>
-      <p class="guest">Guest to be announced</p>
-      <span class="tag">TBA</span>
+    <li class="s">
+      <div class="when"><span class="d">Oct 28</span><span class="t">4:30 – 6:30pm</span></div>
+      <div class="body">
+        <p class="topic">Pre-Seed: Formation &amp; Founder Equity</p>
+        <p class="detail">Before there’s a product, there’s a cap table — the decisions that shape everything that follows</p>
+        <p class="guest"><b>Danielle Strachman</b> · 1517 Fund</p>
+      </div>
+      <span class="tag">In person</span>
+    </li>
+    <li class="s">
+      <div class="when"><span class="d">Nov 4</span><span class="t">9:00am PT</span></div>
+      <div class="body">
+        <p class="topic">Growth Rounds &amp; Series C and Beyond</p>
+        <p class="detail">Late-stage rounds bring new players — crossover funds, sovereign wealth, and hedge funds who think differently than VCs</p>
+        <p class="guest"><b>Vittorio Lavioso</b> · Baillie Gifford</p>
+      </div>
+      <span class="tag virt">Online</span>
+    </li>
+    <li class="s">
+      <div class="when"><span class="d">Nov 4</span><span class="t">4:30 – 6:30pm</span></div>
+      <div class="body">
+        <p class="topic">The Public Markets Transition</p>
+        <p class="detail">The IPO isn’t the end — it’s a transition to a completely different game, and the data on founder and employee outcomes is rarely shown</p>
+        <p class="guest"><b>Doreen Linfoot</b> · Augment</p>
+      </div>
+      <span class="tag">In person</span>
     </li>
   </ol>
 
   <footer>
-    Taught by Lorenzo Barberis Canonico. Guest lineup is subject to change.
+    Taught by Lorenzo Barberis Canonico. Schedule and guest lineup are subject to change.
   </footer>
 </div>

@@ -4,8 +4,20 @@ A single static page listing the schedule, topics and guest lineup for
 **Venture Math: What the Numbers Really Look Like, from Formation to IPO**
 (UC Berkeley Extension, Fall 2026).
 
-`index.html` is self-contained — no build step, no dependencies, no external requests.
-Open it directly in a browser to preview, or serve the folder with any static server.
+`index.html` is **generated** — do not hand-edit it. Run:
+
+```
+python3 build.py
+```
+
+It reads `../fliers/sessions/*.json`, the same data the printed flyers are built from, and
+fills `template.html`. Edit the flyer JSON (or `template.html` for wording and design), then
+rebuild. The output is self-contained — no dependencies, no external requests — so you can
+open it directly in a browser or serve the folder with any static server.
+
+Generating from the flyers is deliberate: the schedule has already shifted once (Oct 21 changed
+guest *and* topic, Nov 4 gained a second session), and a hand-maintained page silently fell out
+of step. One source, two outputs.
 
 ## Publishing to GitHub Pages
 
@@ -34,6 +46,10 @@ separate private repo that tracks the code and metadata and gitignores the image
 
 ## Updating the lineup
 
-Guests and topics are hand-maintained in `index.html`. A session with no confirmed
-speaker uses the `tba` class and shows "Guest to be announced" — do not list anyone
-who has not accepted their invite.
+Edit `fliers/sessions/*.json` and re-run `build.py`. A session with no flyer simply does
+not appear — that is how the empty **Oct 14** slot is handled, and why the page shows dates
+rather than session numbers (the flyers number 01–11 with no 07, and a visible gap on a public
+schedule invites a question you do not want to answer).
+
+Only add a guest once they have accepted. Having a flyer is the signal — if there is no flyer,
+there is no row.
