@@ -1,0 +1,174 @@
+<title>Venture Math</title>
+<meta name="description" content="A data-driven tour of the startup lifecycle, from formation to IPO. UC Berkeley Extension, Fall 2026.">
+<style>
+  :root{
+    --bg:#fbfaf7; --panel:#ffffff; --ink:#191714; --muted:#6b645a; --faint:#8d857a;
+    --rule:#e4ded3; --accent:#8a5a2b; --accent-soft:#f3ebdf; --chip:#efe9dd;
+    --shadow:0 1px 2px rgba(25,23,20,.04),0 8px 24px rgba(25,23,20,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#14130f; --panel:#1c1a16; --ink:#f0ece4; --muted:#a49b8d; --faint:#8b8274;
+      --rule:#2e2b24; --accent:#d9a566; --accent-soft:#2a231a; --chip:#262218;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14130f; --panel:#1c1a16; --ink:#f0ece4; --muted:#a49b8d; --faint:#8b8274;
+    --rule:#2e2b24; --accent:#d9a566; --accent-soft:#2a231a; --chip:#262218;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 ui-serif,Georgia,"Iowan Old Style","Times New Roman",serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:64rem; margin:0 auto; padding:clamp(2rem,6vw,5rem) clamp(1.1rem,4vw,2.5rem) 5rem}
+  .eyebrow{
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--accent); font-weight:600; margin:0 0 1rem;
+  }
+  h1{font-size:clamp(2.3rem,6.5vw,3.9rem); line-height:1.04; letter-spacing:-.02em; margin:0 0 .6rem; font-weight:600}
+  .deck{font-size:clamp(1.1rem,2.4vw,1.35rem); color:var(--muted); font-style:italic; margin:0 0 2rem; max-width:34ch}
+  .lede{font-size:1.06rem; max-width:60ch; margin:0 0 2rem; color:var(--ink)}
+  .lede strong{font-weight:600}
+
+  .facts{
+    display:flex; flex-wrap:wrap; gap:.55rem; padding:0; margin:0 0 3.5rem; list-style:none;
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  .facts li{
+    background:var(--chip); border:1px solid var(--rule); border-radius:999px;
+    padding:.4rem .95rem; font-size:.86rem; color:var(--muted);
+  }
+  .facts b{color:var(--ink); font-weight:600}
+
+  h2{
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:.75rem; letter-spacing:.16em; text-transform:uppercase; color:var(--faint);
+    font-weight:600; margin:0 0 1.25rem; padding-bottom:.7rem; border-bottom:1px solid var(--rule);
+  }
+
+  ol.sessions{list-style:none; padding:0; margin:0; display:grid; gap:.7rem}
+  .s{
+    background:var(--panel); border:1px solid var(--rule); border-radius:12px;
+    padding:1.15rem 1.3rem; box-shadow:var(--shadow);
+    display:grid; grid-template-columns:4.6rem 1fr auto; gap:.35rem 1.3rem; align-items:baseline;
+  }
+  .wk{
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:.72rem; letter-spacing:.09em; text-transform:uppercase; color:var(--faint);
+    font-weight:600; grid-row:1/3;
+  }
+  .wk .date{display:block; font-size:.95rem; letter-spacing:0; text-transform:none; color:var(--ink); font-weight:600; margin-top:.15rem}
+  .topic{font-size:1.12rem; font-weight:600; letter-spacing:-.01em; margin:0}
+  .guest{
+    grid-column:2; font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:.9rem; color:var(--muted); margin:.15rem 0 0;
+  }
+  .guest b{color:var(--ink); font-weight:600}
+  .tag{
+    grid-column:3; grid-row:1/3; align-self:center;
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600;
+    color:var(--accent); background:var(--accent-soft); border:1px solid var(--rule);
+    padding:.28rem .6rem; border-radius:999px; white-space:nowrap;
+  }
+  .s.tba .topic{color:var(--muted)}
+
+  @media(max-width:36rem){
+    .s{grid-template-columns:1fr; gap:.2rem}
+    .wk{grid-row:auto}
+    .wk .date{display:inline; margin-left:.5rem}
+    .guest,.tag{grid-column:1}
+    .tag{grid-row:auto; justify-self:start; margin-top:.6rem}
+  }
+
+  footer{margin-top:3.5rem; padding-top:1.5rem; border-top:1px solid var(--rule);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:.85rem; color:var(--faint)}
+  footer a{color:var(--accent)}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">UC Berkeley Extension · Fall 2026</p>
+  <h1>Venture Math</h1>
+  <p class="deck">What the numbers really look like, from formation to IPO.</p>
+
+  <p class="lede">
+    Founders negotiate equity, dilution and terms mostly in the dark — the benchmarks that would tell
+    them what "normal" looks like are the one thing nobody in the room shares. This course walks the
+    startup lifecycle stage by stage against data on <strong>40,000+ startups</strong>, and each week a
+    stage-appropriate investor joins to say what the numbers look like from their side of the table.
+  </p>
+
+  <ul class="facts">
+    <li><b>10 sessions</b></li>
+    <li>Wednesdays <b>4:30–6:30pm PT</b></li>
+    <li><b>Sep 2 – Nov 4, 2026</b></li>
+    <li>Live online</li>
+  </ul>
+
+  <h2>Schedule &amp; guests</h2>
+  <ol class="sessions">
+    <li class="s">
+      <div class="wk">Week 1<span class="date">Sep 2</span></div>
+      <p class="topic">Seed &amp; first institutional capital</p>
+      <p class="guest"><b>Rex Salisbury</b> · Cambrian VC</p>
+    </li>
+    <li class="s">
+      <div class="wk">Week 2<span class="date">Sep 9</span></div>
+      <p class="topic">Accelerators &amp; SAFEs</p>
+      <p class="guest"><b>Christina Gilbert</b> · Y Combinator</p>
+    </li>
+    <li class="s">
+      <div class="wk">Week 3<span class="date">Sep 16</span></div>
+      <p class="topic">Series A &amp; the institutional transition</p>
+      <p class="guest"><b>Mercedes Bent</b> · Premise</p>
+    </li>
+    <li class="s">
+      <div class="wk">Week 4<span class="date">Sep 23</span></div>
+      <p class="topic">Series B &amp; scaling product–market fit</p>
+      <p class="guest"><b>Nnamdi Iregbulem</b> · Lightspeed</p>
+    </li>
+    <li class="s">
+      <div class="wk">Week 5<span class="date">Sep 30</span></div>
+      <p class="topic">Crypto &amp; the frontier</p>
+      <p class="guest"><b>Ani Pai</b> · Robot Ventures &amp; Dragonfly</p>
+    </li>
+    <li class="s">
+      <div class="wk">Week 6<span class="date">Oct 7</span></div>
+      <p class="topic">Warrants &amp; strategic investors</p>
+      <p class="guest"><b>Andy Ku</b> · AI Fund &amp; In-Q-Tel</p>
+    </li>
+    <li class="s tba">
+      <div class="wk">Week 7<span class="date">Oct 14</span></div>
+      <p class="topic">Topic to be announced</p>
+      <p class="guest">Guest to be announced</p>
+      <span class="tag">TBA</span>
+    </li>
+    <li class="s tba">
+      <div class="wk">Week 8<span class="date">Oct 21</span></div>
+      <p class="topic">Growth rounds &amp; Series C+</p>
+      <p class="guest">Guest to be announced</p>
+      <span class="tag">TBA</span>
+    </li>
+    <li class="s">
+      <div class="wk">Week 9<span class="date">Oct 28</span></div>
+      <p class="topic">Pre-seed: formation &amp; founder equity</p>
+      <p class="guest"><b>Danielle Strachman</b> · 1517 Fund</p>
+    </li>
+    <li class="s tba">
+      <div class="wk">Week 10<span class="date">Nov 4</span></div>
+      <p class="topic">The public-markets transition</p>
+      <p class="guest">Guest to be announced</p>
+      <span class="tag">TBA</span>
+    </li>
+  </ol>
+
+  <footer>
+    Taught by Lorenzo Barberis Canonico. Guest lineup is subject to change.
+  </footer>
+</div>
