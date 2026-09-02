@@ -49,6 +49,23 @@ FLYERS_DST = os.path.join(ROOT, "fliers")
 # Anything still carrying drafting markers must not reach a public URL.
 PLACEHOLDERS = ("TO REPLACE", "First Lastname", "guest-placeholder", "Lorem")
 
+ASSETS_SRC = os.path.join(ROOT, "..", "fliers", "assets")
+ASSETS_DST = os.path.join(ROOT, "assets")
+
+
+def asset(ref):
+    """Turn a flyer asset ref ("../assets/x.jpg") into a basename that exists in fliers/assets."""
+    if not ref:
+        return ""
+    name = os.path.basename(str(ref))
+    return name if os.path.exists(os.path.join(ASSETS_SRC, name)) else ""
+
+
+def role(title):
+    """First clause of the guest title is the current role; the rest is prior history."""
+    return re.split(r"\s*·\s*", title)[0] if title else ""
+
+
 rows, held = [], []
 for f in sorted(glob.glob(os.path.join(SESSIONS, "*.json"))):
     if os.path.basename(f).startswith("_"):
@@ -59,6 +76,7 @@ for f in sorted(glob.glob(os.path.join(SESSIONS, "*.json"))):
     unfinished = [m for m in PLACEHOLDERS if m in raw]
     if unfinished:
         held.append((slug, unfinished))
+    title = txt(d.get("guest_title"))
     rows.append({
         "slug": slug, "flyer": "" if unfinished else slug,
         "date": fmt_date(txt(d.get("date"))),
@@ -67,26 +85,68 @@ for f in sorted(glob.glob(os.path.join(SESSIONS, "*.json"))):
         "detail": txt(d.get("topic_detail")),
         "guest": txt(d.get("guest_name")),
         "firm": txt(d.get("guest_logo_alt")),
+        "role": role(title),
+        "photo": asset(d.get("guest_photo")),
+        "logo": asset(d.get("guest_logo")),
         "virtual": "virtual" in txt(d.get("location")).lower(),
         "sort": (parse_date(txt(d.get("date"))), parse_time(txt(d.get("time")))),
     })
 rows.sort(key=lambda r: r["sort"])
 
+# copy the guest photos + firm logos the page references into site/assets/
+if os.path.isdir(ASSETS_DST):
+    shutil.rmtree(ASSETS_DST)
+os.makedirs(ASSETS_DST, exist_ok=True)
+wanted = {a for r in rows for a in (r["photo"], r["logo"]) if a}
+for a in sorted(wanted):
+    shutil.copy2(os.path.join(ASSETS_SRC, a), os.path.join(ASSETS_DST, a))
+
 e = html.escape
-cards = "\n".join(f'''    <li class="s">
+
+
+def avatar(r, cls):
+    return (f'<img class="{cls}" src="assets/{e(r["photo"])}" alt="{e(r["guest"])}" '
+            f'loading="lazy" width="60" height="60">') if r["photo"] else ""
+
+
+def logo_plate(r):
+    return (f'<span class="logo-plate"><img src="assets/{e(r["logo"])}" '
+            f'alt="{e(r["firm"])}" loading="lazy"></span>') if r["logo"] else ""
+
+
+def guest_block(r):
+    if not r["guest"]:
+        return ""
+    # the first clause of the title already names the firm; the logo plate carries the brand mark,
+    # so show the role verbatim and fall back to the bare firm only when there is no role.
+    role = f'<div class="role">{e(r["role"])}</div>' if r["role"] else \
+           (f'<div class="role"><b>{e(r["firm"])}</b></div>' if r["firm"] else "")
+    return (f'<div class="guest">{avatar(r, "avatar")}'
+            f'<div class="who"><div class="name">{e(r["guest"])}</div>{role}</div>'
+            f'{logo_plate(r)}</div>')
+
+
+faces = "\n".join(
+    f'        <img src="assets/{e(r["photo"])}" alt="{e(r["guest"])}" title="{e(r["guest"])} · {e(r["firm"])}" loading="lazy" width="60" height="60">'
+    for r in rows if r["photo"])
+
+cards = "\n".join(f'''    <li class="s reveal" style="--i:{i + 2}">
       <div class="when"><span class="d">{e(r["date"])}</span><span class="t">{e(r["time"])}</span></div>
       <div class="body">
         <p class="topic">{e(r["title"])}</p>
         <p class="detail">{e(r["detail"])}</p>
-        <p class="guest"><b>{e(r["guest"])}</b> · {e(r["firm"])}</p>
+        {guest_block(r)}
       </div>
-      <span class="tag{' virt' if r["virtual"] else ''}">{"Online" if r["virtual"] else "In person"}</span>
-      {f'<a class="fly" href="fliers/{r["flyer"]}.html">Flyer</a>' if r["flyer"] else ''}
-    </li>''' for r in rows)
+      <div class="aside">
+        <span class="tag{' virt' if r["virtual"] else ''}">{"Online" if r["virtual"] else "In person"}</span>
+        {f'<a class="fly" href="fliers/{r["flyer"]}.html">Flyer</a>' if r["flyer"] else ''}
+      </div>
+    </li>''' for i, r in enumerate(rows))
 
 span = f'{rows[0]["date"]} – {rows[-1]["date"]}, 2026' if rows else ""
 page = open(os.path.join(ROOT, "template.html")).read()
-page = page.replace("<!--SESSIONS-->", cards).replace("__COUNT__", str(len(rows))).replace("__SPAN__", span)
+page = (page.replace("<!--FACES-->", faces).replace("<!--SESSIONS-->", cards)
+            .replace("__COUNT__", str(len(rows))).replace("__SPAN__", span))
 open(os.path.join(ROOT, "index.html"), "w").write(page)
 
 # publish only the finished flyers, and clear out any previously-copied ones

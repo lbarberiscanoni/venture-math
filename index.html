@@ -1,234 +1,378 @@
 <meta charset="utf-8">
 <title>Venture Math</title>
 <meta name="description" content="A data-driven tour of the startup lifecycle, from formation to IPO. UC Berkeley Extension, Fall 2026.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
   :root{
     --bg:#fbfaf7; --panel:#ffffff; --ink:#191714; --muted:#6b645a; --faint:#8d857a;
-    --rule:#e4ded3; --accent:#8a5a2b; --accent-soft:#f3ebdf; --chip:#efe9dd;
-    --shadow:0 1px 2px rgba(25,23,20,.04),0 8px 24px rgba(25,23,20,.05);
+    --rule:#e7e1d6; --hair:#efe9de; --accent:#8a5a2b; --accent-ink:#7a4e24;
+    --accent-soft:#f3ebdf; --chip:#efe9dd; --ring:#ffffff;
+    --logo-plate:#ffffff; --logo-plate-rule:#e7e1d6;
+    --shadow:0 1px 2px rgba(25,23,20,.04),0 10px 30px rgba(25,23,20,.06);
+    --shadow-lift:0 2px 6px rgba(25,23,20,.06),0 18px 44px rgba(25,23,20,.10);
+    --glow:transparent;
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --bg:#14130f; --panel:#1c1a16; --ink:#f0ece4; --muted:#a49b8d; --faint:#8b8274;
-      --rule:#2e2b24; --accent:#d9a566; --accent-soft:#2a231a; --chip:#262218;
-      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+      --bg:#131109; --panel:#1c1a15; --ink:#f2eee6; --muted:#a89f90; --faint:#8b8274;
+      --rule:#2f2b22; --hair:#26231c; --accent:#e0ac6b; --accent-ink:#e9bd85;
+      --accent-soft:#2a2115; --chip:#242018; --ring:#26231b;
+      --logo-plate:#f4efe6; --logo-plate-rule:#d8cfbf;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.34);
+      --shadow-lift:0 2px 8px rgba(0,0,0,.45),0 20px 50px rgba(0,0,0,.42);
+      --glow:radial-gradient(60rem 32rem at 78% -8%,rgba(224,172,107,.10),transparent 60%);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#14130f; --panel:#1c1a16; --ink:#f0ece4; --muted:#a49b8d; --faint:#8b8274;
-    --rule:#2e2b24; --accent:#d9a566; --accent-soft:#2a231a; --chip:#262218;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+    --bg:#131109; --panel:#1c1a15; --ink:#f2eee6; --muted:#a89f90; --faint:#8b8274;
+    --rule:#2f2b22; --hair:#26231c; --accent:#e0ac6b; --accent-ink:#e9bd85;
+    --accent-soft:#2a2115; --chip:#242018; --ring:#26231b;
+    --logo-plate:#f4efe6; --logo-plate-rule:#d8cfbf;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.34);
+    --shadow-lift:0 2px 8px rgba(0,0,0,.45),0 20px 50px rgba(0,0,0,.42);
+    --glow:radial-gradient(60rem 32rem at 78% -8%,rgba(224,172,107,.10),transparent 60%);
   }
+
   *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
   body{
     margin:0; background:var(--bg); color:var(--ink);
+    background-image:var(--glow);
+    background-repeat:no-repeat;
     font:16px/1.65 ui-serif,Georgia,"Iowan Old Style","Times New Roman",serif;
-    -webkit-font-smoothing:antialiased;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
-  .wrap{max-width:64rem; margin:0 auto; padding:clamp(2rem,6vw,5rem) clamp(1.1rem,4vw,2.5rem) 5rem}
+  ::selection{background:var(--accent-soft);color:var(--ink)}
+  .sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  a{color:inherit}
+
+  .wrap{max-width:66rem; margin:0 auto; padding:clamp(2rem,6vw,5.5rem) clamp(1.1rem,4vw,2.5rem) 5rem}
+
+  /* ---------- hero ---------- */
   .eyebrow{
     font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--accent); font-weight:600; margin:0 0 1rem;
+    font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--accent-ink); font-weight:600; margin:0 0 1.15rem;
+    display:inline-flex; align-items:center; gap:.6rem;
   }
-  h1{font-size:clamp(2.3rem,6.5vw,3.9rem); line-height:1.04; letter-spacing:-.02em; margin:0 0 .6rem; font-weight:600}
-  .deck{font-size:clamp(1.1rem,2.4vw,1.35rem); color:var(--muted); font-style:italic; margin:0 0 2rem; max-width:34ch}
-  .lede{font-size:1.06rem; max-width:60ch; margin:0 0 2rem}
+  .eyebrow::before{content:"";width:1.6rem;height:1px;background:var(--accent);opacity:.65}
+  h1{
+    font-size:clamp(2.6rem,8vw,4.6rem); line-height:1; letter-spacing:-.025em;
+    margin:0 0 .55rem; font-weight:600;
+  }
+  .deck{
+    font-size:clamp(1.15rem,2.6vw,1.5rem); color:var(--muted); font-style:italic;
+    margin:0 0 1.9rem; max-width:30ch; line-height:1.35;
+  }
+  .lede{font-size:1.075rem; max-width:60ch; margin:0 0 2.4rem; color:var(--ink)}
   .lede strong{font-weight:600}
 
+  /* ---------- guest facepile ---------- */
+  .lineup{
+    display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+    margin:0 0 2rem; padding:1.05rem 1.2rem;
+    background:var(--panel); border:1px solid var(--rule); border-radius:16px;
+    box-shadow:var(--shadow);
+  }
+  .faces{display:flex; padding-left:.55rem}
+  .faces img{
+    width:2.85rem; height:2.85rem; border-radius:50%; object-fit:cover;
+    margin-left:-.55rem; border:2.5px solid var(--ring);
+    box-shadow:0 1px 3px rgba(25,23,20,.18);
+    background:var(--chip); transition:transform .18s ease;
+  }
+  .faces img:hover{transform:translateY(-3px) scale(1.06); z-index:2; position:relative}
+  .lineup-note{
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:.9rem; color:var(--muted);
+  }
+  .lineup-note b{color:var(--ink); font-weight:600}
+
   .facts{
-    display:flex; flex-wrap:wrap; gap:.55rem; padding:0; margin:0 0 3.5rem; list-style:none;
+    display:flex; flex-wrap:wrap; gap:.55rem; padding:0; margin:0 0 3.75rem; list-style:none;
     font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   }
   .facts li{
     background:var(--chip); border:1px solid var(--rule); border-radius:999px;
-    padding:.4rem .95rem; font-size:.86rem; color:var(--muted);
+    padding:.42rem 1rem; font-size:.86rem; color:var(--muted);
   }
   .facts b{color:var(--ink); font-weight:600}
 
+  /* ---------- section head ---------- */
   h2{
     font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    font-size:.75rem; letter-spacing:.16em; text-transform:uppercase; color:var(--faint);
-    font-weight:600; margin:0 0 1.25rem; padding-bottom:.7rem; border-bottom:1px solid var(--rule);
+    font-size:.75rem; letter-spacing:.18em; text-transform:uppercase; color:var(--faint);
+    font-weight:600; margin:0 0 1.4rem; padding-bottom:.75rem; border-bottom:1px solid var(--rule);
+    display:flex; justify-content:space-between; align-items:baseline; gap:1rem;
   }
+  h2 .count{color:var(--accent-ink)}
 
-  ol.sessions{list-style:none; padding:0; margin:0; display:grid; gap:.7rem}
+  /* ---------- session cards ---------- */
+  ol.sessions{list-style:none; padding:0; margin:0; display:grid; gap:.85rem}
   .s{
-    background:var(--panel); border:1px solid var(--rule); border-radius:12px;
-    padding:1.15rem 1.3rem; box-shadow:var(--shadow);
-    display:grid; grid-template-columns:6.5rem 1fr auto; gap:.35rem 1.4rem; align-items:start;
+    position:relative; background:var(--panel); border:1px solid var(--rule); border-radius:14px;
+    padding:1.25rem 1.45rem; box-shadow:var(--shadow);
+    display:grid; grid-template-columns:5.5rem 1fr auto; gap:.3rem 1.5rem; align-items:start;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    overflow:hidden;
   }
-  .when{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; padding-top:.1rem}
-  .when .d{display:block; font-size:1rem; font-weight:600; color:var(--ink)}
-  .when .t{display:block; font-size:.78rem; color:var(--faint); margin-top:.15rem}
-  .topic{font-size:1.12rem; font-weight:600; letter-spacing:-.01em; margin:0}
-  .detail{font-size:.95rem; color:var(--muted); margin:.3rem 0 0; max-width:58ch}
+  .s::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:var(--accent); opacity:0; transition:opacity .2s ease;
+  }
+  .s:hover{transform:translateY(-2px); box-shadow:var(--shadow-lift); border-color:var(--accent)}
+  .s:hover::before{opacity:.9}
+
+  .when{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; padding-top:.15rem}
+  .when .d{display:block; font-size:1.05rem; font-weight:700; color:var(--ink); letter-spacing:-.01em}
+  .when .t{display:block; font-size:.76rem; color:var(--faint); margin-top:.2rem; line-height:1.35}
+
+  .body{min-width:0}
+  .topic{font-size:1.18rem; font-weight:600; letter-spacing:-.012em; margin:0; line-height:1.25}
+  .detail{font-size:.95rem; color:var(--muted); margin:.35rem 0 0; max-width:56ch}
+
   .guest{
-    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    font-size:.88rem; color:var(--muted); margin:.55rem 0 0;
+    display:flex; align-items:center; gap:.7rem; margin:.95rem 0 0;
+    padding-top:.9rem; border-top:1px solid var(--hair);
   }
-  .guest b{color:var(--ink); font-weight:600}
+  .guest img.avatar{
+    width:2.7rem; height:2.7rem; border-radius:50%; object-fit:cover; flex:none;
+    border:1px solid var(--rule); background:var(--chip);
+  }
+  .guest .who{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; min-width:0}
+  .guest .name{font-size:.95rem; font-weight:600; color:var(--ink); line-height:1.2}
+  .guest .role{font-size:.8rem; color:var(--muted); margin-top:.12rem; line-height:1.3}
+  .guest .role b{color:var(--accent-ink); font-weight:600}
+  .logo-plate{
+    margin-left:auto; flex:none; display:flex; align-items:center; justify-content:center;
+    height:2.35rem; padding:0 .7rem; border-radius:9px;
+    background:var(--logo-plate); border:1px solid var(--logo-plate-rule);
+  }
+  .logo-plate img{height:1.15rem; width:auto; max-width:7rem; display:block}
+
+  .aside{display:flex; flex-direction:column; align-items:flex-end; gap:.45rem}
   .tag{
     font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
     font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600;
     color:var(--muted); background:var(--chip); border:1px solid var(--rule);
-    padding:.28rem .6rem; border-radius:999px; white-space:nowrap; margin-top:.1rem;
+    padding:.3rem .62rem; border-radius:999px; white-space:nowrap;
+    display:inline-flex; align-items:center; gap:.4rem;
   }
-  .tag.virt{color:var(--accent); background:var(--accent-soft)}
-  .fly{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:.72rem;
-    letter-spacing:.06em;text-transform:uppercase;font-weight:600;text-decoration:none;
-    color:var(--accent);border:1px solid var(--accent);padding:.28rem .6rem;border-radius:999px;
-    white-space:nowrap;margin-top:.35rem}
-  .fly:hover{background:var(--accent);color:var(--bg)}
-  .s{align-items:start}
-  .s > .tag,.s > .fly{justify-self:end}
-
-  @media(max-width:38rem){
-    .s{grid-template-columns:1fr; gap:.2rem}
-    .when{display:flex; gap:.5rem; align-items:baseline; margin-bottom:.5rem}
-    .when .d,.when .t{display:inline}
-    .tag{justify-self:start; margin-top:.75rem}
-    .s > .fly{justify-self:start; margin-top:.5rem}
+  .tag::before{content:"";width:.45rem;height:.45rem;border-radius:50%;background:currentColor;opacity:.7}
+  .tag.virt{color:var(--accent-ink); background:var(--accent-soft); border-color:var(--accent-soft)}
+  .fly{
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; font-size:.72rem;
+    letter-spacing:.06em; text-transform:uppercase; font-weight:600; text-decoration:none;
+    color:var(--accent-ink); border:1px solid var(--accent); padding:.3rem .64rem; border-radius:999px;
+    white-space:nowrap; transition:background .15s ease,color .15s ease;
   }
+  .fly:hover{background:var(--accent); color:#fff}
 
-  footer{margin-top:3.5rem; padding-top:1.5rem; border-top:1px solid var(--rule);
+  /* entrance */
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .reveal{animation:rise .6s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(var(--i,0)*60ms)}
+
+  footer{
+    margin-top:4rem; padding-top:1.6rem; border-top:1px solid var(--rule);
     font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    font-size:.85rem; color:var(--faint)}
+    font-size:.85rem; color:var(--faint); line-height:1.6;
+  }
+  footer b{color:var(--muted); font-weight:600}
+
+  @media (max-width:44rem){
+    .s{grid-template-columns:1fr; gap:.2rem}
+    .when{display:flex; gap:.55rem; align-items:baseline; margin-bottom:.55rem}
+    .when .d,.when .t{display:inline}
+    .aside{flex-direction:row; align-items:center; margin-top:.9rem; order:3}
+    .logo-plate{margin-left:0}
+    .guest{flex-wrap:wrap}
+  }
+  @media (max-width:30rem){
+    .logo-plate{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{animation:none}
+    .faces img,.s{transition:none}
+  }
 </style>
 
 <div class="wrap">
-  <p class="eyebrow">UC Berkeley Extension · Fall 2026</p>
-  <h1>Venture Math</h1>
-  <p class="deck">What the numbers really look like, from formation to IPO.</p>
+  <header class="reveal" style="--i:0">
+    <p class="eyebrow">UC Berkeley Extension · Fall 2026</p>
+    <h1>Venture Math</h1>
+    <p class="deck">What the numbers really look like, from formation to IPO.</p>
 
-  <p class="lede">
-    Founders negotiate equity, dilution and terms mostly in the dark — the benchmarks that would tell
-    them what "normal" looks like are the one thing nobody in the room shares. This course walks the
-    startup lifecycle stage by stage against data on <strong>40,000+ startups</strong>, and each session a
-    stage-appropriate investor joins to say what the numbers look like from their side of the table.
-  </p>
+    <p class="lede">
+      Founders negotiate equity, dilution and terms mostly in the dark — the benchmarks that would tell
+      them what "normal" looks like are the one thing nobody in the room shares. This course walks the
+      startup lifecycle stage by stage against data on <strong>40,000+ startups</strong>, and each session a
+      stage-appropriate investor joins to say what the numbers look like from their side of the table.
+    </p>
 
-  <ul class="facts">
-    <li><b>11 sessions</b></li>
-    <li><b>Sep 2 – Nov 4, 2026</b></li>
-    <li>Berkeley &amp; online</li>
-  </ul>
+    <div class="lineup">
+      <div class="faces">
+        <img src="assets/guest-rex-salisbury.jpg" alt="Rex Salisbury" title="Rex Salisbury · Cambrian VC" loading="lazy" width="60" height="60">
+        <img src="assets/guest-christina-gilbert.jpg" alt="Christina Gilbert" title="Christina Gilbert · Y Combinator" loading="lazy" width="60" height="60">
+        <img src="assets/guest-mercedes-bent.jpg" alt="Mercedes Bent" title="Mercedes Bent · Premise VC" loading="lazy" width="60" height="60">
+        <img src="assets/guest-nnamdi-iregbulem.jpg" alt="Nnamdi Iregbulem" title="Nnamdi Iregbulem · Lightspeed" loading="lazy" width="60" height="60">
+        <img src="assets/guest-ani-pai.jpg" alt="Ani Pai" title="Ani Pai · Robot Ventures" loading="lazy" width="60" height="60">
+        <img src="assets/guest-andy-ku.jpg" alt="Andy Ku" title="Andy Ku · AI Fund" loading="lazy" width="60" height="60">
+        <img src="assets/guest-peter-walker.jpg" alt="Peter Walker" title="Peter Walker · Carta" loading="lazy" width="60" height="60">
+        <img src="assets/guest-charles-hudson.jpg" alt="Charles Hudson" title="Charles Hudson · Precursor Ventures" loading="lazy" width="60" height="60">
+        <img src="assets/guest-danielle-strachman.jpg" alt="Danielle Strachman" title="Danielle Strachman · 1517 Fund" loading="lazy" width="60" height="60">
+        <img src="assets/guest-vittorio-lavioso.jpg" alt="Vittorio Lavioso" title="Vittorio Lavioso · Baillie Gifford" loading="lazy" width="60" height="60">
+        <img src="assets/guest-doreen-linfoot.jpg" alt="Doreen Linfoot" title="Doreen Linfoot · Augment" loading="lazy" width="60" height="60">
+      </div>
+      <p class="lineup-note"><b>11 investors</b> across the stack — from seed to growth.</p>
+    </div>
 
-  <h2>Schedule &amp; guests</h2>
+    <ul class="facts">
+      <li><b>11 sessions</b></li>
+      <li><b>Sep 2 – Nov 4, 2026</b></li>
+      <li>Berkeley &amp; online</li>
+    </ul>
+  </header>
+
+  <h2 class="reveal" style="--i:1">
+    <span>Schedule &amp; guests</span>
+    <span class="count">Fall 2026</span>
+  </h2>
   <ol class="sessions">
-    <li class="s">
+    <li class="s reveal" style="--i:2">
       <div class="when"><span class="d">Sep 2</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">Seed &amp; First Institutional Capital</p>
         <p class="detail">How to think about valuation when you have no revenue, and what seed investors are actually looking for</p>
-        <p class="guest"><b>Rex Salisbury</b> · Cambrian VC</p>
+        <div class="guest"><img class="avatar" src="assets/guest-rex-salisbury.jpg" alt="Rex Salisbury" loading="lazy" width="60" height="60"><div class="who"><div class="name">Rex Salisbury</div><div class="role">Founder &amp; General Partner, Cambrian VC</div></div><span class="logo-plate"><img src="assets/logo-cambrian-vc.png" alt="Cambrian VC" loading="lazy"></span></div>
       </div>
-      <span class="tag">In person</span>
-      <a class="fly" href="fliers/01-rex-salisbury.html">Flyer</a>
+      <div class="aside">
+        <span class="tag">In person</span>
+        <a class="fly" href="fliers/01-rex-salisbury.html">Flyer</a>
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:3">
       <div class="when"><span class="d">Sep 9</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">Accelerators &amp; SAFEs</p>
         <p class="detail">What an accelerator actually buys you, and how the SAFE became the default instrument for early-stage capital</p>
-        <p class="guest"><b>Christina Gilbert</b> · Y Combinator</p>
+        <div class="guest"><img class="avatar" src="assets/guest-christina-gilbert.jpg" alt="Christina Gilbert" loading="lazy" width="60" height="60"><div class="who"><div class="name">Christina Gilbert</div><div class="role">Visiting Group Partner, Y Combinator</div></div><span class="logo-plate"><img src="assets/logo-y-combinator.png" alt="Y Combinator" loading="lazy"></span></div>
       </div>
-      <span class="tag">In person</span>
-      <a class="fly" href="fliers/02-christina-gilbert.html">Flyer</a>
+      <div class="aside">
+        <span class="tag">In person</span>
+        <a class="fly" href="fliers/02-christina-gilbert.html">Flyer</a>
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:4">
       <div class="when"><span class="d">Sep 16</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">Series A &amp; The Institutional Transition</p>
         <p class="detail">Series A is where governance gets real: you add board members, negotiate pro-rata rights, and face investors who expect a different level of rigor</p>
-        <p class="guest"><b>Mercedes Bent</b> · Premise VC</p>
+        <div class="guest"><img class="avatar" src="assets/guest-mercedes-bent.jpg" alt="Mercedes Bent" loading="lazy" width="60" height="60"><div class="who"><div class="name">Mercedes Bent</div><div class="role">Co-Founder, Premise VC</div></div><span class="logo-plate"><img src="assets/logo-premise.svg" alt="Premise VC" loading="lazy"></span></div>
       </div>
-      <span class="tag">In person</span>
-      <a class="fly" href="fliers/03-mercedes-bent.html">Flyer</a>
+      <div class="aside">
+        <span class="tag">In person</span>
+        <a class="fly" href="fliers/03-mercedes-bent.html">Flyer</a>
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:5">
       <div class="when"><span class="d">Sep 23</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">Series B &amp; Scaling Product-Market-Fit</p>
         <p class="detail">Series B separates companies that found product-market fit from those that faked it — and it is when down rounds, refreshers, and secondaries enter the conversation</p>
-        <p class="guest"><b>Nnamdi Iregbulem</b> · Lightspeed</p>
+        <div class="guest"><img class="avatar" src="assets/guest-nnamdi-iregbulem.jpg" alt="Nnamdi Iregbulem" loading="lazy" width="60" height="60"><div class="who"><div class="name">Nnamdi Iregbulem</div><div class="role">Partner, Lightspeed Venture Partners</div></div><span class="logo-plate"><img src="assets/logo-lightspeed.svg" alt="Lightspeed" loading="lazy"></span></div>
       </div>
-      <span class="tag">In person</span>
-      <a class="fly" href="fliers/04-nnamdi-iregbulem.html">Flyer</a>
+      <div class="aside">
+        <span class="tag">In person</span>
+        <a class="fly" href="fliers/04-nnamdi-iregbulem.html">Flyer</a>
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:6">
       <div class="when"><span class="d">Sep 30</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">Crypto, Tokens &amp; Frontier Tech Capital</p>
         <p class="detail">What changes when equity isn’t the only asset on the table — token warrants, milestone tranches, and how capital-hungry frontier companies actually get funded</p>
-        <p class="guest"><b>Ani Pai</b> · Robot Ventures</p>
+        <div class="guest"><img class="avatar" src="assets/guest-ani-pai.jpg" alt="Ani Pai" loading="lazy" width="60" height="60"><div class="who"><div class="name">Ani Pai</div><div class="role">General Partner, Robot Ventures</div></div><span class="logo-plate"><img src="assets/logo-robot-ventures.png" alt="Robot Ventures" loading="lazy"></span></div>
       </div>
-      <span class="tag">In person</span>
-      <a class="fly" href="fliers/05-ani-pai.html">Flyer</a>
+      <div class="aside">
+        <span class="tag">In person</span>
+        <a class="fly" href="fliers/05-ani-pai.html">Flyer</a>
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:7">
       <div class="when"><span class="d">Oct 7</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">Warrants &amp; Strategic Investors</p>
         <p class="detail">What corporate, government, and studio investors want that financial VCs don’t — and what their paper actually costs you</p>
-        <p class="guest"><b>Andy Ku</b> · AI Fund</p>
+        <div class="guest"><img class="avatar" src="assets/guest-andy-ku.jpg" alt="Andy Ku" loading="lazy" width="60" height="60"><div class="who"><div class="name">Andy Ku</div><div class="role">Partner, AI Fund</div></div><span class="logo-plate"><img src="assets/logo-ai-fund.svg" alt="AI Fund" loading="lazy"></span></div>
       </div>
-      <span class="tag">In person</span>
-      <a class="fly" href="fliers/06-andy-ku.html">Flyer</a>
+      <div class="aside">
+        <span class="tag">In person</span>
+        <a class="fly" href="fliers/06-andy-ku.html">Flyer</a>
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:8">
       <div class="when"><span class="d">Oct 14</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">Inside the Data: What 40,000 Cap Tables Actually Show</p>
         <p class="detail">Every benchmark in this course came from somewhere. This session goes behind them — how the numbers are built, what they can and cannot tell you, and how to read a median against your own deal.</p>
-        <p class="guest"><b>Peter Walker</b> · Carta</p>
+        <div class="guest"><img class="avatar" src="assets/guest-peter-walker.jpg" alt="Peter Walker" loading="lazy" width="60" height="60"><div class="who"><div class="name">Peter Walker</div><div class="role">Head of Insights, Carta</div></div></div>
       </div>
-      <span class="tag">In person</span>
-      
+      <div class="aside">
+        <span class="tag">In person</span>
+        
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:9">
       <div class="when"><span class="d">Oct 21</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">Writing The First Check</p>
         <p class="detail">How a pre-seed fund decides with almost no data — and what the economics look like from the other side of the table</p>
-        <p class="guest"><b>Charles Hudson</b> · Precursor Ventures</p>
+        <div class="guest"><img class="avatar" src="assets/guest-charles-hudson.jpg" alt="Charles Hudson" loading="lazy" width="60" height="60"><div class="who"><div class="name">Charles Hudson</div><div class="role">Managing Partner &amp; Founder, Precursor Ventures</div></div><span class="logo-plate"><img src="assets/logo-precursor.png" alt="Precursor Ventures" loading="lazy"></span></div>
       </div>
-      <span class="tag virt">Online</span>
-      <a class="fly" href="fliers/08-charles-hudson.html">Flyer</a>
+      <div class="aside">
+        <span class="tag virt">Online</span>
+        <a class="fly" href="fliers/08-charles-hudson.html">Flyer</a>
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:10">
       <div class="when"><span class="d">Oct 28</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">Pre-Seed: Formation &amp; Founder Equity</p>
         <p class="detail">Before there’s a product, there’s a cap table — the decisions that shape everything that follows</p>
-        <p class="guest"><b>Danielle Strachman</b> · 1517 Fund</p>
+        <div class="guest"><img class="avatar" src="assets/guest-danielle-strachman.jpg" alt="Danielle Strachman" loading="lazy" width="60" height="60"><div class="who"><div class="name">Danielle Strachman</div><div class="role">Co-Founder &amp; General Partner, 1517 Fund</div></div><span class="logo-plate"><img src="assets/logo-1517.svg" alt="1517 Fund" loading="lazy"></span></div>
       </div>
-      <span class="tag">In person</span>
-      <a class="fly" href="fliers/09-danielle-strachman.html">Flyer</a>
+      <div class="aside">
+        <span class="tag">In person</span>
+        <a class="fly" href="fliers/09-danielle-strachman.html">Flyer</a>
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:11">
       <div class="when"><span class="d">Nov 4</span><span class="t">9:00am PT</span></div>
       <div class="body">
         <p class="topic">Growth Rounds &amp; Series C and Beyond</p>
         <p class="detail">Late-stage rounds bring new players — crossover funds, sovereign wealth, and hedge funds who think differently than VCs</p>
-        <p class="guest"><b>Vittorio Lavioso</b> · Baillie Gifford</p>
+        <div class="guest"><img class="avatar" src="assets/guest-vittorio-lavioso.jpg" alt="Vittorio Lavioso" loading="lazy" width="60" height="60"><div class="who"><div class="name">Vittorio Lavioso</div><div class="role">Investment Manager, Baillie Gifford</div></div><span class="logo-plate"><img src="assets/logo-baillie-gifford.svg" alt="Baillie Gifford" loading="lazy"></span></div>
       </div>
-      <span class="tag virt">Online</span>
-      <a class="fly" href="fliers/10-vittorio-lavioso.html">Flyer</a>
+      <div class="aside">
+        <span class="tag virt">Online</span>
+        <a class="fly" href="fliers/10-vittorio-lavioso.html">Flyer</a>
+      </div>
     </li>
-    <li class="s">
+    <li class="s reveal" style="--i:12">
       <div class="when"><span class="d">Nov 4</span><span class="t">4:30 – 6:30pm</span></div>
       <div class="body">
         <p class="topic">The Public Markets Transition</p>
         <p class="detail">The IPO isn’t the end — it’s a transition to a completely different game, and the data on founder and employee outcomes is rarely shown</p>
-        <p class="guest"><b>Doreen Linfoot</b> · Augment</p>
+        <div class="guest"><img class="avatar" src="assets/guest-doreen-linfoot.jpg" alt="Doreen Linfoot" loading="lazy" width="60" height="60"><div class="who"><div class="name">Doreen Linfoot</div><div class="role">Investments, Augment</div></div><span class="logo-plate"><img src="assets/logo-augment.svg" alt="Augment" loading="lazy"></span></div>
       </div>
-      <span class="tag">In person</span>
-      <a class="fly" href="fliers/11-doreen-linfoot.html">Flyer</a>
+      <div class="aside">
+        <span class="tag">In person</span>
+        <a class="fly" href="fliers/11-doreen-linfoot.html">Flyer</a>
+      </div>
     </li>
   </ol>
 
-  <footer>
-    Taught by Lorenzo Barberis Canonico. Schedule and guest lineup are subject to change.
+  <footer class="reveal">
+    Taught by <b>Lorenzo Barberis Canonico</b>. Schedule and guest lineup are subject to change.
   </footer>
 </div>
