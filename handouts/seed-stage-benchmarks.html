@@ -10,365 +10,221 @@
 <style>
   :root{
     --ink:#14283b; --muted:#5b6b7a; --faint:#95a1ad;
-    --bg:#ffffff; --paper:#ffffff; --rule:#e4e8ec; --grid:#eef1f4;
+    --paper:#ffffff; --rule:#e4e8ec; --grid:#eef1f4;
     --teal:#0f7a68; --teal-mid:#3f9585; --teal-soft:#9cc7bd; --teal-deep:#0c5f52;
     --clay:#b05a38; --clay-mid:#c68562; --clay-soft:#dcae90; --clay-deep:#8f4529;
-    --slate:#aab4bd; --slate-deep:#6d7c89;
+    --slate:#aab4bd;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{
     background:#f3f5f7; color:var(--ink);
-    font:13px/1.5 'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font:12px/1.35 'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
     -webkit-font-smoothing:antialiased; letter-spacing:-.004em;
     -webkit-print-color-adjust:exact; print-color-adjust:exact;
   }
   svg text{font-family:'Inter',ui-sans-serif,system-ui,sans-serif; font-variant-numeric:tabular-nums}
-  .sheet{width:768px; margin:0 auto 22px; padding:12px 30px 9px; background:var(--paper); position:relative}
+  .sheet{width:768px; margin:0 auto; padding:14px 28px 10px; background:var(--paper)}
 
-  /* headers — quiet typographic hierarchy, no ornament */
-  .brand{margin-bottom:8px}
-  .brand .src{float:right; font-size:9.5px; color:var(--faint); text-align:right; line-height:1.5; margin-top:4px; font-weight:500}
-  .eyebrow{font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--teal); font-weight:600; margin:0 0 5px}
-  h1{font-size:25px; letter-spacing:-.02em; margin:0 0 4px; font-weight:600; color:var(--ink)}
-  .brand .sub{font-size:13px; color:var(--muted); margin:0 0 6px; max-width:72ch; font-weight:400}
-  .brand .rule{height:1.5px; background:var(--ink)}
-  .run{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;
-    padding-bottom:5px; border-bottom:1px solid var(--rule)}
-  .run .l{font-size:12px; font-weight:600; color:var(--ink); letter-spacing:.02em; text-transform:uppercase}
-  .run .l .n{color:var(--teal)}
-  .run .l .sec{color:var(--faint); font-weight:500; text-transform:none; letter-spacing:0; font-size:12px}
-  .run .r{font-size:10px; color:var(--faint); letter-spacing:.08em; font-weight:600}
+  header.top{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1.5px solid var(--ink); padding-bottom:4px; margin-bottom:5px}
+  header.top .l h1{font-size:19px; letter-spacing:-.02em; margin:0; font-weight:700; color:var(--ink)}
+  header.top .l .eyebrow{font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:600; margin:0 0 2px}
+  header.top .r{text-align:right; font-size:9px; color:var(--faint); line-height:1.5; font-weight:500}
+  header.top .r b{color:var(--muted)}
+  .keynote{font-size:10.5px; color:var(--muted); margin:0 0 8px}
+  .keynote b{color:var(--teal); font-weight:600}
+  .keynote .c{color:var(--clay); font-weight:600}
 
-  /* grid + cards — hairline only, no shadow */
-  .grid{display:grid; grid-template-columns:1fr 1fr; gap:8px}
-  .card{background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:9px 14px 7px; break-inside:avoid}
-  .card.wide{grid-column:1 / -1}
-  .card h2{font-size:14.5px; font-weight:600; letter-spacing:-.015em; margin:0 0 2px; color:var(--ink)}
-  .card .cs{font-size:11px; color:var(--muted); margin:0 0 8px; line-height:1.4; font-weight:400}
-  .card .cite{font-size:9px; color:var(--faint); margin:7px 0 0; letter-spacing:.03em; font-weight:500; text-transform:uppercase;
-    padding-top:6px; border-top:1px solid var(--grid)}
-  .card svg{display:block; width:100%; height:auto; overflow:visible}
-  .dl{display:flex; gap:15px; flex-wrap:wrap; font-size:10.5px; color:var(--muted); margin:0 0 5px; font-weight:500}
-  .dl i{font-style:normal; display:inline-flex; align-items:center; gap:5px}
-  .dl .sw{width:9px; height:9px; border-radius:2px; display:inline-block}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:3px 10px}
+  .cell{break-inside:avoid; min-width:0}
+  .cell.wide{grid-column:1 / -1}
+  .cell h2{font-size:11px; font-weight:700; letter-spacing:-.01em; margin:0 0 0; color:var(--ink)}
+  .cell h2 .u{font-weight:500; color:var(--faint)}
+  .cell svg{display:block; width:100%; height:auto; overflow:visible}
 
-  /* vesting table */
-  table.vest{width:100%; border-collapse:collapse; font-size:12px; margin-top:2px}
-  table.vest th{font-size:9.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600;
-    text-align:center; padding:0 6px 8px; border-bottom:1px solid var(--rule)}
+  table.vest{width:100%; border-collapse:collapse; font-size:11px}
+  table.vest th{font-size:8.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600; text-align:center; padding:0 5px 4px; border-bottom:1px solid var(--rule)}
   table.vest th:first-child{text-align:left}
-  table.vest td{padding:12px 6px; border-bottom:1px solid var(--grid); text-align:center; vertical-align:middle}
+  table.vest td{padding:3px 5px; border-bottom:1px solid var(--grid); text-align:center; vertical-align:middle}
   table.vest tr:last-child td{border-bottom:none}
   table.vest td:first-child{text-align:left}
-  table.vest .p{font-weight:600; font-size:13px; color:var(--ink)}
-  table.vest .et{font-size:10px; color:var(--faint); font-weight:400}
-  table.vest .v{font-weight:600; color:var(--teal-deep); font-size:12.5px}
-  table.vest .v small{display:block; color:var(--faint); font-weight:400; font-size:9px}
+  table.vest .p{font-weight:600; font-size:12px; color:var(--ink)}
+  table.vest .et{font-size:9px; color:var(--faint); font-weight:400}
+  table.vest .v{font-weight:600; color:var(--teal-deep); font-size:11.5px}
+  table.vest .v small{color:var(--faint); font-weight:400; font-size:8.5px}
 
-  footer{margin-top:12px; padding-top:8px; border-top:1px solid var(--rule);
-    font-size:9px; color:var(--faint); display:flex; justify-content:space-between; gap:12px; font-weight:500}
+  footer{margin-top:4px; padding-top:4px; border-top:1px solid var(--rule); font-size:8.5px; color:var(--faint); display:flex; justify-content:space-between; gap:12px; font-weight:500}
   footer b{color:var(--muted); font-weight:600}
 
-  @page{ size:letter portrait; margin:0.4in }
-  @media print{ body{background:#fff} .sheet{width:auto; margin:0; padding:0; page-break-after:always; break-after:page} .sheet:last-child{page-break-after:auto} }
-  @media screen{ .sheet{box-shadow:0 1px 12px rgba(20,40,59,.07); border-radius:3px} }
+  @page{ size:letter portrait; margin:0.3in }
+  @media print{ body{background:#fff} .sheet{width:auto; margin:0; padding:0} }
+  @media screen{ .sheet{box-shadow:0 1px 12px rgba(20,40,59,.08); border-radius:3px; margin:18px auto} }
 </style>
 </head>
 <body>
+<div class="sheet">
 
-<!-- ===================== SHEET 1 — RAISING A SEED ROUND ===================== -->
-<section class="sheet" id="p1">
-  <div class="brand">
-    <div class="src">Data: <b style="color:var(--muted)">Carta</b> · re-visualized for<br>classroom use, attributed per chart</div>
-    <p class="eyebrow">Venture Math · Fall 2026</p>
-    <h1>Seed-Stage Benchmarks</h1>
-    <p class="sub">What the numbers actually look like at the seed round — how much you raise, what you sell, and what you keep — read against Carta's data on tens of thousands of startups. <b style="color:var(--teal);font-weight:600">Teal = what you keep · clay = what you give up.</b></p>
-    <div class="rule"></div>
-  </div>
-  <div class="run"><span class="l"><span class="n">1</span> — Raising a seed round <span class="sec">size, dilution &amp; SAFEs</span></span><span class="r">PAGE 1 / 3</span></div>
+  <header class="top">
+    <div class="l">
+      <p class="eyebrow">Venture Math · UC Berkeley Extension · Fall 2026</p>
+      <h1>Seed-Stage Benchmarks</h1>
+    </div>
+    <div class="r">Session 01 · Seed &amp; First Institutional Capital<br>Data: <b>Carta</b> · re-visualized for classroom use</div>
+  </header>
 
   <div class="grid">
 
-    <!-- (9) round size + lead check : WIDE -->
-    <div class="card wide">
-      <h2>Six in ten seed rounds are under $5M</h2>
-      <p class="cs">Share of 2025 seed rounds by amount raised — the two <b style="color:var(--teal)">teal</b> bars are ≈61% of the market. Small figure above each bar ≈ the check a lead writes.</p>
-      <svg viewBox="0 0 700 126" role="img" aria-label="Seed round size distribution and lead check size">
-        <line x1="30" y1="104" x2="694" y2="104" stroke="var(--rule)" stroke-width="1.25"/>
-        <rect x="48"  y="32"    width="62" height="72"   fill="var(--teal)"/>
-        <rect x="140" y="36.4"  width="62" height="67.6" fill="var(--teal)"/>
-        <rect x="232" y="63"    width="62" height="41"   fill="var(--slate)"/>
-        <rect x="324" y="86.3"  width="62" height="17.7" fill="var(--slate)"/>
-        <rect x="416" y="94.4"  width="62" height="9.6"  fill="var(--slate)"/>
-        <rect x="508" y="97.8"  width="62" height="6.2"  fill="var(--slate)"/>
-        <rect x="600" y="88.9"  width="62" height="15.1" fill="var(--slate)"/>
-        <g font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle">
-          <text x="79" y="27">31.4%</text><text x="171" y="31">29.5%</text>
-        </g>
-        <g font-size="11" font-weight="600" fill="var(--muted)" text-anchor="middle">
-          <text x="263" y="58">17.9%</text><text x="355" y="81">7.7%</text><text x="447" y="89">4.2%</text><text x="539" y="93">2.7%</text><text x="631" y="84">6.6%</text>
-        </g>
-        <g font-size="9.5" font-weight="600" fill="var(--faint)" text-anchor="middle">
-          <text x="79" y="13">~$1M</text><text x="171" y="13">~$2M</text><text x="263" y="13">~$3M</text><text x="355" y="13">~$4M</text><text x="447" y="13">~$6M</text><text x="539" y="13">~$7M</text><text x="631" y="13">~$8M</text>
-        </g>
-        <g font-size="9.5" fill="var(--muted)" text-anchor="middle" font-weight="500">
-          <text x="79" y="120">Under $2.5M</text><text x="171" y="120">$2.5–4.9M</text><text x="263" y="120">$5–7.4M</text>
-          <text x="355" y="120">$7.5–9.9M</text><text x="447" y="120">$10–12.4M</text><text x="539" y="120">$12.5–15M</text><text x="631" y="120">$15M+</text>
-        </g>
+    <!-- round size : WIDE -->
+    <div class="cell wide">
+      <h2>Six in ten seed rounds are under $5M <span class="u">· amount raised, 2025</span></h2>
+      <svg viewBox="0 0 700 90" role="img" aria-label="Seed round size distribution">
+        <line x1="30" y1="72" x2="694" y2="72" stroke="var(--rule)" stroke-width="1.25"/>
+        <rect x="48"  y="18"   width="62" height="54"   fill="var(--teal)"/>
+        <rect x="140" y="21.3" width="62" height="50.7" fill="var(--teal)"/>
+        <rect x="232" y="41.2" width="62" height="30.8" fill="var(--slate)"/>
+        <rect x="324" y="58.8" width="62" height="13.2" fill="var(--slate)"/>
+        <rect x="416" y="64.8" width="62" height="7.2"  fill="var(--slate)"/>
+        <rect x="508" y="67.4" width="62" height="4.6"  fill="var(--slate)"/>
+        <rect x="600" y="60.6" width="62" height="11.4" fill="var(--slate)"/>
+        <g font-size="10.5" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="79" y="14">31.4%</text><text x="171" y="17">29.5%</text></g>
+        <g font-size="9.5" font-weight="600" fill="var(--muted)" text-anchor="middle"><text x="263" y="37">17.9%</text><text x="355" y="55">7.7%</text><text x="447" y="61">4.2%</text><text x="539" y="63.5">2.7%</text><text x="631" y="57">6.6%</text></g>
+        <g font-size="8.5" fill="var(--muted)" text-anchor="middle" font-weight="500"><text x="79" y="86">Under $2.5M</text><text x="171" y="86">$2.5–4.9M</text><text x="263" y="86">$5–7.4M</text><text x="355" y="86">$7.5–9.9M</text><text x="447" y="86">$10–12.4M</text><text x="539" y="86">$12.5–15M</text><text x="631" y="86">$15M+</text></g>
       </svg>
-      <p class="cite">Carta · 1,429 seed rounds · US · 2025</p>
     </div>
 
-    <!-- (1) % sold to investors : WIDE -->
-    <div class="card wide">
-      <h2>A priced seed sells about a fifth of the company</h2>
-      <p class="cs">Median % sold to investors — primary rounds vs. bridges. <span style="color:var(--faint)">Range spans the 25th–75th percentile; dot is the median.</span></p>
-      <svg viewBox="0 0 700 98" role="img" aria-label="Percent sold to investors at seed, primary versus bridge">
-        <g stroke="var(--grid)" stroke-width="1">
-          <line x1="70" y1="18" x2="70" y2="80"/><line x1="266.7" y1="18" x2="266.7" y2="80"/>
-          <line x1="463.3" y1="18" x2="463.3" y2="80"/><line x1="660" y1="18" x2="660" y2="80"/>
-        </g>
-        <g fill="var(--faint)" font-size="9.5" text-anchor="middle" font-weight="500">
-          <text x="70" y="93">0%</text><text x="266.7" y="93">10%</text><text x="463.3" y="93">20%</text><text x="660" y="93">30%</text>
-        </g>
-        <text x="0" y="38" font-size="12" font-weight="600" fill="var(--ink)">Primary</text>
-        <line x1="335.5" y1="34" x2="583.3" y2="34" stroke="var(--clay)" stroke-width="7" stroke-linecap="round"/>
-        <text x="329" y="37" font-size="9.5" fill="var(--faint)" text-anchor="end" font-weight="500">13.5%</text>
-        <text x="589" y="37" font-size="9.5" fill="var(--faint)" font-weight="500">26.1%</text>
-        <circle cx="471.2" cy="34" r="6.5" fill="#fff" stroke="var(--clay)" stroke-width="2.5"/>
-        <text x="471.2" y="23" font-size="12.5" font-weight="700" fill="var(--clay)" text-anchor="middle">20.4%</text>
-        <text x="0" y="70" font-size="12" font-weight="600" fill="var(--ink)">Bridge</text>
-        <line x1="221.4" y1="66" x2="473.2" y2="66" stroke="var(--clay-soft)" stroke-width="7" stroke-linecap="round"/>
-        <text x="215" y="69" font-size="9.5" fill="var(--faint)" text-anchor="end" font-weight="500">7.7%</text>
-        <text x="479" y="69" font-size="9.5" fill="var(--faint)" font-weight="500">20.5%</text>
-        <circle cx="353.2" cy="66" r="6.5" fill="#fff" stroke="var(--clay-mid)" stroke-width="2.5"/>
-        <text x="353.2" y="84" font-size="12.5" font-weight="700" fill="var(--clay-mid)" text-anchor="middle">14.4%</text>
+    <!-- % sold : HALF -->
+    <div class="cell">
+      <h2>A priced seed sells ~a fifth <span class="u">· % sold to investors</span></h2>
+      <svg viewBox="0 0 360 86" role="img" aria-label="Percent sold to investors, primary vs bridge">
+        <g stroke="var(--grid)" stroke-width="1"><line x1="52" y1="16" x2="52" y2="70"/><line x1="148" y1="16" x2="148" y2="70"/><line x1="244" y1="16" x2="244" y2="70"/><line x1="340" y1="16" x2="340" y2="70"/></g>
+        <g fill="var(--faint)" font-size="8" text-anchor="middle" font-weight="500"><text x="52" y="82">0%</text><text x="148" y="82">10%</text><text x="244" y="82">20%</text><text x="340" y="82">30%</text></g>
+        <text x="0" y="39" font-size="10" font-weight="600" fill="var(--ink)">Primary</text>
+        <line x1="181.6" y1="36" x2="302.6" y2="36" stroke="var(--clay)" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="247.8" cy="36" r="5.5" fill="#fff" stroke="var(--clay)" stroke-width="2.25"/>
+        <text x="247.8" y="26" font-size="11" font-weight="700" fill="var(--clay)" text-anchor="middle">20.4%</text>
+        <text x="0" y="65" font-size="10" font-weight="600" fill="var(--ink)">Bridge</text>
+        <line x1="125.9" y1="62" x2="248.8" y2="62" stroke="var(--clay-soft)" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="190.2" cy="62" r="5.5" fill="#fff" stroke="var(--clay-mid)" stroke-width="2.25"/>
+        <text x="190.2" y="52" font-size="11" font-weight="700" fill="var(--clay-mid)" text-anchor="middle">14.4%</text>
       </svg>
-      <p class="cite">Carta · 3,368 priced rounds · US · Jan–Sep 2024</p>
     </div>
 
-    <!-- (11) SAFE dilution : WIDE, taller, r20 dots -->
-    <div class="card wide">
-      <h2>The more you raise on a SAFE, the more you give up</h2>
-      <p class="cs">Expected dilution in post-money SAFE rounds — <b style="color:var(--ink)">dot = median</b>, line = middle-50% range. Dilution climbs with every step up in round size.</p>
-      <svg viewBox="0 0 700 212" role="img" aria-label="Percent sold in SAFE rounds by amount raised">
-        <g stroke="var(--grid)" stroke-width="1">
-          <line x1="40" y1="168" x2="694" y2="168"/><line x1="40" y1="128.6" x2="694" y2="128.6"/>
-          <line x1="40" y1="89.1" x2="694" y2="89.1"/><line x1="40" y1="49.7" x2="694" y2="49.7"/>
-        </g>
-        <g fill="var(--faint)" font-size="9.5" text-anchor="end" font-weight="500">
-          <text x="34" y="171">0%</text><text x="34" y="132">10%</text><text x="34" y="92">20%</text><text x="34" y="53">30%</text>
-        </g>
-        <line x1="260" y1="36" x2="260" y2="168" stroke="var(--grid)" stroke-width="1"/><line x1="470" y1="36" x2="470" y2="168" stroke="var(--grid)" stroke-width="1"/>
-        <g font-size="11" font-weight="600" text-anchor="middle" fill="var(--muted)">
-          <text x="150" y="26">Angel round</text><text x="365" y="26">Pre-seed</text><text x="590" y="26">Seed &amp; above</text>
-        </g>
-        <line x1="110" y1="164.1" x2="110" y2="128.6" stroke="var(--slate)" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="110" cy="155.4" r="20" fill="var(--clay)"/><text x="110" y="159.4" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">3.2%</text>
-        <line x1="200" y1="150.7" x2="200" y2="115.9" stroke="var(--slate)" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="200" cy="140" r="20" fill="var(--clay)"/><text x="200" y="144" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">7.1%</text>
-        <line x1="320" y1="140.8" x2="320" y2="95.5" stroke="var(--slate)" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="320" cy="123.8" r="20" fill="var(--clay)"/><text x="320" y="127.8" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">11.2%</text>
-        <line x1="410" y1="121.5" x2="410" y2="65.5" stroke="var(--slate)" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="410" cy="100.2" r="20" fill="var(--clay)"/><text x="410" y="104.2" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">17.2%</text>
-        <line x1="540" y1="107.3" x2="540" y2="46.9" stroke="var(--slate)" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="540" cy="80.9" r="20" fill="var(--clay)"/><text x="540" y="84.9" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">22.1%</text>
-        <line x1="630" y1="109.6" x2="630" y2="36.7" stroke="var(--slate)" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="630" cy="82.4" r="20" fill="var(--clay)"/><text x="630" y="86.4" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">21.7%</text>
-        <g font-size="9.5" fill="var(--faint)" text-anchor="middle" font-weight="500">
-          <text x="110" y="200">&lt;$250K</text><text x="200" y="200">$250–499K</text>
-          <text x="320" y="200">$500–999K</text><text x="410" y="200">$1–2.4M</text>
-          <text x="540" y="200">$2.5–4.9M</text><text x="630" y="200">$5M+</text>
-        </g>
+    <!-- founder ownership : HALF -->
+    <div class="cell">
+      <h2>Fewer founders, bigger slice <span class="u">· median per founder</span></h2>
+      <svg viewBox="0 0 360 92" role="img" aria-label="Founder ownership by number of founders">
+        <g stroke="var(--grid)" stroke-width="1"><line x1="42" y1="72" x2="345" y2="72"/><line x1="42" y1="54.7" x2="345" y2="54.7"/><line x1="42" y1="37.3" x2="345" y2="37.3"/><line x1="42" y1="20" x2="345" y2="20"/></g>
+        <g fill="var(--faint)" font-size="7.5" text-anchor="end" font-weight="500"><text x="37" y="74.5">0%</text><text x="37" y="57">15%</text><text x="37" y="39.5">30%</text><text x="37" y="22.5">45%</text></g>
+        <line x1="120" y1="23.4" x2="120" y2="39.6" stroke="var(--teal-soft)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="120" cy="32.7" r="17" fill="var(--teal-deep)"/><text x="120" y="36.7" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">34%</text>
+        <line x1="200" y1="31" x2="200" y2="47.7" stroke="var(--teal-soft)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="200" cy="41.9" r="17" fill="var(--teal)"/><text x="200" y="45.9" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">26%</text>
+        <line x1="280" y1="36.7" x2="280" y2="52.3" stroke="var(--teal-soft)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="280" cy="45.4" r="17" fill="var(--teal-mid)"/><text x="280" y="49.4" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">23%</text>
+        <g fill="var(--muted)" font-size="9" text-anchor="middle" font-weight="500"><text x="120" y="90">2 founders</text><text x="200" y="90">3</text><text x="280" y="90">4</text></g>
       </svg>
-      <p class="cite">Carta · 2,414 startups on post-money SAFEs · US · 2024</p>
     </div>
 
-  </div>
-  <footer><span><b>Venture Math</b> — Session 01, Seed &amp; First Institutional Capital · Page 1 of 3</span><span>Data © Carta. Used with attribution for classroom instruction.</span></footer>
-</section>
-
-<!-- ===================== SHEET 2 — OWNERSHIP ===================== -->
-<section class="sheet" id="p2">
-  <div class="run"><span class="l"><span class="n">2</span> — Ownership <span class="sec">what you keep, and what's carved out</span></span><span class="r">DATA: CARTA</span></div>
-
-  <div class="grid">
-
-    <!-- (3) founder ownership by team size : WIDE -->
-    <div class="card wide">
-      <h2>Fewer founders, a bigger slice each</h2>
-      <p class="cs">Median equity held per founder at seed, by number of founders — line marks the middle-50% range.</p>
-      <svg viewBox="0 0 700 156" role="img" aria-label="Founder ownership by number of founders">
-        <g stroke="var(--grid)" stroke-width="1">
-          <line x1="50" y1="128" x2="690" y2="128"/><line x1="50" y1="94.7" x2="690" y2="94.7"/>
-          <line x1="50" y1="61.3" x2="690" y2="61.3"/><line x1="50" y1="28" x2="690" y2="28"/>
-        </g>
-        <g fill="var(--faint)" font-size="9" text-anchor="end" font-weight="500">
-          <text x="44" y="131">0%</text><text x="44" y="98">15%</text><text x="44" y="64">30%</text><text x="44" y="31">45%</text>
-        </g>
-        <line x1="180" y1="34.7" x2="180" y2="65.8" stroke="var(--teal-soft)" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="180" cy="52.5" r="28" fill="var(--teal-deep)"/><text x="180" y="58.5" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">34%</text>
-        <line x1="385" y1="49.1" x2="385" y2="81.3" stroke="var(--teal-soft)" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="385" cy="70.2" r="28" fill="var(--teal)"/><text x="385" y="76.2" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">26%</text>
-        <line x1="590" y1="60.2" x2="590" y2="90.2" stroke="var(--teal-soft)" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="590" cy="76.9" r="28" fill="var(--teal-mid)"/><text x="590" y="82.9" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">23%</text>
-        <g fill="var(--muted)" font-size="11" text-anchor="middle" font-weight="500">
-          <text x="180" y="150">2 founders</text><text x="385" y="150">3 founders</text><text x="590" y="150">4 founders</text>
-        </g>
+    <!-- SAFE dilution : WIDE -->
+    <div class="cell wide">
+      <h2>The more you raise on a SAFE, the more you give up <span class="u">· dot = median, line = middle-50%</span></h2>
+      <svg viewBox="0 0 700 116" role="img" aria-label="Percent sold in SAFE rounds by amount raised">
+        <g stroke="var(--grid)" stroke-width="1"><line x1="40" y1="96" x2="694" y2="96"/><line x1="40" y1="74.3" x2="694" y2="74.3"/><line x1="40" y1="52.6" x2="694" y2="52.6"/><line x1="40" y1="30.9" x2="694" y2="30.9"/></g>
+        <g fill="var(--faint)" font-size="8.5" text-anchor="end" font-weight="500"><text x="34" y="99">0%</text><text x="34" y="77">10%</text><text x="34" y="55">20%</text><text x="34" y="34">30%</text></g>
+        <line x1="260" y1="22" x2="260" y2="96" stroke="var(--grid)" stroke-width="1"/><line x1="470" y1="22" x2="470" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <g font-size="10" font-weight="600" text-anchor="middle" fill="var(--muted)"><text x="150" y="14">Angel round</text><text x="365" y="14">Pre-seed</text><text x="590" y="14">Seed &amp; above</text></g>
+        <line x1="110" y1="93.8" x2="110" y2="74.3" stroke="var(--slate)" stroke-width="2" stroke-linecap="round"/><circle cx="110" cy="89.1" r="13" fill="var(--clay)"/><text x="110" y="92.2" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">3.2%</text>
+        <line x1="200" y1="86.4" x2="200" y2="67.3" stroke="var(--slate)" stroke-width="2" stroke-linecap="round"/><circle cx="200" cy="80.6" r="13" fill="var(--clay)"/><text x="200" y="83.7" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">7.1%</text>
+        <line x1="320" y1="81" x2="320" y2="56" stroke="var(--slate)" stroke-width="2" stroke-linecap="round"/><circle cx="320" cy="71.7" r="13" fill="var(--clay)"/><text x="320" y="74.8" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">11.2%</text>
+        <line x1="410" y1="70.4" x2="410" y2="39.6" stroke="var(--slate)" stroke-width="2" stroke-linecap="round"/><circle cx="410" cy="58.7" r="13" fill="var(--clay)"/><text x="410" y="61.8" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">17.2%</text>
+        <line x1="540" y1="62.6" x2="540" y2="29.4" stroke="var(--slate)" stroke-width="2" stroke-linecap="round"/><circle cx="540" cy="48" r="13" fill="var(--clay)"/><text x="540" y="51.1" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">22.1%</text>
+        <line x1="630" y1="63.9" x2="630" y2="23.7" stroke="var(--slate)" stroke-width="2" stroke-linecap="round"/><circle cx="630" cy="48.9" r="13" fill="var(--clay)"/><text x="630" y="52" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">21.7%</text>
+        <g font-size="8.5" fill="var(--faint)" text-anchor="middle" font-weight="500"><text x="110" y="112">&lt;$250K</text><text x="200" y="112">$250–499K</text><text x="320" y="112">$500–999K</text><text x="410" y="112">$1–2.4M</text><text x="540" y="112">$2.5–4.9M</text><text x="630" y="112">$5M+</text></g>
       </svg>
-      <p class="cite">Carta · 5,857 startups · median per founder</p>
     </div>
 
-    <!-- (4) ownership by valuation : WIDE, direct-labeled -->
-    <div class="card wide">
-      <h2>Founders' majority fades as valuations rise</h2>
-      <p class="cs">Median ownership split at seed / Series A, by post-money valuation. Above ~$25M, investors already hold the largest block.</p>
-      <svg viewBox="0 0 720 188" role="img" aria-label="Ownership split by valuation at seed and series A">
-        <text x="278" y="16" font-size="10.5" font-weight="600" fill="var(--teal)" text-anchor="middle">Founding team</text>
-        <text x="472" y="16" font-size="10.5" font-weight="600" fill="var(--teal-mid)" text-anchor="middle">Pool</text>
-        <text x="603" y="16" font-size="10.5" font-weight="600" fill="var(--clay)" text-anchor="middle">Investors</text>
-        <text x="0" y="63" font-size="12" font-weight="600" fill="var(--ink)">$10M–$25M</text>
-        <rect x="120" y="30" width="317.8" height="58" fill="var(--teal)"/>
-        <rect x="437.8" y="30" width="69.6" height="58" fill="var(--teal-soft)"/>
-        <rect x="507.4" y="30" width="192.6" height="58" fill="var(--clay-soft)"/>
-        <text x="278" y="64" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">54.8%</text>
-        <text x="472" y="64" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">12.0%</text>
-        <text x="603" y="64" font-size="13.5" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">33.2%</text>
-        <text x="0" y="137" font-size="12" font-weight="600" fill="var(--ink)">$25M–$49M</text>
-        <rect x="120" y="104" width="222.7" height="58" fill="var(--teal)"/>
-        <rect x="342.7" y="104" width="80.0" height="58" fill="var(--teal-soft)"/>
-        <rect x="422.7" y="104" width="277.3" height="58" fill="var(--clay-soft)"/>
-        <text x="231" y="138" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">38.4%</text>
-        <text x="382" y="138" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">13.8%</text>
-        <text x="561" y="138" font-size="13.5" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">47.8%</text>
+    <!-- ownership by valuation : WIDE -->
+    <div class="cell wide">
+      <h2>Founders' majority fades as valuations rise <span class="u">· median ownership by post-money valuation</span></h2>
+      <svg viewBox="0 0 720 78" role="img" aria-label="Ownership split by valuation">
+        <text x="278" y="9" font-size="9" font-weight="600" fill="var(--teal)" text-anchor="middle">Founding team</text>
+        <text x="472" y="9" font-size="9" font-weight="600" fill="var(--teal-mid)" text-anchor="middle">Pool</text>
+        <text x="603" y="9" font-size="9" font-weight="600" fill="var(--clay)" text-anchor="middle">Investors</text>
+        <text x="0" y="34" font-size="10.5" font-weight="600" fill="var(--ink)">$10M–$25M</text>
+        <rect x="120" y="16" width="317.8" height="26" fill="var(--teal)"/><rect x="437.8" y="16" width="69.6" height="26" fill="var(--teal-soft)"/><rect x="507.4" y="16" width="192.6" height="26" fill="var(--clay-soft)"/>
+        <text x="278" y="33" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">54.8%</text><text x="472" y="33" font-size="9.5" font-weight="700" fill="#fff" text-anchor="middle">12.0%</text><text x="603" y="33" font-size="11" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">33.2%</text>
+        <text x="0" y="68" font-size="10.5" font-weight="600" fill="var(--ink)">$25M–$49M</text>
+        <rect x="120" y="50" width="222.7" height="26" fill="var(--teal)"/><rect x="342.7" y="50" width="80.0" height="26" fill="var(--teal-soft)"/><rect x="422.7" y="50" width="277.3" height="26" fill="var(--clay-soft)"/>
+        <text x="231" y="67" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">38.4%</text><text x="382" y="67" font-size="9.5" font-weight="700" fill="#fff" text-anchor="middle">13.8%</text><text x="561" y="67" font-size="11" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">47.8%</text>
       </svg>
-      <p class="cite">Carta · 10,809 US software startups · rounds raised 2019–2024</p>
     </div>
 
-    <!-- (6) vesting cheatsheet : WIDE table (moved here) -->
-    <div class="card wide">
-      <h2>How each role vests its equity</h2>
-      <p class="cs">Most common vesting terms by role in a U.S. startup — the schedule that turns a grant into ownership you actually keep.</p>
+    <!-- valuation trend : HALF -->
+    <div class="cell">
+      <h2>Seed valuations grew fastest at the top <span class="u">· 2018 → 2025</span></h2>
+      <svg viewBox="0 0 360 112" role="img" aria-label="Seed valuation by percentile 2018 to 2025">
+        <g font-size="9" fill="var(--muted)" font-weight="600"><text x="0" y="21">95th</text><text x="0" y="43">90th</text><text x="0" y="65">75th</text><text x="0" y="87">50th</text><text x="0" y="109">25th</text></g>
+        <line x1="167.2" y1="18" x2="324.1" y2="18" stroke="var(--slate)" stroke-width="1.75"/><circle cx="167.2" cy="18" r="4" fill="#fff" stroke="var(--slate)" stroke-width="1.75"/><circle cx="324.1" cy="18" r="5.5" fill="var(--teal)"/><text x="333" y="21" font-size="9.5" font-weight="700" fill="var(--ink)">$80M</text>
+        <line x1="141.5" y1="40" x2="244.7" y2="40" stroke="var(--slate)" stroke-width="1.75"/><circle cx="141.5" cy="40" r="4" fill="#fff" stroke="var(--slate)" stroke-width="1.75"/><circle cx="244.7" cy="40" r="5.5" fill="var(--teal)"/><text x="253" y="43" font-size="9.5" font-weight="700" fill="var(--ink)">$55M</text>
+        <line x1="118" y1="62" x2="174.2" y2="62" stroke="var(--slate)" stroke-width="1.75"/><circle cx="118" cy="62" r="4" fill="#fff" stroke="var(--slate)" stroke-width="1.75"/><circle cx="174.2" cy="62" r="5.5" fill="var(--teal)"/><text x="183" y="65" font-size="9.5" font-weight="700" fill="var(--ink)">$32.8M</text>
+        <line x1="101.8" y1="84" x2="133.5" y2="84" stroke="var(--slate)" stroke-width="1.75"/><circle cx="101.8" cy="84" r="4" fill="#fff" stroke="var(--slate)" stroke-width="1.75"/><circle cx="133.5" cy="84" r="5.5" fill="var(--teal)"/><text x="142" y="87" font-size="9.5" font-weight="700" fill="var(--ink)">$20M</text>
+        <line x1="89.1" y1="106" x2="108.4" y2="106" stroke="var(--slate)" stroke-width="1.75"/><circle cx="89.1" cy="106" r="4" fill="#fff" stroke="var(--slate)" stroke-width="1.75"/><circle cx="108.4" cy="106" r="5.5" fill="var(--teal)"/><text x="117" y="109" font-size="9.5" font-weight="700" fill="var(--ink)">$12.1M</text>
+      </svg>
+    </div>
+
+    <!-- shop / odds : HALF -->
+    <div class="cell">
+      <h2>Where to raise <span class="u">· <tspan style="fill:var(--teal)">unicorn</tspan> vs <tspan style="fill:var(--clay)">50×</tspan> odds by seed val.</span></h2>
+      <svg viewBox="0 0 360 110" role="img" aria-label="Unicorn and 50x odds by seed valuation quartile">
+        <g stroke="var(--grid)" stroke-width="1"><line x1="42" y1="96" x2="352" y2="96"/><line x1="42" y1="74.3" x2="352" y2="74.3"/><line x1="42" y1="52.6" x2="352" y2="52.6"/><line x1="42" y1="30.9" x2="352" y2="30.9"/></g>
+        <g fill="var(--faint)" font-size="7.5" text-anchor="end" font-weight="500"><text x="37" y="98.5">0%</text><text x="37" y="77">2%</text><text x="37" y="55">4%</text><text x="37" y="33.5">6%</text></g>
+        <rect x="69"  y="87.3" width="18" height="8.7"  fill="var(--teal)"/><text x="78" y="83.5" font-size="7.5" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">0.8%</text>
+        <rect x="89"  y="28.7" width="18" height="67.3" fill="var(--clay)"/><text x="98" y="24.9" font-size="7.5" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">6.2%</text>
+        <rect x="138" y="79.7" width="18" height="16.3" fill="var(--teal)"/><text x="147" y="75.9" font-size="7.5" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">1.5%</text>
+        <rect x="158" y="48.2" width="18" height="47.8" fill="var(--clay)"/><text x="167" y="44.4" font-size="7.5" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">4.4%</text>
+        <rect x="207" y="67.8" width="18" height="28.2" fill="var(--teal)"/><text x="216" y="64" font-size="7.5" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">2.6%</text>
+        <rect x="227" y="51.5" width="18" height="44.5" fill="var(--clay)"/><text x="236" y="47.7" font-size="7.5" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">4.1%</text>
+        <rect x="276" y="35.2" width="18" height="60.8" fill="var(--teal)"/><text x="285" y="31.4" font-size="7.5" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">5.6%</text>
+        <rect x="296" y="43.9" width="18" height="52.1" fill="var(--clay)"/><text x="305" y="40.1" font-size="7.5" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">4.8%</text>
+        <g fill="var(--muted)" font-size="8" text-anchor="middle" font-weight="500"><text x="87" y="108">Low val.</text><text x="156" y="108">Low-mid</text><text x="225" y="108">High-mid</text><text x="294" y="108">High val.</text></g>
+      </svg>
+    </div>
+
+    <!-- funnel : WIDE -->
+    <div class="cell wide">
+      <h2>Each round, most of the field drops out <span class="u">· class of 2018, as of Jan 2025</span></h2>
+      <svg viewBox="0 0 700 116" role="img" aria-label="Venture capital funnel, class of 2018">
+        <rect x="20" y="8"  width="420" height="13" fill="var(--teal)" opacity=".32"/><text x="450" y="18" font-size="10.5" font-weight="600" fill="var(--ink)">4,369 incorporated in 2018 <tspan fill="var(--faint)">· 100%</tspan></text>
+        <rect x="20" y="24" width="237" height="13" fill="var(--teal)" opacity=".5"/><text x="450" y="34" font-size="10.5" font-weight="600" fill="var(--ink)">2,464 raised a Seed <tspan fill="var(--teal)" font-weight="700">· 56.4%</tspan></text>
+        <rect x="20" y="40" width="153" height="13" fill="var(--teal)" opacity=".66"/><text x="450" y="50" font-size="10.5" font-weight="600" fill="var(--ink)">1,588 raised Series A <tspan fill="var(--faint)">· 36.4%</tspan></text>
+        <rect x="20" y="56" width="62"  height="13" fill="var(--teal)" opacity=".82"/><text x="450" y="66" font-size="10.5" font-weight="600" fill="var(--ink)">643 raised Series B <tspan fill="var(--faint)">· 14.8%</tspan></text>
+        <rect x="20" y="72" width="19"  height="13" fill="var(--teal)"/><text x="450" y="82" font-size="10.5" font-weight="600" fill="var(--ink)">194 raised Series C <tspan fill="var(--faint)">· 4.4%</tspan></text>
+        <rect x="20" y="88" width="8"   height="13" fill="var(--teal-deep)"/><text x="450" y="98" font-size="10.5" font-weight="600" fill="var(--ink)">50 raised Series D+ <tspan fill="var(--faint)">· 1.1%</tspan></text>
+        <text x="20" y="112" font-size="9" font-weight="500" fill="var(--muted)">By Jan 2025: <tspan fill="var(--clay-deep)" font-weight="700">62% closed</tspan> · <tspan fill="var(--teal-deep)" font-weight="700">32% still live</tspan> · 5.5% M&amp;A · 1.3% unicorn · 0.3% IPO</text>
+      </svg>
+    </div>
+
+    <!-- vesting : WIDE table -->
+    <div class="cell wide">
+      <h2>How each role vests its equity <span class="u">· most common terms, U.S. startups</span></h2>
       <table class="vest">
         <thead><tr><th>Persona / equity type</th><th>Vests over</th><th>Cliff?</th><th>Frequency</th></tr></thead>
         <tbody>
-          <tr><td><span class="p">Founders</span> <span class="et">Incentive stock options</span></td><td class="v">4 years</td><td class="v">1 year <small>(or none)</small></td><td class="v">Monthly</td></tr>
-          <tr><td><span class="p">Advisors</span> <span class="et">Non-qualified stock options</span></td><td class="v">2 years</td><td class="v">6 months</td><td class="v">Monthly</td></tr>
-          <tr><td><span class="p">Independent board</span> <span class="et">Non-qualified stock options</span></td><td class="v">4 years</td><td class="v">1 year</td><td class="v">Quarterly</td></tr>
-          <tr><td><span class="p">Employees</span> <span class="et">Incentive stock options or RSUs</span></td><td class="v">4 years</td><td class="v">1 year</td><td class="v">Monthly</td></tr>
+          <tr><td><span class="p">Founders</span> <span class="et">· ISOs</span></td><td class="v">4 years</td><td class="v">1 year <small>(or none)</small></td><td class="v">Monthly</td></tr>
+          <tr><td><span class="p">Advisors</span> <span class="et">· NSOs</span></td><td class="v">2 years</td><td class="v">6 months</td><td class="v">Monthly</td></tr>
+          <tr><td><span class="p">Independent board</span> <span class="et">· NSOs</span></td><td class="v">4 years</td><td class="v">1 year</td><td class="v">Quarterly</td></tr>
+          <tr><td><span class="p">Employees</span> <span class="et">· ISOs or RSUs</span></td><td class="v">4 years</td><td class="v">1 year</td><td class="v">Monthly</td></tr>
         </tbody>
       </table>
-      <p class="cite">Carta · most common values across 500,000+ equityholders at Carta companies</p>
     </div>
 
   </div>
-  <footer><span><b>Venture Math</b> — Session 01, Seed &amp; First Institutional Capital · Page 2 of 3</span><span>Data © Carta. Used with attribution for classroom instruction.</span></footer>
-</section>
 
-<!-- ===================== SHEET 3 — THE BIGGER PICTURE ===================== -->
-<section class="sheet" id="p3">
-  <div class="run"><span class="l"><span class="n">3</span> — The bigger picture <span class="sec">the funnel, valuations &amp; the odds</span></span><span class="r">DATA: CARTA</span></div>
+  <footer>
+    <span><b>Venture Math: What the Numbers Really Look Like, from Formation to IPO</b> — UC Berkeley Extension, Fall 2026</span>
+    <span>Every figure re-visualized from Carta's public data, attributed for classroom use.</span>
+  </footer>
 
-  <div class="grid">
-
-    <!-- (7) VC funnel : WIDE, first -->
-    <div class="card wide">
-      <h2>Each round, most of the field drops out</h2>
-      <p class="cs">The class of 2018, stage by stage — share of the original cohort still advancing. Outcomes as of Jan 2025.</p>
-      <svg viewBox="0 0 700 208" role="img" aria-label="Venture capital funnel for the 2018 cohort">
-        <rect x="20" y="10"  width="420" height="21" fill="var(--teal)" opacity=".32"/>
-        <text x="450" y="24.5" font-size="12" font-weight="600" fill="var(--ink)">4,369 incorporated in 2018 <tspan fill="var(--faint)">· 100%</tspan></text>
-        <rect x="20" y="37"  width="237" height="21" fill="var(--teal)" opacity=".5"/>
-        <text x="450" y="51.5" font-size="12" font-weight="600" fill="var(--ink)">2,464 raised a Seed <tspan fill="var(--teal)" font-weight="700">· 56.4%</tspan></text>
-        <rect x="20" y="64"  width="153" height="21" fill="var(--teal)" opacity=".66"/>
-        <text x="450" y="78.5" font-size="12" font-weight="600" fill="var(--ink)">1,588 raised Series A <tspan fill="var(--faint)">· 36.4%</tspan></text>
-        <rect x="20" y="91"  width="62"  height="21" fill="var(--teal)" opacity=".82"/>
-        <text x="450" y="105.5" font-size="12" font-weight="600" fill="var(--ink)">643 raised Series B <tspan fill="var(--faint)">· 14.8%</tspan></text>
-        <rect x="20" y="118" width="19"  height="21" fill="var(--teal)"/>
-        <text x="450" y="132.5" font-size="12" font-weight="600" fill="var(--ink)">194 raised Series C <tspan fill="var(--faint)">· 4.4%</tspan></text>
-        <rect x="20" y="145" width="8"   height="21" fill="var(--teal-deep)"/>
-        <text x="450" y="159.5" font-size="12" font-weight="600" fill="var(--ink)">50 raised Series D+ <tspan fill="var(--faint)">· 1.1%</tspan></text>
-        <text x="20" y="188" font-size="10" font-weight="600" fill="var(--muted)">Where they are now:</text>
-        <g font-size="10">
-          <rect x="150" y="178" width="96" height="24" rx="4" fill="none" stroke="var(--rule)"/>
-          <text x="198" y="188" text-anchor="middle" font-size="8.5" fill="var(--faint)" font-weight="500">IPO</text><text x="198" y="199" text-anchor="middle" font-weight="700" fill="var(--ink)">15 · 0.3%</text>
-          <rect x="252" y="178" width="96" height="24" rx="4" fill="none" stroke="var(--rule)"/>
-          <text x="300" y="188" text-anchor="middle" font-size="8.5" fill="var(--faint)" font-weight="500">M&amp;A</text><text x="300" y="199" text-anchor="middle" font-weight="700" fill="var(--ink)">239 · 5.5%</text>
-          <rect x="354" y="178" width="96" height="24" rx="4" fill="none" stroke="var(--teal)"/>
-          <text x="402" y="188" text-anchor="middle" font-size="8.5" fill="var(--teal)" font-weight="600">Still live</text><text x="402" y="199" text-anchor="middle" font-weight="700" fill="var(--teal-deep)">1,408 · 32%</text>
-          <rect x="456" y="178" width="96" height="24" rx="4" fill="none" stroke="var(--clay)"/>
-          <text x="504" y="188" text-anchor="middle" font-size="8.5" fill="var(--clay)" font-weight="600">Closed</text><text x="504" y="199" text-anchor="middle" font-weight="700" fill="var(--clay-deep)">2,707 · 62%</text>
-          <rect x="558" y="178" width="120" height="24" rx="4" fill="none" stroke="var(--rule)"/>
-          <text x="618" y="188" text-anchor="middle" font-size="8.5" fill="var(--faint)" font-weight="500">Private unicorn</text><text x="618" y="199" text-anchor="middle" font-weight="700" fill="var(--ink)">57 · 1.3%</text>
-        </g>
-      </svg>
-      <p class="cite">Carta · 4,369 companies incorporated 2018 · status as of Jan 1, 2025</p>
-    </div>
-
-    <!-- (8) valuation dumbbell -->
-    <div class="card">
-      <h2>Seed valuations grew fastest at the top</h2>
-      <p class="cs">Post-money seed valuation by percentile, <span style="color:var(--faint)">2018</span> <b style="color:var(--teal)">→ 2025</b>. Growth since 2018 in teal.</p>
-      <svg viewBox="0 0 360 240" role="img" aria-label="Seed valuation by percentile 2018 versus 2025">
-        <g font-size="10.5" fill="var(--muted)" font-weight="600">
-          <text x="0" y="47">95th</text><text x="0" y="95">90th</text><text x="0" y="143">75th</text><text x="0" y="191">50th</text><text x="0" y="239">25th</text>
-        </g>
-        <line x1="150" y1="44" x2="311.3" y2="44" stroke="var(--slate)" stroke-width="2"/>
-        <circle cx="150" cy="44" r="5" fill="#fff" stroke="var(--slate)" stroke-width="2"/><circle cx="311.3" cy="44" r="7" fill="var(--teal)"/>
-        <text x="142" y="47" font-size="9.5" fill="var(--faint)" text-anchor="end" font-weight="500">$30.6M</text>
-        <text x="322" y="43" font-size="11" font-weight="700" fill="var(--ink)">$80M</text><text x="322" y="53" font-size="9" font-weight="600" fill="var(--teal)">+161%</text>
-        <line x1="127.6" y1="92" x2="243.5" y2="92" stroke="var(--slate)" stroke-width="2"/>
-        <circle cx="127.6" cy="92" r="5" fill="#fff" stroke="var(--slate)" stroke-width="2"/><circle cx="243.5" cy="92" r="7" fill="var(--teal)"/>
-        <text x="119" y="95" font-size="9.5" fill="var(--faint)" text-anchor="end" font-weight="500">$22.5M</text>
-        <text x="254" y="91" font-size="11" font-weight="700" fill="var(--ink)">$55M</text><text x="254" y="101" font-size="9" font-weight="600" fill="var(--teal)">+144%</text>
-        <line x1="106.3" y1="140" x2="169.4" y2="140" stroke="var(--slate)" stroke-width="2"/>
-        <circle cx="106.3" cy="140" r="5" fill="#fff" stroke="var(--slate)" stroke-width="2"/><circle cx="169.4" cy="140" r="7" fill="var(--teal)"/>
-        <text x="98" y="143" font-size="9.5" fill="var(--faint)" text-anchor="end" font-weight="500">$15.1M</text>
-        <text x="180" y="139" font-size="11" font-weight="700" fill="var(--ink)">$32.8M</text><text x="180" y="149" font-size="9" font-weight="600" fill="var(--teal)">+117%</text>
-        <line x1="92.1" y1="188" x2="121.9" y2="188" stroke="var(--slate)" stroke-width="2"/>
-        <circle cx="92.1" cy="188" r="5" fill="#fff" stroke="var(--slate)" stroke-width="2"/><circle cx="121.9" cy="188" r="7" fill="var(--teal)"/>
-        <text x="84" y="191" font-size="9.5" fill="var(--faint)" text-anchor="end" font-weight="500">$10M</text>
-        <text x="132" y="187" font-size="11" font-weight="700" fill="var(--ink)">$20M</text><text x="132" y="197" font-size="9" font-weight="600" fill="var(--teal)">+100%</text>
-        <line x1="83.2" y1="236" x2="101.2" y2="236" stroke="var(--slate)" stroke-width="2"/>
-        <circle cx="83.2" cy="236" r="5" fill="#fff" stroke="var(--slate)" stroke-width="2"/><circle cx="101.2" cy="236" r="7" fill="var(--teal)"/>
-        <text x="75" y="239" font-size="9.5" fill="var(--faint)" text-anchor="end" font-weight="500">$6M</text>
-        <text x="112" y="235" font-size="11" font-weight="700" fill="var(--ink)">$12.1M</text><text x="112" y="245" font-size="9" font-weight="600" fill="var(--teal)">+102%</text>
-      </svg>
-      <p class="cite">Carta · 12,229 US seed rounds · Q1 2018–Q3 2025</p>
-    </div>
-
-    <!-- (10) where to shop at seed -->
-    <div class="card">
-      <h2>Pricey seeds make more unicorns — cheap ones 50× more often</h2>
-      <div class="dl"><i><span class="sw" style="background:var(--teal)"></span>Became a unicorn</i><i><span class="sw" style="background:var(--clay)"></span>50× seed value</i></div>
-      <svg viewBox="0 0 360 240" role="img" aria-label="Unicorn and 50x odds by seed valuation quartile">
-        <g stroke="var(--grid)" stroke-width="1">
-          <line x1="42" y1="210" x2="352" y2="210"/><line x1="42" y1="161.4" x2="352" y2="161.4"/>
-          <line x1="42" y1="112.9" x2="352" y2="112.9"/><line x1="42" y1="64.3" x2="352" y2="64.3"/>
-        </g>
-        <g fill="var(--faint)" font-size="8.5" text-anchor="end" font-weight="500">
-          <text x="37" y="213">0%</text><text x="37" y="164">2%</text><text x="37" y="116">4%</text><text x="37" y="67">6%</text>
-        </g>
-        <rect x="69"  y="190.6" width="20" height="19.4"  fill="var(--teal)"/><text x="79" y="185.6" font-size="9" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">0.8%</text>
-        <rect x="91"  y="59.3"  width="20" height="150.7" fill="var(--clay)"/><text x="101" y="54.3" font-size="9" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">6.2%</text>
-        <rect x="142" y="173.5" width="20" height="36.5"  fill="var(--teal)"/><text x="152" y="168.5" font-size="9" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">1.5%</text>
-        <rect x="164" y="103.1" width="20" height="106.9" fill="var(--clay)"/><text x="174" y="98.1" font-size="9" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">4.4%</text>
-        <rect x="215" y="146.8" width="20" height="63.2"  fill="var(--teal)"/><text x="225" y="141.8" font-size="9" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">2.6%</text>
-        <rect x="237" y="110.4" width="20" height="99.6"  fill="var(--clay)"/><text x="247" y="105.4" font-size="9" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">4.1%</text>
-        <rect x="288" y="73.9"  width="20" height="136.1" fill="var(--teal)"/><text x="298" y="68.9" font-size="9" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">5.6%</text>
-        <rect x="310" y="93.4"  width="20" height="116.6" fill="var(--clay)"/><text x="320" y="88.4" font-size="9" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">4.8%</text>
-        <g fill="var(--muted)" font-size="9" text-anchor="middle" font-weight="500">
-          <text x="90" y="226">Low val.</text><text x="163" y="226">Low-mid</text><text x="236" y="226">High-mid</text><text x="309" y="226">High val.</text>
-        </g>
-        <text x="197" y="238" font-size="8.5" fill="var(--faint)" text-anchor="middle" font-weight="500">seed valuation quartile (1st → 99th percentile)</text>
-      </svg>
-      <p class="cite">Carta · 5,700 US startups · seed 2016–2020 · by highest val</p>
-    </div>
-
-  </div>
-  <footer><span><b>Venture Math: What the Numbers Really Look Like, from Formation to IPO</b> · Page 3 of 3</span><span>Data © Carta. Re-visualized with attribution for classroom instruction.</span></footer>
-</section>
-
+</div>
 </body>
 </html>
