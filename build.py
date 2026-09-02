@@ -88,6 +88,7 @@ for f in sorted(glob.glob(os.path.join(SESSIONS, "*.json"))):
         "role": role(title),
         "photo": asset(d.get("guest_photo")),
         "logo": asset(d.get("guest_logo")),
+        "linkedin": (d.get("linkedin") or "").strip(),
         "virtual": "virtual" in txt(d.get("location")).lower(),
         "sort": (parse_date(txt(d.get("date"))), parse_time(txt(d.get("time")))),
     })
@@ -104,14 +105,29 @@ for a in sorted(wanted):
 e = html.escape
 
 
+def linkedin_open(r, extra=""):
+    """Opening <a> tag to a guest's LinkedIn, or "" when they have no profile on file."""
+    return (f'<a{extra} href="{e(r["linkedin"])}" target="_blank" rel="noopener noreferrer" '
+            f'aria-label="{e(r["guest"])} on LinkedIn">') if r["linkedin"] else ""
+
+
 def avatar(r, cls):
-    return (f'<img class="{cls}" src="assets/{e(r["photo"])}" alt="{e(r["guest"])}" '
-            f'loading="lazy" width="60" height="60">') if r["photo"] else ""
+    if not r["photo"]:
+        return ""
+    img = (f'<img class="{cls}" src="assets/{e(r["photo"])}" alt="{e(r["guest"])}" '
+           f'loading="lazy" width="60" height="60">')
+    # when a LinkedIn profile is on file, the face is a link to it
+    return f'{linkedin_open(r, " class=\"avatar-link\"")}{img}</a>' if r["linkedin"] else img
 
 
 def logo_plate(r):
     return (f'<span class="logo-plate"><img src="assets/{e(r["logo"])}" '
             f'alt="{e(r["firm"])}" loading="lazy"></span>') if r["logo"] else ""
+
+
+def guest_name(r):
+    """The guest's name, linked to their LinkedIn when one is on file."""
+    return f'{linkedin_open(r)}{e(r["guest"])}</a>' if r["linkedin"] else e(r["guest"])
 
 
 def guest_block(r):
@@ -122,13 +138,17 @@ def guest_block(r):
     role = f'<div class="role">{e(r["role"])}</div>' if r["role"] else \
            (f'<div class="role"><b>{e(r["firm"])}</b></div>' if r["firm"] else "")
     return (f'<div class="guest">{avatar(r, "avatar")}'
-            f'<div class="who"><div class="name">{e(r["guest"])}</div>{role}</div>'
+            f'<div class="who"><div class="name">{guest_name(r)}</div>{role}</div>'
             f'{logo_plate(r)}</div>')
 
 
-faces = "\n".join(
-    f'        <img src="assets/{e(r["photo"])}" alt="{e(r["guest"])}" title="{e(r["guest"])} · {e(r["firm"])}" loading="lazy" width="60" height="60">'
-    for r in rows if r["photo"])
+def face(r):
+    img = (f'<img src="assets/{e(r["photo"])}" alt="{e(r["guest"])}" '
+           f'title="{e(r["guest"])} · {e(r["firm"])}" loading="lazy" width="60" height="60">')
+    return f'        {linkedin_open(r, " class=\"face\"")}{img}</a>' if r["linkedin"] else f'        {img}'
+
+
+faces = "\n".join(face(r) for r in rows if r["photo"])
 
 cards = "\n".join(f'''    <li class="s reveal" style="--i:{i + 2}">
       <div class="when"><span class="d">{e(r["date"])}</span><span class="t">{e(r["time"])}</span></div>
