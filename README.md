@@ -1,8 +1,8 @@
-# Venture Math @ Berkeley — course page
+# Venture Math — course page
 
 A single static page listing the schedule, topics and guest lineup for
 **Venture Math: What the Numbers Really Look Like, from Formation to IPO**
-(UC Berkeley Extension, Fall 2026).
+(Fall 2026).
 
 `index.html` is **generated** — do not hand-edit it. Run:
 
