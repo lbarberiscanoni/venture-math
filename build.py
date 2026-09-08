@@ -177,7 +177,8 @@ copied = 0
 for r in rows:
     if not r["flyer"]:
         continue
-    for ext in (".html", ".pdf"):
+    # .png is the share-preview image the poster's og:image points at — publish it too.
+    for ext in (".html", ".pdf", ".png"):
         src = os.path.join(FLYERS_SRC, r["flyer"] + ext)
         if os.path.exists(src):
             shutil.copy2(src, os.path.join(FLYERS_DST, r["flyer"] + ext))

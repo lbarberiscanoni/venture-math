@@ -53,3 +53,13 @@ schedule invites a question you do not want to answer).
 
 Only add a guest once they have accepted. Having a flyer is the signal — if there is no flyer,
 there is no row.
+
+## Sharing a poster
+
+Each guest's poster is a directly linkable page at `fliers/<slug>.html`
+(e.g. `https://lbarberiscanoni.github.io/venture-math/fliers/01-rex-salisbury.html`) — the
+same URL the **Flyer** link on the schedule points to. `build.py` publishes the poster HTML,
+its PDF, **and** a `.png` preview image; the poster carries Open Graph tags pointing at that
+PNG, so dropping the link into email, LinkedIn, Slack or iMessage unfurls into a card showing
+the poster. The preview image and link URLs are built in `../fliers/build.py`; see that
+folder's README for the `SITE_BASE_URL` override to use once `venturemath.xyz` is live.
