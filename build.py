@@ -89,6 +89,7 @@ for f in sorted(glob.glob(os.path.join(SESSIONS, "*.json"))):
         "photo": asset(d.get("guest_photo")),
         "logo": asset(d.get("guest_logo")),
         "linkedin": (d.get("linkedin") or "").strip(),
+        "lecture": (d.get("lecture_url") or "").strip(),
         "virtual": "virtual" in txt(d.get("location")).lower(),
         "sort": (parse_date(txt(d.get("date"))), parse_time(txt(d.get("time")))),
     })
@@ -159,6 +160,7 @@ cards = "\n".join(f'''    <li class="s reveal" style="--i:{i + 2}">
       </div>
       <div class="aside">
         <span class="tag{' virt' if r["virtual"] else ''}">{"Online" if r["virtual"] else "In person"}</span>
+        {f'<a class="watch" href="{e(r["lecture"])}" target="_blank" rel="noopener noreferrer">Watch lecture</a>' if r["lecture"] else ''}
         {f'<a class="fly" href="fliers/{r["flyer"]}.html">Flyer</a>' if r["flyer"] else ''}
       </div>
     </li>''' for i, r in enumerate(rows))

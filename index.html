@@ -187,6 +187,16 @@
     white-space:nowrap; transition:background .15s ease,color .15s ease;
   }
   .fly:hover{background:var(--accent); color:#fff}
+  .watch{
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; font-size:.72rem;
+    letter-spacing:.06em; text-transform:uppercase; font-weight:600; text-decoration:none;
+    color:var(--accent-ink); background:var(--accent-soft); border:1px solid var(--accent);
+    padding:.3rem .64rem; border-radius:999px; white-space:nowrap;
+    display:inline-flex; align-items:center; gap:.34rem;
+    transition:background .15s ease,color .15s ease;
+  }
+  .watch::before{content:"\25B6"; font-size:.58rem; line-height:1}
+  .watch:hover{background:var(--accent); color:#fff}
 
   /* entrance */
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -203,7 +213,7 @@
     .s{grid-template-columns:1fr; gap:.2rem}
     .when{display:flex; gap:.55rem; align-items:baseline; margin-bottom:.55rem}
     .when .d,.when .t{display:inline}
-    .aside{flex-direction:row; align-items:center; margin-top:.9rem; order:3}
+    .aside{flex-direction:row; flex-wrap:wrap; align-items:center; margin-top:.9rem; order:3}
     .logo-plate{margin-left:0}
     .guest{flex-wrap:wrap}
   }
@@ -271,6 +281,7 @@
       </div>
       <div class="aside">
         <span class="tag">In person</span>
+        <a class="watch" href="https://www.youtube.com/watch?v=TYa15c5zNfg" target="_blank" rel="noopener noreferrer">Watch lecture</a>
         <a class="fly" href="fliers/01-rex-salisbury.html">Flyer</a>
       </div>
     </li>
@@ -283,6 +294,7 @@
       </div>
       <div class="aside">
         <span class="tag">In person</span>
+        
         <a class="fly" href="fliers/02-christina-gilbert.html">Flyer</a>
       </div>
     </li>
@@ -295,6 +307,7 @@
       </div>
       <div class="aside">
         <span class="tag">In person</span>
+        
         <a class="fly" href="fliers/03-mercedes-bent.html">Flyer</a>
       </div>
     </li>
@@ -307,6 +320,7 @@
       </div>
       <div class="aside">
         <span class="tag">In person</span>
+        
         <a class="fly" href="fliers/04-nnamdi-iregbulem.html">Flyer</a>
       </div>
     </li>
@@ -319,6 +333,7 @@
       </div>
       <div class="aside">
         <span class="tag">In person</span>
+        
         <a class="fly" href="fliers/05-ani-pai.html">Flyer</a>
       </div>
     </li>
@@ -331,6 +346,7 @@
       </div>
       <div class="aside">
         <span class="tag">In person</span>
+        
         <a class="fly" href="fliers/06-andy-ku.html">Flyer</a>
       </div>
     </li>
@@ -344,6 +360,7 @@
       <div class="aside">
         <span class="tag">In person</span>
         
+        
       </div>
     </li>
     <li class="s reveal" style="--i:9">
@@ -355,6 +372,7 @@
       </div>
       <div class="aside">
         <span class="tag virt">Online</span>
+        
         <a class="fly" href="fliers/08-charles-hudson.html">Flyer</a>
       </div>
     </li>
@@ -367,6 +385,7 @@
       </div>
       <div class="aside">
         <span class="tag">In person</span>
+        
         <a class="fly" href="fliers/09-danielle-strachman.html">Flyer</a>
       </div>
     </li>
@@ -379,6 +398,7 @@
       </div>
       <div class="aside">
         <span class="tag virt">Online</span>
+        
         <a class="fly" href="fliers/10-vittorio-lavioso.html">Flyer</a>
       </div>
     </li>
@@ -391,6 +411,7 @@
       </div>
       <div class="aside">
         <span class="tag">In person</span>
+        
         <a class="fly" href="fliers/11-doreen-linfoot.html">Flyer</a>
       </div>
     </li>
