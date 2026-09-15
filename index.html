@@ -64,8 +64,17 @@
     font-size:clamp(1.15rem,2.6vw,1.5rem); color:var(--muted); font-style:italic;
     margin:0 0 1.9rem; max-width:30ch; line-height:1.35;
   }
-  .lede{font-size:1.075rem; max-width:60ch; margin:0 0 2.4rem; color:var(--ink)}
+  .lede{font-size:1.075rem; max-width:60ch; margin:0 0 1.15rem; color:var(--ink)}
   .lede strong{font-weight:600}
+  .channel-link{
+    display:inline-flex; align-items:center; gap:.45rem; margin:0 0 2.4rem;
+    padding:.52rem .9rem; border:1px solid var(--accent); border-radius:999px;
+    color:var(--accent-ink); text-decoration:none;
+    font:600 .86rem/1.2 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    transition:background .15s ease,color .15s ease;
+  }
+  .channel-link:hover{background:var(--accent);color:var(--bg)}
+  .channel-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
   /* ---------- guest facepile ---------- */
   .lineup{
@@ -219,6 +228,10 @@
       startup lifecycle stage by stage against data on <strong>40,000+ startups</strong>, and each session a
       stage-appropriate investor joins to say what the numbers look like from their side of the table.
     </p>
+
+    <a class="channel-link" href="https://www.youtube.com/@venturemathlectures" target="_blank" rel="noopener noreferrer">
+      Watch Venture Math on YouTube <span aria-hidden="true">↗</span>
+    </a>
 
     <div class="lineup">
       <div class="faces">
