@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAFEs &amp; the Accelerator — Venture Math</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14283b; --muted:#5b6b7a; --faint:#95a1ad;
+    --paper:#ffffff; --rule:#e4e8ec; --grid:#eef1f4;
+    --teal:#0f7a68; --teal-mid:#3f9585; --teal-soft:#9cc7bd; --teal-deep:#0c5f52;
+    --clay:#b05a38; --clay-mid:#c68562; --clay-soft:#dcae90; --clay-deep:#8f4529;
+    --slate:#aab4bd;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:#f3f5f7; color:var(--ink);
+    font:12.5px/1.4 'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased; letter-spacing:-.004em;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  svg text{font-family:'Inter',ui-sans-serif,system-ui,sans-serif; font-variant-numeric:tabular-nums}
+  .sheet{width:768px; margin:0 auto 20px; padding:16px 28px 11px; background:var(--paper); position:relative}
+
+  .brand{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1.5px solid var(--ink); padding-bottom:7px; margin-bottom:11px}
+  .brand .l .eyebrow{font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--teal); font-weight:600; margin:0 0 3px}
+  .brand .l h1{font-size:24px; letter-spacing:-.02em; margin:0; font-weight:700; color:var(--ink)}
+  .brand .r{text-align:right; font-size:9px; color:var(--faint); line-height:1.5; font-weight:500}
+  .brand .r b{color:var(--muted)}
+  .run{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:11px; padding-bottom:6px; border-bottom:1px solid var(--rule)}
+  .run .l{font-size:12px; font-weight:600; color:var(--ink); letter-spacing:.02em; text-transform:uppercase}
+  .run .l .n{color:var(--teal)}
+  .run .l .sec{color:var(--faint); font-weight:500; text-transform:none; letter-spacing:0}
+  .run .r{font-size:10px; color:var(--faint); letter-spacing:.08em; font-weight:600}
+
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:7px}
+  .card{background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:7px 13px 6px; break-inside:avoid; min-width:0}
+  .card.wide{grid-column:1 / -1}
+  .card h2{font-size:14px; font-weight:600; letter-spacing:-.015em; margin:0 0 2px; color:var(--ink)}
+  .card .cs{font-size:10.5px; color:var(--muted); margin:0 0 5px; line-height:1.35; font-weight:400}
+  .card .cite{font-size:9px; color:var(--faint); margin:6px 0 0; letter-spacing:.03em; font-weight:500; text-transform:uppercase; padding-top:5px; border-top:1px solid var(--grid)}
+  .card svg{display:block; width:100%; height:auto; overflow:visible}
+  .dl{display:flex; gap:14px; flex-wrap:wrap; font-size:10px; color:var(--muted); margin:0 0 5px; font-weight:500}
+  .dl i{font-style:normal; display:inline-flex; align-items:center; gap:5px}
+  .dl .sw{width:9px; height:9px; border-radius:2px; display:inline-block}
+
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:1px}
+  .stat{border:1px solid var(--grid); border-radius:6px; padding:6px 10px; background:#fbfcfd}
+  .stat .big{font-size:19px; font-weight:700; color:var(--teal-deep); letter-spacing:-.02em; line-height:1}
+  .stat .lab{font-size:9px; color:var(--muted); margin-top:3px; line-height:1.25; font-weight:500}
+  .note-alumni{font-size:9.5px; color:var(--muted); margin:6px 0 0; line-height:1.4}
+  .note-alumni b{color:var(--ink); font-weight:600}
+
+  footer{margin-top:10px; padding-top:7px; border-top:1px solid var(--rule); font-size:9px; color:var(--faint); display:flex; justify-content:space-between; gap:12px; font-weight:500}
+  footer b{color:var(--muted); font-weight:600}
+
+  @page{ size:letter portrait; margin:0.4in }
+  @media print{ body{background:#fff} .sheet{width:auto; margin:0; padding:0; page-break-after:always; break-after:page} .sheet:last-child{page-break-after:auto} }
+  @media screen{ .sheet{box-shadow:0 1px 12px rgba(20,40,59,.08); border-radius:3px} }
+</style>
+</head>
+<body>
+
+<!-- ===================== FRONT — THE ACCELERATOR ===================== -->
+<section class="sheet" id="p1">
+  <div class="brand">
+    <div class="l">
+      <p class="eyebrow">Venture Math · Fall 2026</p>
+      <h1>SAFEs &amp; the Accelerator</h1>
+    </div>
+    <div class="r">Session 02 · Accelerators &amp; SAFEs · <b>Christina Gilbert</b> (Y Combinator)<br>Data: <b>Carta · PitchBook · Y Combinator</b> · re-visualized for classroom use</div>
+  </div>
+  <div class="run"><span class="l"><span class="n">The accelerator</span> <span class="sec">that set the template: Y Combinator</span></span><span class="r">DATA: PITCHBOOK · YC · CARTA</span></div>
+
+  <div class="grid">
+
+    <!-- YC standard deal timeline : WIDE -->
+    <div class="card wide">
+      <h2>The YC standard deal, 2005 → today</h2>
+      <p class="cs">What Y Combinator pays for ~7% of your company — and when they changed the instrument. The check grew 20×; the tool they invented (the <b style="color:var(--clay)">SAFE</b>) became the market standard you see overleaf.</p>
+      <svg viewBox="0 0 700 150" role="img" aria-label="Timeline of YC standard deal terms">
+        <!-- axis -->
+        <line x1="30" y1="74" x2="680" y2="74" stroke="var(--rule)" stroke-width="1.5"/>
+        <!-- connectors -->
+        <g stroke="var(--slate)" stroke-width="1">
+          <line x1="48" y1="74" x2="48" y2="90"/>
+          <line x1="176" y1="74" x2="176" y2="58"/>
+          <line x1="316" y1="74" x2="316" y2="90"/>
+          <line x1="444" y1="74" x2="444" y2="58"/>
+          <line x1="556" y1="74" x2="556" y2="90"/>
+          <line x1="660" y1="74" x2="660" y2="58"/>
+        </g>
+        <!-- nodes -->
+        <circle cx="48" cy="74" r="5" fill="var(--teal)"/>
+        <circle cx="176" cy="74" r="5" fill="var(--teal)"/>
+        <circle cx="316" cy="74" r="6" fill="var(--clay)"/>
+        <circle cx="444" cy="74" r="5" fill="var(--teal)"/>
+        <circle cx="556" cy="74" r="5" fill="var(--teal)"/>
+        <circle cx="660" cy="74" r="6" fill="var(--teal-deep)"/>
+        <!-- below labels: 2005, 2013, 2018 -->
+        <g text-anchor="middle">
+          <text x="48" y="103" font-size="10.5" font-weight="700" fill="var(--teal)">2005</text>
+          <text x="48" y="115" font-size="9.5" font-weight="600" fill="var(--ink)">$6K / founder</text>
+          <text x="48" y="126" font-size="8.5" fill="var(--faint)">(&lt;$18K) · for ~7%</text>
+
+          <text x="316" y="103" font-size="10.5" font-weight="700" fill="var(--clay)">2013</text>
+          <text x="316" y="115" font-size="9.5" font-weight="600" fill="var(--clay-deep)">YC invents the SAFE</text>
+          <text x="316" y="126" font-size="8.5" fill="var(--faint)">(pre-money)</text>
+
+          <text x="556" y="103" font-size="10.5" font-weight="700" fill="var(--teal)">2018</text>
+          <text x="556" y="115" font-size="9.5" font-weight="600" fill="var(--ink)">$150K for 7%</text>
+          <text x="556" y="126" font-size="8.5" fill="var(--faint)">post-money SAFE</text>
+        </g>
+        <!-- above labels: 2008, 2014, 2022 -->
+        <g text-anchor="middle">
+          <text x="176" y="30" font-size="10.5" font-weight="700" fill="var(--teal)">2008</text>
+          <text x="176" y="42" font-size="9.5" font-weight="600" fill="var(--ink)">$11K +$3K / founder</text>
+          <text x="176" y="52" font-size="8.5" fill="var(--faint)">for ~7%</text>
+
+          <text x="444" y="42" font-size="10.5" font-weight="700" fill="var(--teal)">2014</text>
+          <text x="444" y="54" font-size="9.5" font-weight="600" fill="var(--ink)">$120K for 7%</text>
+
+          <text x="660" y="30" font-size="10.5" font-weight="700" fill="var(--teal-deep)">2022+</text>
+          <text x="660" y="42" font-size="9.5" font-weight="600" fill="var(--ink)">$125K for 7% +</text>
+          <text x="660" y="52" font-size="8.5" fill="var(--faint)">$375K uncapped MFN</text>
+        </g>
+      </svg>
+      <p class="cite">Y Combinator standard deal, 2005–present · via CoffeeSpace timeline, Nov 2024</p>
+    </div>
+
+    <!-- YC by the numbers : HALF -->
+    <div class="card">
+      <h2>YC by the numbers</h2>
+      <p class="cs">Twenty years of the world's largest accelerator, in five figures.</p>
+      <div class="stats">
+        <div class="stat"><div class="big">4,977</div><div class="lab">companies funded since 2005</div></div>
+        <div class="stat"><div class="big">8 → 729</div><div class="lab">first batch (S05) → largest (S21+W21)</div></div>
+        <div class="stat"><div class="big">$89B</div><div class="lab">Airbnb (W09) — highest-valued alum</div></div>
+        <div class="stat"><div class="big">$1B</div><div class="lab">Cruise (W14) — largest exit, to GM</div></div>
+      </div>
+      <p class="note-alumni">First IPO <b>Dropbox</b> (S07) · first exit <b>TextPayMe</b> → Amazon · <b>Reddit</b> (S05) now ~$21B public · the <b>SAFE</b> was invented here in 2013.</p>
+      <p class="cite">Y Combinator · ycdb.co · market caps as of Nov 2024</p>
+    </div>
+
+    <!-- Series A charters complex : HALF -->
+    <div class="card">
+      <h2>The SAFE pushed complexity into Series A</h2>
+      <p class="cs">Prevalence of extra preferred classes in Series A charters, 2004 → 2022 — a downstream cost of stacking pre-priced rounds.</p>
+      <div class="dl"><i><span class="sw" style="background:var(--teal)"></span>Series Seed</i><i><span class="sw" style="background:var(--slate)"></span>Shadow A</i><i><span class="sw" style="background:var(--clay)"></span>Both</i></div>
+      <svg viewBox="0 0 360 138" role="img" aria-label="Series A charter complexity 2004 to 2022">
+        <g stroke="var(--grid)" stroke-width="1"><line x1="38" y1="112" x2="352" y2="112"/><line x1="38" y1="77" x2="352" y2="77"/><line x1="38" y1="42" x2="352" y2="42"/></g>
+        <g fill="var(--faint)" font-size="7.5" text-anchor="end" font-weight="500"><text x="34" y="114">0</text><text x="34" y="79.5">25</text><text x="34" y="44.5">50</text><text x="34" y="24">70%</text></g>
+        <!-- milestone markers -->
+        <g stroke="var(--faint)" stroke-width="1" stroke-dasharray="2 2"><line x1="191.5" y1="18" x2="191.5" y2="112"/><line x1="277" y1="18" x2="277" y2="112"/></g>
+        <text x="191.5" y="15" font-size="6.8" fill="var(--faint)" text-anchor="middle">pre-money SAFE</text>
+        <text x="277" y="15" font-size="6.8" fill="var(--faint)" text-anchor="middle">post-money SAFE</text>
+        <!-- Series Seed (teal) : y=112-val*1.4 ; x=38+(yr-2004)*17.06 -->
+        <polyline points="38,112 123.3,109.2 191.5,82.6 208.6,63 277,30.8 311.1,40.6 328.2,22.4 345.3,19.6" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Shadow A (slate dashed) -->
+        <polyline points="38,95.2 106.2,98 140.3,88.2 191.5,93.8 242.7,77 277,74.2 328.2,44.8 345.3,29.4" fill="none" stroke="var(--slate)" stroke-width="1.75" stroke-dasharray="4 2.5" stroke-linejoin="round"/>
+        <!-- Both (clay) -->
+        <polyline points="38,112 191.5,112 208.6,107.8 259.8,98 311.1,88.2 345.3,71.4" fill="none" stroke="var(--clay)" stroke-width="2" stroke-linejoin="round"/>
+        <!-- end labels -->
+        <text x="349" y="18" font-size="8.5" font-weight="700" fill="var(--teal)" text-anchor="end">66%</text>
+        <text x="349" y="35" font-size="8.5" font-weight="700" fill="var(--slate)" text-anchor="end">59%</text>
+        <text x="349" y="69" font-size="8.5" font-weight="700" fill="var(--clay)" text-anchor="end">29%</text>
+        <g fill="var(--muted)" font-size="8" text-anchor="middle" font-weight="500"><text x="38" y="126">2004</text><text x="191.5" y="126">2013</text><text x="345" y="126">2022</text></g>
+      </svg>
+      <p class="cite">R. Bartlett via C. Harvey · Delaware A&amp;R charters · 2004–2022</p>
+    </div>
+
+    <!-- accelerator exit value : WIDE -->
+    <div class="card wide">
+      <h2>No accelerator comes close on exit value</h2>
+      <p class="cs">Peak single-cohort cumulative exit value, by program (through Dec 2022). YC's best class alone has returned more than every rival's best class combined.</p>
+      <svg viewBox="0 0 700 150" role="img" aria-label="Peak cohort exit value by accelerator">
+        <!-- x grid 0..100B ; x0=150 W=500 -->
+        <g stroke="var(--grid)" stroke-width="1"><line x1="150" y1="14" x2="150" y2="128"/><line x1="275" y1="14" x2="275" y2="128"/><line x1="400" y1="14" x2="400" y2="128"/><line x1="525" y1="14" x2="525" y2="128"/><line x1="650" y1="14" x2="650" y2="128"/></g>
+        <g fill="var(--faint)" font-size="8" text-anchor="middle" font-weight="500"><text x="150" y="140">$0</text><text x="275" y="140">$25B</text><text x="400" y="140">$50B</text><text x="525" y="140">$75B</text><text x="650" y="140">$100B</text></g>
+        <!-- rows: y 24,50,76,102 ... bars h16 -->
+        <g font-size="10" fill="var(--ink)" text-anchor="end" font-weight="600"><text x="142" y="30">Y Combinator</text><text x="142" y="56">MassChallenge</text><text x="142" y="82">Techstars</text><text x="142" y="108">500 Global</text></g>
+        <rect x="150" y="20" width="466.5" height="16" fill="var(--teal-deep)"/><text x="622" y="32.5" font-size="10.5" font-weight="700" fill="var(--teal-deep)" text-anchor="start">$93.3B</text>
+        <rect x="150" y="46" width="85" height="16" fill="var(--slate)"/><text x="241" y="58.5" font-size="9.5" font-weight="700" fill="var(--muted)" text-anchor="start">$17B</text>
+        <rect x="150" y="72" width="52.5" height="16" fill="var(--slate)"/><text x="208.5" y="84.5" font-size="9.5" font-weight="700" fill="var(--muted)" text-anchor="start">$10.5B</text>
+        <rect x="150" y="98" width="6" height="16" fill="var(--slate)"/><text x="162" y="110.5" font-size="9.5" font-weight="700" fill="var(--muted)" text-anchor="start">$1.2B <tspan fill="var(--faint)" font-weight="500">· SOSV $0.6B</tspan></text>
+        <text x="622" y="46" font-size="8" fill="var(--faint)" text-anchor="start" font-weight="500">2012 class</text>
+      </svg>
+      <p class="cite">PitchBook · “Quantifying the Success of YC &amp; the Largest Accelerators,” 2023 · YC by class: 2012 $93B · 2013 $30B · 2014 $20B · 2015 $11B</p>
+    </div>
+
+  </div>
+  <footer><span><b>Venture Math</b> — Session 02 · Accelerators &amp; SAFEs</span><span>Data © Carta, PitchBook, Y Combinator. Re-visualized with attribution for classroom instruction.</span></footer>
+</section>
+
+<!-- ===================== BACK — THE SAFE ===================== -->
+<section class="sheet" id="p2">
+  <div class="run"><span class="l"><span class="n">The SAFE has taken over</span> <span class="sec">pre-seed fundraising</span></span><span class="r">TEAL = SAFE · CLAY = CONVERTIBLE NOTE</span></div>
+
+  <div class="grid">
+
+    <!-- SAFEs vs notes by industry : WIDE -->
+    <div class="card wide">
+      <h2>SAFEs have all but replaced convertible notes</h2>
+      <p class="cs">Share of pre-priced capital raised on <b style="color:var(--teal)">SAFEs</b> vs. <b style="color:var(--clay)">convertible notes</b>, by industry. Even the most note-heavy corner of the market is now a coin flip.</p>
+      <svg viewBox="0 0 700 202" role="img" aria-label="SAFE vs convertible note share by industry">
+        <text x="118" y="11" font-size="8" fill="var(--faint)" text-anchor="end" font-weight="600" letter-spacing=".04em">INDUSTRY</text>
+        <text x="678" y="11" font-size="8" fill="var(--faint)" text-anchor="end" font-weight="600" letter-spacing=".04em"># CHECKS</text>
+        <!-- rows -->
+        <g font-size="9.5" fill="var(--muted)" text-anchor="end" font-weight="500">
+          <text x="118" y="28.5">Education</text><text x="118" y="44.5">Advertising tech</text><text x="118" y="60.5">Fintech</text><text x="118" y="76.5">Web3</text><text x="118" y="92.5">SaaS</text><text x="118" y="108.5">Consumer</text><text x="118" y="124.5">Hardware / IT</text><text x="118" y="140.5">Healthtech</text><text x="118" y="156.5">Pharma / biotech</text><text x="118" y="172.5">Energy</text><text x="118" y="188.5">Medical devices</text>
+        </g>
+        <!-- teal (SAFE) + clay (note) bars, h=10 -->
+        <g>
+          <rect x="126" y="20"  width="460.6" height="10" fill="var(--teal)"/><rect x="586.6" y="20"  width="9.4"   height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="36"  width="446.5" height="10" fill="var(--teal)"/><rect x="572.5" y="36"  width="23.5"  height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="52"  width="432.4" height="10" fill="var(--teal)"/><rect x="558.4" y="52"  width="37.6"  height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="68"  width="432.4" height="10" fill="var(--teal)"/><rect x="558.4" y="68"  width="37.6"  height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="84"  width="390.1" height="10" fill="var(--teal)"/><rect x="516.1" y="84"  width="79.9"  height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="100" width="366.6" height="10" fill="var(--teal)"/><rect x="492.6" y="100" width="103.4" height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="116" width="333.7" height="10" fill="var(--teal)"/><rect x="459.7" y="116" width="136.3" height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="132" width="324.3" height="10" fill="var(--teal)"/><rect x="450.3" y="132" width="145.7" height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="148" width="310.2" height="10" fill="var(--teal)"/><rect x="436.2" y="148" width="159.8" height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="164" width="286.7" height="10" fill="var(--teal)"/><rect x="412.7" y="164" width="183.3" height="10" fill="var(--clay-soft)"/>
+          <rect x="126" y="180" width="225.6" height="10" fill="var(--teal)"/><rect x="351.6" y="180" width="244.4" height="10" fill="var(--clay-deep)"/>
+        </g>
+        <!-- SAFE % labels (white, inside teal, left) -->
+        <g font-size="8.5" font-weight="700" fill="#fff" text-anchor="start">
+          <text x="131" y="28.5">98%</text><text x="131" y="44.5">95%</text><text x="131" y="60.5">92%</text><text x="131" y="76.5">92%</text><text x="131" y="92.5">83%</text><text x="131" y="108.5">78%</text><text x="131" y="124.5">71%</text><text x="131" y="140.5">69%</text><text x="131" y="156.5">66%</text><text x="131" y="172.5">61%</text><text x="131" y="188.5">48%</text>
+        </g>
+        <!-- note % labels (white, inside clay, right) where wide enough -->
+        <g font-size="8" font-weight="700" fill="#fff" text-anchor="end">
+          <text x="591" y="92.5">17%</text><text x="591" y="108.5">22%</text><text x="591" y="124.5">29%</text><text x="591" y="140.5">31%</text><text x="591" y="156.5">34%</text><text x="591" y="172.5">39%</text><text x="591" y="188.5">52%</text>
+        </g>
+        <!-- check counts -->
+        <g font-size="8.5" fill="var(--faint)" text-anchor="end" font-weight="600">
+          <text x="678" y="28.5">572</text><text x="678" y="44.5">490</text><text x="678" y="60.5">3,240</text><text x="678" y="76.5">668</text><text x="678" y="92.5">11,172</text><text x="678" y="108.5">4,460</text><text x="678" y="124.5">1,801</text><text x="678" y="140.5">3,434</text><text x="678" y="156.5">2,359</text><text x="678" y="172.5">830</text><text x="678" y="188.5">1,216</text>
+        </g>
+      </svg>
+      <p class="cite">Carta · 30,242 SAFEs &amp; notes signed before any priced round · Jan 2023–May 2024</p>
+    </div>
+
+    <!-- post-money default : HALF -->
+    <div class="card">
+      <h2>Post-money is now the default SAFE</h2>
+      <p class="cs">Share of SAFEs signed <b style="color:var(--teal)">post-money</b>, 2018 → 2025. YC made it the default in 2018, then dropped the capped-and-discounted version in 2021.</p>
+      <svg viewBox="0 0 360 132" role="img" aria-label="Post-money share of SAFEs over time">
+        <g stroke="var(--grid)" stroke-width="1"><line x1="40" y1="108" x2="345" y2="108"/><line x1="40" y1="86.5" x2="345" y2="86.5"/><line x1="40" y1="65" x2="345" y2="65"/><line x1="40" y1="43.5" x2="345" y2="43.5"/><line x1="40" y1="22" x2="345" y2="22"/></g>
+        <g fill="var(--faint)" font-size="8" text-anchor="end" font-weight="500"><text x="35" y="110.5">0</text><text x="35" y="68">50</text><text x="35" y="25">100%</text></g>
+        <!-- area -->
+        <path d="M40 95.96 L81.4 69.3 L122.9 61.56 L164.3 46.08 L205.7 40.06 L247.1 39.2 L288.6 36.62 L330 37.48 L330 108 L40 108 Z" fill="var(--teal-soft)" opacity=".35"/>
+        <!-- line -->
+        <polyline points="40,95.96 81.4,69.3 122.9,61.56 164.3,46.08 205.7,40.06 247.1,39.2 288.6,36.62 330,37.48" fill="none" stroke="var(--teal)" stroke-width="2.25" stroke-linejoin="round" stroke-linecap="round"/>
+        <g fill="var(--teal)"><circle cx="40" cy="95.96" r="2.6"/><circle cx="81.4" cy="69.3" r="2.6"/><circle cx="122.9" cy="61.56" r="2.6"/><circle cx="205.7" cy="40.06" r="2.6"/><circle cx="247.1" cy="39.2" r="2.6"/><circle cx="288.6" cy="36.62" r="2.6"/></g>
+        <!-- endpoints -->
+        <text x="40" y="90" font-size="9" fill="var(--faint)" text-anchor="start" font-weight="600">14%</text>
+        <text x="330" y="32" font-size="11.5" fill="var(--ink)" text-anchor="end" font-weight="700">82%</text>
+        <!-- annotation pin: 2021 val-cap+discount removed -->
+        <line x1="156" y1="46.08" x2="164.3" y2="46.08" stroke="var(--clay)" stroke-width="1"/>
+        <circle cx="164.3" cy="46.08" r="3.4" fill="#fff" stroke="var(--clay)" stroke-width="2"/>
+        <text x="153" y="38" font-size="7.3" fill="var(--clay-deep)" text-anchor="end" font-weight="600">YC drops the capped-</text>
+        <text x="153" y="47" font-size="7.3" fill="var(--clay-deep)" text-anchor="end" font-weight="600">and-discounted SAFE · 2021</text>
+        <!-- x axis -->
+        <g fill="var(--muted)" font-size="8" text-anchor="middle" font-weight="500"><text x="40" y="122">2018</text><text x="205.7" y="122">2022</text><text x="330" y="122">2025</text></g>
+      </svg>
+      <p class="cite">Carta · 119,232 SAFEs signed before any priced equity</p>
+    </div>
+
+    <!-- how much sold : HALF -->
+    <div class="card">
+      <h2>The more you raise on a SAFE, the more you sell</h2>
+      <p class="cs">Median % of the company sold, by SAFE round size. Founders who stack multiple SAFEs feel it compound.</p>
+      <svg viewBox="0 0 360 132" role="img" aria-label="Median percent sold by SAFE round size">
+        <g stroke="var(--grid)" stroke-width="1"><line x1="40" y1="108" x2="345" y2="108"/><line x1="40" y1="82" x2="345" y2="82"/><line x1="40" y1="56" x2="345" y2="56"/><line x1="40" y1="30" x2="345" y2="30"/></g>
+        <g fill="var(--faint)" font-size="8" text-anchor="end" font-weight="500"><text x="35" y="110.5">0%</text><text x="35" y="84.5">8</text><text x="35" y="58.5">17</text><text x="35" y="32.5">25%</text></g>
+        <!-- lollipops: x = 70,131,192,253,314 -->
+        <g stroke="var(--slate)" stroke-width="2.4" stroke-linecap="round">
+          <line x1="70" y1="108" x2="70" y2="98.6"/><line x1="131" y1="108" x2="131" y2="85.8"/><line x1="192" y1="108" x2="192" y2="73.1"/><line x1="253" y1="108" x2="253" y2="56.8"/><line x1="314" y1="108" x2="314" y2="41.2"/>
+        </g>
+        <circle cx="70" cy="98.6" r="11.5" fill="var(--clay)"/><text x="70" y="102" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">3.0</text>
+        <circle cx="131" cy="85.8" r="11.5" fill="var(--clay)"/><text x="131" y="89.2" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">7.1</text>
+        <circle cx="192" cy="73.1" r="11.5" fill="var(--clay)"/><text x="192" y="76.5" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">11.2</text>
+        <circle cx="253" cy="56.8" r="12.5" fill="var(--clay)"/><text x="253" y="60.4" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">16.4</text>
+        <circle cx="314" cy="41.2" r="12.5" fill="var(--clay-deep)"/><text x="314" y="44.8" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">21.4</text>
+        <g fill="var(--muted)" font-size="7.4" text-anchor="middle" font-weight="500"><text x="70" y="121">&lt;$250K</text><text x="131" y="121">$250–499K</text><text x="192" y="121">$500–999K</text><text x="253" y="121">$1–2.4M</text><text x="314" y="121">$2.5–4.9M</text></g>
+      </svg>
+      <p class="cite">Carta · 1,503 US companies on post-money SAFEs · H1 2024</p>
+    </div>
+
+    <!-- pre-seed shrinking : WIDE -->
+    <div class="card wide">
+      <h2>Pre-seed keeps shrinking — under $500K is now half the market</h2>
+      <p class="cs">Share of US pre-priced rounds (SAFEs &amp; notes) raising under $500K, by quarter. The <b style="color:var(--teal-deep)">sub-$250K band</b> is doing the shrinking.</p>
+      <div class="dl"><i><span class="sw" style="background:var(--teal-deep)"></span>Under $250K</i><i><span class="sw" style="background:var(--teal-mid)"></span>$250K–$499K</i></div>
+      <svg viewBox="0 0 700 150" role="img" aria-label="Share of pre-priced rounds under 500K by quarter">
+        <g stroke="var(--grid)" stroke-width="1"><line x1="40" y1="124" x2="694" y2="124"/><line x1="40" y1="75" x2="694" y2="75"/><line x1="40" y1="26" x2="694" y2="26"/></g>
+        <g fill="var(--faint)" font-size="8" text-anchor="end" font-weight="500"><text x="35" y="126.5">0</text><text x="35" y="77.5">25</text><text x="35" y="28.5">50%</text></g>
+        <!-- 12 quarters; cx = 62 + i*56 ; bar width 30 -->
+        <!-- i0 23Q1 25,13 -->
+        <g>
+          <rect x="47"  y="98.0" width="30" height="26.0" fill="var(--teal-deep)"/><rect x="47"  y="72.5" width="30" height="25.5" fill="var(--teal-mid)"/><text x="62"  y="67" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">38</text>
+          <rect x="103" y="97.0" width="30" height="27.0" fill="var(--teal-deep)"/><rect x="103" y="69.5" width="30" height="27.5" fill="var(--teal-mid)"/><text x="118" y="64" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">40</text>
+          <rect x="159" y="99.1" width="30" height="24.9" fill="var(--teal-deep)"/><rect x="159" y="66.6" width="30" height="32.5" fill="var(--teal-mid)"/><text x="174" y="61" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">42</text>
+          <rect x="215" y="99.0" width="30" height="25.0" fill="var(--teal-deep)"/><rect x="215" y="71.5" width="30" height="27.5" fill="var(--teal-mid)"/><text x="230" y="66" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">39</text>
+          <rect x="271" y="97.1" width="30" height="26.9" fill="var(--teal-deep)"/><rect x="271" y="71.6" width="30" height="25.5" fill="var(--teal-mid)"/><text x="286" y="66" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">40</text>
+          <rect x="327" y="97.1" width="30" height="26.9" fill="var(--teal-deep)"/><rect x="327" y="69.7" width="30" height="27.4" fill="var(--teal-mid)"/><text x="342" y="64" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">41</text>
+          <rect x="383" y="95.2" width="30" height="28.8" fill="var(--teal-deep)"/><rect x="383" y="69.7" width="30" height="25.5" fill="var(--teal-mid)"/><text x="398" y="64" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">42</text>
+          <rect x="439" y="97.1" width="30" height="26.9" fill="var(--teal-deep)"/><rect x="439" y="69.7" width="30" height="27.4" fill="var(--teal-mid)"/><text x="454" y="64" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">41</text>
+          <rect x="495" y="95.2" width="30" height="28.8" fill="var(--teal-deep)"/><rect x="495" y="67.7" width="30" height="27.5" fill="var(--teal-mid)"/><text x="510" y="62" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">43</text>
+          <rect x="551" y="93.2" width="30" height="30.8" fill="var(--teal-deep)"/><rect x="551" y="67.7" width="30" height="25.5" fill="var(--teal-mid)"/><text x="566" y="62" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">44</text>
+          <rect x="607" y="91.3" width="30" height="32.7" fill="var(--teal-deep)"/><rect x="607" y="61.9" width="30" height="29.4" fill="var(--teal-mid)"/><text x="622" y="56" font-size="8" fill="var(--muted)" text-anchor="middle" font-weight="600">47</text>
+          <rect x="663" y="85.4" width="30" height="38.6" fill="var(--teal-deep)"/><rect x="663" y="57.9" width="30" height="27.5" fill="var(--teal-mid)"/><text x="678" y="52" font-size="9.5" fill="var(--clay-deep)" text-anchor="middle" font-weight="700">49%</text>
+        </g>
+        <!-- year brackets -->
+        <g stroke="var(--rule)" stroke-width="1"><line x1="47" y1="132" x2="245" y2="132"/><line x1="271" y1="132" x2="469" y2="132"/><line x1="495" y1="132" x2="693" y2="132"/></g>
+        <g fill="var(--muted)" font-size="9" text-anchor="middle" font-weight="600"><text x="146" y="145">2023</text><text x="370" y="145">2024</text><text x="594" y="145">2025</text></g>
+      </svg>
+      <p class="cite">Carta · US pre-priced rounds (SAFEs &amp; convertible notes) · Q1 2023–Q4 2025</p>
+    </div>
+
+  </div>
+  <footer><span><b>Venture Math: What the Numbers Really Look Like, from Formation to IPO</b></span><span>Data © Carta. Re-visualized with attribution for classroom instruction.</span></footer>
+</section>
+
+</body>
+</html>

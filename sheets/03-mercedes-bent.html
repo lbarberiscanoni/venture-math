@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Series A &amp; the Institutional Transition &#8212; Venture Math</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14283b; --muted:#5b6b7a; --faint:#95a1ad;
+    --paper:#ffffff; --rule:#e4e8ec; --grid:#eef1f4;
+    --teal:#0f7a68; --teal-mid:#3f9585; --teal-soft:#9cc7bd; --teal-deep:#0c5f52;
+    --clay:#b05a38; --clay-mid:#c68562; --clay-soft:#dcae90; --clay-deep:#8f4529;
+    --slate:#aab4bd;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:#f3f5f7; color:var(--ink);
+    font:12.5px/1.4 'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased; letter-spacing:-.004em;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  svg text{font-family:'Inter',ui-sans-serif,system-ui,sans-serif; font-variant-numeric:tabular-nums}
+  .sheet{width:768px; margin:0 auto 20px; padding:15px 28px 8px; background:var(--paper); position:relative}
+
+  .brand{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1.5px solid var(--ink); padding-bottom:7px; margin-bottom:11px}
+  .brand .l .eyebrow{font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--teal); font-weight:600; margin:0 0 3px}
+  .brand .l h1{font-size:24px; letter-spacing:-.02em; margin:0; font-weight:700; color:var(--ink)}
+  .brand .r{text-align:right; font-size:9px; color:var(--faint); line-height:1.5; font-weight:500}
+  .brand .r b{color:var(--muted)}
+  .run{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:11px; padding-bottom:6px; border-bottom:1px solid var(--rule)}
+  .run .l{font-size:12px; font-weight:600; color:var(--ink); letter-spacing:.02em; text-transform:uppercase}
+  .run .l .n{color:var(--teal)}
+  .run .l .sec{color:var(--faint); font-weight:500; text-transform:none; letter-spacing:0}
+  .run .r{font-size:10px; color:var(--faint); letter-spacing:.08em; font-weight:600}
+
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:6px}
+  .card{background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:7px 13px 6px; break-inside:avoid; min-width:0}
+  .card.wide{grid-column:1 / -1}
+  .card h2{font-size:14px; font-weight:600; letter-spacing:-.015em; margin:0 0 2px; color:var(--ink)}
+  .card .cs{font-size:10.5px; color:var(--muted); margin:0 0 5px; line-height:1.35; font-weight:400}
+  .card .cite{font-size:9px; color:var(--faint); margin:6px 0 0; letter-spacing:.03em; font-weight:500; text-transform:uppercase; padding-top:5px; border-top:1px solid var(--grid)}
+  .card svg{display:block; width:100%; height:auto; overflow:visible}
+  .dl{display:flex; gap:14px; flex-wrap:wrap; font-size:10px; color:var(--muted); margin:0 0 5px; font-weight:500}
+  .dl i{font-style:normal; display:inline-flex; align-items:center; gap:5px}
+  .dl .sw{width:9px; height:9px; border-radius:2px; display:inline-block}
+
+  .callout{grid-column:1 / -1; border:1px solid var(--clay-soft); background:#fdf7f3; border-radius:8px; padding:6px 13px; display:flex; align-items:center; gap:14px}
+  .callout .big{font-size:30px; font-weight:700; color:var(--clay-deep); letter-spacing:-.03em; line-height:1; flex:none}
+  .callout .t{font-size:11px; color:var(--ink); line-height:1.35; font-weight:500}
+  .callout .t b{font-weight:700}
+  .callout .t span{display:block; font-size:9px; color:var(--faint); margin-top:3px; text-transform:uppercase; letter-spacing:.03em; font-weight:500}
+
+  footer{margin-top:8px; padding-top:6px; border-top:1px solid var(--rule); font-size:9px; color:var(--faint); display:flex; justify-content:space-between; gap:12px; font-weight:500}
+  footer b{color:var(--muted); font-weight:600}
+
+  @page{ size:letter portrait; margin:0.4in }
+  @media print{ body{background:#fff} .sheet{width:auto; margin:0; padding:0; page-break-after:always; break-after:page} .sheet:last-child{page-break-after:auto} }
+  @media screen{ .sheet{box-shadow:0 1px 12px rgba(20,40,59,.08); border-radius:3px} }
+</style>
+</head>
+<body>
+
+<!-- ===================== FRONT — THE BAR & THE CLOCK ===================== -->
+<section class="sheet" id="p1">
+  <div class="brand">
+    <div class="l">
+      <p class="eyebrow">Venture Math &#183; Fall 2026</p>
+      <h1>Series A &amp; the Institutional Transition</h1>
+    </div>
+    <div class="r">Session 03 &#183; Sept 16 &#183; <b>Mercedes Bent</b> (Premise VC)<br>Data: <b>Carta</b> &#183; re-visualized for classroom use</div>
+  </div>
+  <div class="run"><span class="l"><span class="n">The bar</span> <span class="sec">&#8212; how few clear it, and how long it takes</span></span><span class="r">TEAL = ON PACE &#183; CLAY = THE LONG TAIL</span></div>
+
+  <div class="grid">
+
+    <div class="card wide">
+      <h2>Most of the graduating happens in years 1&#8211;3 &#8212; then it thins out</h2>
+      <p class="cs">Share of seed startups reaching a Series A, by quarter after the seed round. The peak is year 2; everything past year 3 is <b style="color:var(--clay-deep)">bridge territory</b>.</p>
+      <svg viewBox="0 0 700 178" role="img" aria-label="Share of seed startups graduating to Series A, by quarter after the seed round">
+        <rect x="41.0" y="8" width="128.0" height="17" rx="3" fill="var(--teal)" opacity="0.14"/>
+        <text x="105.0" y="15.5" font-size="7.5" font-weight="700" fill="var(--faint)" text-anchor="middle" letter-spacing=".06em">YEAR 1</text>
+        <text x="105.0" y="23.5" font-size="8.5" font-weight="700" fill="var(--teal)" text-anchor="middle">9.7% graduated</text>
+        <rect x="171.0" y="8" width="128.0" height="17" rx="3" fill="var(--teal)" opacity="0.14"/>
+        <text x="235.0" y="15.5" font-size="7.5" font-weight="700" fill="var(--faint)" text-anchor="middle" letter-spacing=".06em">YEAR 2</text>
+        <text x="235.0" y="23.5" font-size="8.5" font-weight="700" fill="var(--teal)" text-anchor="middle">15.6% graduated</text>
+        <rect x="301.0" y="8" width="128.0" height="17" rx="3" fill="var(--teal-mid)" opacity="0.14"/>
+        <text x="365.0" y="15.5" font-size="7.5" font-weight="700" fill="var(--faint)" text-anchor="middle" letter-spacing=".06em">YEAR 3</text>
+        <text x="365.0" y="23.5" font-size="8.5" font-weight="700" fill="var(--teal-mid)" text-anchor="middle">9.8% graduated</text>
+        <rect x="431.0" y="8" width="128.0" height="17" rx="3" fill="var(--clay)" opacity="0.16"/>
+        <text x="495.0" y="15.5" font-size="7.5" font-weight="700" fill="var(--faint)" text-anchor="middle" letter-spacing=".06em">YEAR 4</text>
+        <text x="495.0" y="23.5" font-size="8.5" font-weight="700" fill="var(--clay)" text-anchor="middle">5.9% graduated</text>
+        <rect x="561.0" y="8" width="128.0" height="17" rx="3" fill="var(--clay)" opacity="0.16"/>
+        <text x="625.0" y="15.5" font-size="7.5" font-weight="700" fill="var(--faint)" text-anchor="middle" letter-spacing=".06em">YEAR 5</text>
+        <text x="625.0" y="23.5" font-size="8.5" font-weight="700" fill="var(--clay)" text-anchor="middle">3.0% graduated</text>
+        <line x1="170.0" y1="30" x2="170.0" y2="144" stroke="var(--rule)" stroke-width="1"/>
+        <line x1="300.0" y1="30" x2="300.0" y2="144" stroke="var(--rule)" stroke-width="1"/>
+        <line x1="430.0" y1="30" x2="430.0" y2="144" stroke="var(--rule)" stroke-width="1"/>
+        <line x1="560.0" y1="30" x2="560.0" y2="144" stroke="var(--rule)" stroke-width="1"/>
+        <line x1="40.0" y1="144" x2="690.0" y2="144" stroke="var(--ink)" stroke-width="1.2"/>
+        <rect x="43.5" y="130.0" width="25.5" height="14.0" fill="var(--teal)"/>
+        <text x="56.2" y="127.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">0.7%</text>
+        <text x="56.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q1</text>
+        <rect x="76.0" y="108.0" width="25.5" height="36.0" fill="var(--teal)"/>
+        <text x="88.8" y="105.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">1.8%</text>
+        <text x="88.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q2</text>
+        <rect x="108.5" y="82.0" width="25.5" height="62.0" fill="var(--teal)"/>
+        <text x="121.2" y="79.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">3.1%</text>
+        <text x="121.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q3</text>
+        <rect x="141.0" y="62.0" width="25.5" height="82.0" fill="var(--teal)"/>
+        <text x="153.8" y="59.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">4.1%</text>
+        <text x="153.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q4</text>
+        <rect x="173.5" y="54.0" width="25.5" height="90.0" fill="var(--teal)"/>
+        <text x="186.2" y="51.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">4.5%</text>
+        <text x="186.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q5</text>
+        <rect x="206.0" y="56.0" width="25.5" height="88.0" fill="var(--teal)"/>
+        <text x="218.8" y="53.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">4.4%</text>
+        <text x="218.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q6</text>
+        <rect x="238.5" y="74.0" width="25.5" height="70.0" fill="var(--teal)"/>
+        <text x="251.2" y="71.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">3.5%</text>
+        <text x="251.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q7</text>
+        <rect x="271.0" y="80.0" width="25.5" height="64.0" fill="var(--teal)"/>
+        <text x="283.8" y="77.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">3.2%</text>
+        <text x="283.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q8</text>
+        <rect x="303.5" y="80.0" width="25.5" height="64.0" fill="var(--teal-soft)"/>
+        <text x="316.2" y="77.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">3.2%</text>
+        <text x="316.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q9</text>
+        <rect x="336.0" y="86.0" width="25.5" height="58.0" fill="var(--teal-soft)"/>
+        <text x="348.8" y="83.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">2.9%</text>
+        <text x="348.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q10</text>
+        <rect x="368.5" y="90.0" width="25.5" height="54.0" fill="var(--teal-soft)"/>
+        <text x="381.2" y="87.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">2.7%</text>
+        <text x="381.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q11</text>
+        <rect x="401.0" y="94.0" width="25.5" height="50.0" fill="var(--teal-soft)"/>
+        <text x="413.8" y="91.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">2.5%</text>
+        <text x="413.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q12</text>
+        <rect x="433.5" y="100.0" width="25.5" height="44.0" fill="var(--clay-soft)"/>
+        <text x="446.2" y="97.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">2.2%</text>
+        <text x="446.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q13</text>
+        <rect x="466.0" y="100.0" width="25.5" height="44.0" fill="var(--clay-soft)"/>
+        <text x="478.8" y="97.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">2.2%</text>
+        <text x="478.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q14</text>
+        <rect x="498.5" y="98.0" width="25.5" height="46.0" fill="var(--clay-soft)"/>
+        <text x="511.2" y="95.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">2.3%</text>
+        <text x="511.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q15</text>
+        <rect x="531.0" y="102.0" width="25.5" height="42.0" fill="var(--clay-soft)"/>
+        <text x="543.8" y="99.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">2.1%</text>
+        <text x="543.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q16</text>
+        <rect x="563.5" y="102.0" width="25.5" height="42.0" fill="var(--clay-soft)"/>
+        <text x="576.2" y="99.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">2.1%</text>
+        <text x="576.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q17</text>
+        <rect x="596.0" y="112.0" width="25.5" height="32.0" fill="var(--clay-soft)"/>
+        <text x="608.8" y="109.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">1.6%</text>
+        <text x="608.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q18</text>
+        <rect x="628.5" y="114.0" width="25.5" height="30.0" fill="var(--clay-soft)"/>
+        <text x="641.2" y="111.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">1.5%</text>
+        <text x="641.2" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q19</text>
+        <rect x="661.0" y="124.0" width="25.5" height="20.0" fill="var(--clay-soft)"/>
+        <text x="673.8" y="121.0" font-size="7" font-weight="600" fill="var(--muted)" text-anchor="middle">1.0%</text>
+        <text x="673.8" y="154" font-size="6.8" fill="var(--faint)" text-anchor="middle">Q20</text>
+        <rect x="41.0" y="158" width="388.0" height="14" rx="3" fill="var(--teal)" opacity=".12"/>
+        <text x="235.0" y="167.8" font-size="8.5" font-weight="600" fill="var(--teal-deep)" text-anchor="middle">80% of the seeds that ever reach an A do so by year 3</text>
+        <rect x="431.0" y="158" width="258.0" height="14" rx="3" fill="var(--clay)" opacity=".13"/>
+        <text x="560.0" y="167.8" font-size="8.5" font-weight="600" fill="var(--clay-deep)" text-anchor="middle">bridges, extensions &amp; anxiety</text>
+        </svg>
+      <p class="cite">Carta &#183; 9,851 US seed rounds &#183; Q1 2017&#8211;Q4 2024</p>
+    </div>
+
+    <div class="callout">
+      <div class="big">&lt;30%</div>
+      <div class="t"><b>No seed cohort since Q3 2021 has seen more than 30% of its companies reach a Series A.</b> Earlier cohorts &#8212; 2018&#8211;2020 &#8212; reached roughly 45&#8211;55% given enough years. The recent classes are tracking below every one of them at the same age.
+      <span>Carta &#183; 12,249 US seed rounds &#183; cohort study, data as of Q4 2025</span></div>
+    </div>
+
+    <div class="card">
+      <h2>The gap between rounds keeps stretching</h2>
+      <p class="cs">Median <b>years</b> between primary rounds, measured each Q1. Seed&#8594;A has grown most.</p>
+      <svg viewBox="0 0 340 156" role="img" aria-label="Median years between early rounds, 2021 to 2024">
+        <text x="128" y="13" font-size="7.5" font-weight="600" fill="var(--faint)" text-anchor="middle">Q1 2021</text>
+        <text x="186" y="13" font-size="7.5" font-weight="600" fill="var(--faint)" text-anchor="middle">Q1 2022</text>
+        <text x="244" y="13" font-size="7.5" font-weight="600" fill="var(--faint)" text-anchor="middle">Q1 2023</text>
+        <text x="302" y="13" font-size="7.5" font-weight="600" fill="var(--faint)" text-anchor="middle">Q1 2024</text>
+        <text x="112" y="51" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="end">Priced seed &#8594; A</text>
+        <circle cx="128" cy="48" r="11.8" fill="var(--slate)"/>
+        <text x="128" y="51" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">1.46</text>
+        <circle cx="186" cy="48" r="13.4" fill="var(--clay-soft)"/>
+        <text x="186" y="51" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">1.58</text>
+        <circle cx="244" cy="48" r="18.3" fill="var(--clay)"/>
+        <text x="244" y="51" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">1.95</text>
+        <circle cx="302" cy="48" r="20.3" fill="var(--clay)"/>
+        <text x="302" y="51" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">2.10</text>
+        <path d="M128 78 L128 83 L302 83 L302 78" fill="none" stroke="var(--clay)" stroke-width="1.1"/>
+        <text x="215" y="93" font-size="8.5" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">+44% longer than 2021</text>
+        <text x="112" y="123" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="end">Series A &#8594; B</text>
+        <circle cx="128" cy="120" r="16.5" fill="var(--clay-mid)"/>
+        <text x="128" y="123" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">1.81</text>
+        <circle cx="186" cy="120" r="13.5" fill="var(--clay-soft)"/>
+        <text x="186" y="123" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">1.59</text>
+        <circle cx="244" cy="120" r="18.7" fill="var(--clay)"/>
+        <text x="244" y="123" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">1.98</text>
+        <circle cx="302" cy="120" r="22.5" fill="var(--clay-deep)"/>
+        <text x="302" y="123" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">2.26</text>
+        <path d="M128 150 L128 155 L302 155 L302 150" fill="none" stroke="var(--clay)" stroke-width="1.1"/>
+        <text x="215" y="165" font-size="8.5" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">+25% longer than 2021</text>
+        </svg>
+      <p class="cite">Carta &#183; median time between primary VC rounds &#183; Q1 2021&#8211;Q1 2024</p>
+    </div>
+
+    <div class="card">
+      <h2>&#8230; and it was still stretching in 2025</h2>
+      <p class="cs">Median <b>days</b> between primary rounds as of Q2 2025. A different cut of the same story: the seed&#8594;A wait is now ~20 months.</p>
+      <svg viewBox="0 0 340 138" role="img" aria-label="Median days between primary rounds, Q2 2025">
+        <line x1="171.9" y1="16" x2="171.9" y2="110" stroke="var(--grid)" stroke-width="1" stroke-dasharray="2 2"/>
+        <text x="171.9" y="14" font-size="7" fill="var(--faint)" text-anchor="middle">1 yr</text>
+        <line x1="251.8" y1="16" x2="251.8" y2="110" stroke="var(--grid)" stroke-width="1" stroke-dasharray="2 2"/>
+        <text x="251.8" y="14" font-size="7" fill="var(--faint)" text-anchor="middle">2 yrs</text>
+        <text x="86" y="35" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="end">Seed &#8594; Series A</text>
+        <rect x="92.0" y="24" width="135.3" height="15" rx="2" fill="var(--clay)"/>
+        <text x="232.3" y="35" font-size="8.5" font-weight="700" fill="var(--clay-deep)">618</text>
+        <text x="86" y="56" font-size="9" font-weight="500" fill="var(--muted)" text-anchor="end">Series A &#8594; B</text>
+        <rect x="92.0" y="45" width="116.5" height="15" rx="2" fill="var(--slate)"/>
+        <text x="213.5" y="56" font-size="8.5" font-weight="700" fill="var(--faint)">532</text>
+        <text x="86" y="77" font-size="9" font-weight="500" fill="var(--muted)" text-anchor="end">Series B &#8594; C</text>
+        <rect x="92.0" y="66" width="197.9" height="15" rx="2" fill="var(--slate)"/>
+        <text x="294.9" y="77" font-size="8.5" font-weight="700" fill="var(--faint)">904</text>
+        <text x="86" y="98" font-size="9" font-weight="500" fill="var(--muted)" text-anchor="end">Series C &#8594; D</text>
+        <rect x="92.0" y="87" width="184.6" height="15" rx="2" fill="var(--slate)"/>
+        <text x="281.6" y="98" font-size="8.5" font-weight="700" fill="var(--faint)">843</text>
+        <line x1="92" y1="110" x2="300" y2="110" stroke="var(--ink)" stroke-width="1"/>
+        <text x="8" y="124" font-size="8" fill="var(--muted)">All rounds, median: <tspan font-weight="700" fill="var(--ink)">652 days</tspan> in Q2 2025 &#8212; up from ~600 two years earlier.</text>
+        <text x="8" y="134" font-size="7.5" fill="var(--faint)">Bars show the Q2 2025 median for each step.</text>
+        </svg>
+      <p class="cite">Carta &#183; Series A fundraising report &#183; Q2 2023&#8211;Q2 2025</p>
+    </div>
+
+    <div class="card wide">
+      <h2>Some startups fly through funding rounds &#8212; and some wander for years</h2>
+      <p class="cs">Median age of the companies raising each round. The median Series A company is <b style="color:var(--clay-deep)">2.9 years old</b> &#8212; the &#8220;two years of runway&#8221; rule of thumb is the median, not the rule.</p>
+      <svg viewBox="0 0 700 124" role="img" aria-label="Median company age at each funding stage">
+        <line x1="96.0" y1="10" x2="96.0" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <text x="96.0" y="108" font-size="8" fill="var(--faint)" text-anchor="middle">0 yrs</text>
+        <line x1="162.3" y1="10" x2="162.3" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <text x="162.3" y="108" font-size="8" fill="var(--faint)" text-anchor="middle">1 yr</text>
+        <line x1="228.7" y1="10" x2="228.7" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <text x="228.7" y="108" font-size="8" fill="var(--faint)" text-anchor="middle">2 yrs</text>
+        <line x1="295.0" y1="10" x2="295.0" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <text x="295.0" y="108" font-size="8" fill="var(--faint)" text-anchor="middle">3 yrs</text>
+        <line x1="361.4" y1="10" x2="361.4" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <text x="361.4" y="108" font-size="8" fill="var(--faint)" text-anchor="middle">4 yrs</text>
+        <line x1="427.7" y1="10" x2="427.7" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <text x="427.7" y="108" font-size="8" fill="var(--faint)" text-anchor="middle">5 yrs</text>
+        <line x1="494.0" y1="10" x2="494.0" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <text x="494.0" y="108" font-size="8" fill="var(--faint)" text-anchor="middle">6 yrs</text>
+        <line x1="560.4" y1="10" x2="560.4" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <text x="560.4" y="108" font-size="8" fill="var(--faint)" text-anchor="middle">7 yrs</text>
+        <line x1="626.7" y1="10" x2="626.7" y2="96" stroke="var(--grid)" stroke-width="1"/>
+        <text x="626.7" y="108" font-size="8" fill="var(--faint)" text-anchor="middle">8 yrs</text>
+        <text x="90" y="25" font-size="9.5" font-weight="500" fill="var(--muted)" text-anchor="end">Priced seed</text>
+        <rect x="96.0" y="14" width="79.6" height="14" rx="2" fill="var(--teal-soft)"/>
+        <text x="181.6" y="25" font-size="9.5" font-weight="700" fill="var(--muted)">1.2 yrs</text>
+        <text x="90" y="41" font-size="9.5" font-weight="700" fill="var(--ink)" text-anchor="end">Series A</text>
+        <rect x="96.0" y="30" width="192.4" height="14" rx="2" fill="var(--clay)"/>
+        <text x="294.4" y="41" font-size="9.5" font-weight="700" fill="var(--clay-deep)">2.9 yrs</text>
+        <text x="90" y="57" font-size="9.5" font-weight="500" fill="var(--muted)" text-anchor="end">Series B</text>
+        <rect x="96.0" y="46" width="298.5" height="14" rx="2" fill="var(--teal-soft)"/>
+        <text x="400.5" y="57" font-size="9.5" font-weight="700" fill="var(--muted)">4.5 yrs</text>
+        <text x="90" y="73" font-size="9.5" font-weight="500" fill="var(--muted)" text-anchor="end">Series C</text>
+        <rect x="96.0" y="62" width="378.1" height="14" rx="2" fill="var(--teal-soft)"/>
+        <text x="480.1" y="73" font-size="9.5" font-weight="700" fill="var(--muted)">5.7 yrs</text>
+        <text x="90" y="89" font-size="9.5" font-weight="500" fill="var(--muted)" text-anchor="end">Series D</text>
+        <rect x="96.0" y="78" width="517.5" height="14" rx="2" fill="var(--teal-soft)"/>
+        <text x="619.5" y="89" font-size="9.5" font-weight="700" fill="var(--muted)">7.8 yrs</text>
+        <line x1="96.0" y1="96" x2="640.0" y2="96" stroke="var(--ink)" stroke-width="1"/>
+        <text x="96" y="122" font-size="8" fill="var(--faint)">Median age of the companies that raised each round in 2024.</text>
+        </svg>
+      <p class="cite">Carta &#183; 2,118 primary rounds by US companies &#183; Jan&#8211;Sept 2024</p>
+    </div>
+
+  </div>
+  <footer><span><b>Venture Math</b> &#8212; Session 03 &#183; Series A &amp; the Institutional Transition &#183; Front of 2</span><span>Data &#169; Carta. Re-visualized with attribution for classroom instruction.</span></footer>
+</section>
+
+<!-- ===================== BACK — WHAT THE A COSTS ===================== -->
+<section class="sheet" id="p2">
+  <div class="run"><span class="l"><span class="n">The price</span> <span class="sec">&#8212; what you pay for the institutional round</span></span><span class="r">TEAL = SEED &#183; CLAY = SERIES A</span></div>
+
+  <div class="grid">
+
+    <div class="card wide">
+      <h2>The A prices at roughly 3&#215; the seed &#8212; at every percentile</h2>
+      <p class="cs">Post-money valuation benchmarks, <b style="color:var(--teal-deep)">seed</b> vs. <b style="color:var(--clay-deep)">Series A</b>, 2025. Harry Stebbings&#8217; complaint &#8212; <i>&#8220;pricing is 4&#8211;5&#215; the seed round for minimal progression&#8221;</i> &#8212; is the argument this chart is here to test.</p>
+      <div class="dl"><i><span class="sw" style="background:var(--teal)"></span>Seed post-money</i><i><span class="sw" style="background:var(--clay)"></span>Series A post-money</i></div>
+      <svg viewBox="0 0 700 182" role="img" aria-label="Seed to Series A post-money valuation step-up by percentile">
+        <line x1="40" y1="152.0" x2="680" y2="152.0" stroke="var(--ink)" stroke-width="1.2"/>
+        <rect x="80" y="145.0" width="46" height="7.0" rx="2" fill="var(--teal)"/>
+        <text x="103.0" y="141.0" font-size="9" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">$20M</text>
+        <rect x="134" y="130.5" width="46" height="21.5" rx="2" fill="var(--clay)"/>
+        <text x="157.0" y="126.5" font-size="9" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">$61M</text>
+        <text x="130" y="26" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">3.0&#215;</text>
+        <text x="130" y="165" font-size="9" font-weight="600" fill="var(--muted)" text-anchor="middle">50th pct (median)</text>
+        <rect x="240" y="140.4" width="46" height="11.6" rx="2" fill="var(--teal)"/>
+        <text x="263.0" y="136.4" font-size="9" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">$33M</text>
+        <rect x="294" y="115.1" width="46" height="36.9" rx="2" fill="var(--clay)"/>
+        <text x="317.0" y="111.1" font-size="9" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">$105M</text>
+        <text x="290" y="26" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">3.2&#215;</text>
+        <text x="290" y="165" font-size="9" font-weight="600" fill="var(--muted)" text-anchor="middle">75th pct</text>
+        <rect x="400" y="132.0" width="46" height="20.0" rx="2" fill="var(--teal)"/>
+        <text x="423.0" y="128.0" font-size="9" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">$57M</text>
+        <rect x="454" y="82.7" width="46" height="69.3" rx="2" fill="var(--clay)"/>
+        <text x="477.0" y="78.7" font-size="9" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">$197M</text>
+        <text x="450" y="26" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">3.5&#215;</text>
+        <text x="450" y="165" font-size="9" font-weight="600" fill="var(--muted)" text-anchor="middle">90th pct</text>
+        <rect x="560" y="122.5" width="46" height="29.5" rx="2" fill="var(--teal)"/>
+        <text x="583.0" y="118.5" font-size="9" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">$84M</text>
+        <rect x="614" y="54.6" width="46" height="97.4" rx="2" fill="var(--clay)"/>
+        <text x="637.0" y="50.6" font-size="9" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">$277M</text>
+        <text x="610" y="26" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">3.3&#215;</text>
+        <text x="610" y="165" font-size="9" font-weight="600" fill="var(--muted)" text-anchor="middle">95th pct</text>
+        <text x="40" y="176" font-size="8" fill="var(--faint)">Post-money valuation at seed vs. at the Series A that followed. The multiple is roughly constant across the distribution &#8212; the dollars are not.</text>
+        </svg>
+      <p class="cite">Carta &#183; US post-money valuation benchmarks, seed &amp; Series A &#183; 2025</p>
+    </div>
+
+    <div class="card">
+      <h2>What you sell to get there</h2>
+      <p class="cs">Distribution of each round by % sold to VCs, <b style="color:var(--teal-deep)">seed</b> vs. <b style="color:var(--clay-deep)">Series A</b>. Both cluster at 20&#8211;24%; the A sells slightly <i>less</i> than the seed.</p>
+      <svg viewBox="0 0 340 158" role="img" aria-label="Distribution of percent of company sold to VCs, seed vs Series A">
+        <line x1="26.0" y1="122.0" x2="332.0" y2="122.0" stroke="var(--ink)" stroke-width="1"/>
+        <rect x="29.0" y="109.7" width="15.1" height="12.3" fill="var(--teal)"/>
+        <text x="36.6" y="106.7" font-size="7.2" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">4</text>
+        <rect x="46.1" y="103.6" width="15.1" height="18.4" fill="var(--clay)"/>
+        <text x="53.7" y="100.6" font-size="7.2" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">6</text>
+        <text x="45.1" y="132" font-size="7.4" fill="var(--faint)" text-anchor="middle">&lt;5%</text>
+        <rect x="67.2" y="82.1" width="15.1" height="39.9" fill="var(--teal)"/>
+        <text x="74.8" y="79.1" font-size="7.2" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">13</text>
+        <rect x="84.4" y="91.3" width="15.1" height="30.7" fill="var(--clay)"/>
+        <text x="91.9" y="88.3" font-size="7.2" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">10</text>
+        <text x="83.4" y="132" font-size="7.4" fill="var(--faint)" text-anchor="middle">5&#8211;9%</text>
+        <rect x="105.5" y="76.0" width="15.1" height="46.0" fill="var(--teal)"/>
+        <text x="113.1" y="73.0" font-size="7.2" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">15</text>
+        <rect x="122.6" y="66.8" width="15.1" height="55.2" fill="var(--clay)"/>
+        <text x="130.2" y="63.8" font-size="7.2" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">18</text>
+        <text x="121.6" y="132" font-size="7.4" fill="var(--faint)" text-anchor="middle">10&#8211;14%</text>
+        <rect x="143.8" y="63.7" width="15.1" height="58.3" fill="var(--teal)"/>
+        <text x="151.3" y="60.7" font-size="7.2" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">19</text>
+        <rect x="160.9" y="57.6" width="15.1" height="64.4" fill="var(--clay)"/>
+        <text x="168.4" y="54.6" font-size="7.2" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">21</text>
+        <text x="159.9" y="132" font-size="7.4" fill="var(--faint)" text-anchor="middle">15&#8211;19%</text>
+        <rect x="182.0" y="36.1" width="15.1" height="85.9" fill="var(--teal)"/>
+        <text x="189.6" y="33.1" font-size="7.2" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">28</text>
+        <rect x="199.1" y="36.1" width="15.1" height="85.9" fill="var(--clay)"/>
+        <text x="206.7" y="33.1" font-size="7.2" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">28</text>
+        <text x="198.1" y="132" font-size="7.4" fill="var(--faint)" text-anchor="middle">20&#8211;24%</text>
+        <rect x="220.2" y="79.1" width="15.1" height="42.9" fill="var(--teal)"/>
+        <text x="227.8" y="76.1" font-size="7.2" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">14</text>
+        <rect x="237.4" y="94.4" width="15.1" height="27.6" fill="var(--clay)"/>
+        <text x="244.9" y="91.4" font-size="7.2" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">9</text>
+        <text x="236.4" y="132" font-size="7.4" fill="var(--faint)" text-anchor="middle">25&#8211;29%</text>
+        <rect x="258.5" y="109.7" width="15.1" height="12.3" fill="var(--teal)"/>
+        <text x="266.1" y="106.7" font-size="7.2" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">4</text>
+        <rect x="275.6" y="112.8" width="15.1" height="9.2" fill="var(--clay)"/>
+        <text x="283.2" y="109.8" font-size="7.2" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">3</text>
+        <text x="274.6" y="132" font-size="7.4" fill="var(--faint)" text-anchor="middle">30&#8211;34%</text>
+        <rect x="296.8" y="109.7" width="15.1" height="12.3" fill="var(--teal)"/>
+        <text x="304.3" y="106.7" font-size="7.2" font-weight="700" fill="var(--teal-deep)" text-anchor="middle">4</text>
+        <rect x="313.9" y="106.7" width="15.1" height="15.3" fill="var(--clay)"/>
+        <text x="321.4" y="103.7" font-size="7.2" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">5</text>
+        <text x="312.9" y="132" font-size="7.4" fill="var(--faint)" text-anchor="middle">35%+</text>
+        <text x="26" y="150" font-size="8.5" fill="var(--muted)">Medians: seed <tspan font-weight="700" fill="var(--teal-deep)">19.5%</tspan> &#183; Series A <tspan font-weight="700" fill="var(--clay-deep)">18.0%</tspan> &#183; B 14.0% &#183; C 10.0% &#183; D 7.5%</text>
+        <text x="26" y="20" font-size="7.5" fill="var(--faint)">% of rounds falling in each band</text>
+        </svg>
+      <p class="cite">Carta &#183; 2,005 primary rounds, US software startups &#183; 2025</p>
+    </div>
+
+    <div class="card">
+      <h2>Fewer than 1 in 4 teams still own the majority</h2>
+      <p class="cs">Founding-team share of fully diluted equity after each round closes. The majority is gone <b style="color:var(--clay-deep)">at the A</b>, not at the B.</p>
+      <svg viewBox="0 0 340 172" role="img" aria-label="Founding team ownership after each round, percentiles">
+        <line x1="220.8" y1="16" x2="220.8" y2="144" stroke="var(--ink)" stroke-width="1" stroke-dasharray="3 2" opacity=".55"/>
+        <text x="220.8" y="12" font-size="7.5" font-weight="700" fill="var(--muted)" text-anchor="middle">50% &#8212; majority</text>
+        <text x="56" y="33" font-size="9" font-weight="500" fill="var(--muted)" text-anchor="end">Seed</text>
+        <line x1="138.2" y1="30" x2="300.4" y2="30" stroke="var(--slate)" stroke-width="2" opacity=".5"/>
+        <line x1="196.3" y1="26" x2="196.3" y2="34" stroke="var(--slate)" stroke-width="1.6"/>
+        <line x1="272.8" y1="26" x2="272.8" y2="34" stroke="var(--slate)" stroke-width="1.6"/>
+        <circle cx="239.2" cy="30" r="9.5" fill="var(--teal)"/>
+        <text x="239.2" y="33" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">55.8</text>
+        <text x="56" y="57" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="end">Series A</text>
+        <line x1="97.9" y1="54" x2="250.3" y2="54" stroke="var(--clay)" stroke-width="2" opacity=".5"/>
+        <line x1="136.6" y1="50" x2="136.6" y2="58" stroke="var(--clay)" stroke-width="1.6"/>
+        <line x1="214.7" y1="50" x2="214.7" y2="58" stroke="var(--clay)" stroke-width="1.6"/>
+        <circle cx="176.9" cy="54" r="9.5" fill="var(--clay-deep)"/>
+        <text x="176.9" y="57" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">36.2</text>
+        <text x="56" y="81" font-size="9" font-weight="500" fill="var(--muted)" text-anchor="end">Series B</text>
+        <line x1="79.8" y1="78" x2="199.8" y2="78" stroke="var(--slate)" stroke-width="2" opacity=".5"/>
+        <line x1="102.3" y1="74" x2="102.3" y2="82" stroke="var(--slate)" stroke-width="1.6"/>
+        <line x1="166.5" y1="74" x2="166.5" y2="82" stroke="var(--slate)" stroke-width="1.6"/>
+        <circle cx="135.7" cy="78" r="9.5" fill="var(--teal)"/>
+        <text x="135.7" y="81" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">23.2</text>
+        <text x="56" y="105" font-size="9" font-weight="500" fill="var(--muted)" text-anchor="end">Series C</text>
+        <line x1="75.0" y1="102" x2="169.0" y2="102" stroke="var(--slate)" stroke-width="2" opacity=".5"/>
+        <line x1="91.2" y1="98" x2="91.2" y2="106" stroke="var(--slate)" stroke-width="1.6"/>
+        <line x1="139.8" y1="98" x2="139.8" y2="106" stroke="var(--slate)" stroke-width="1.6"/>
+        <circle cx="114.1" cy="102" r="9.5" fill="var(--teal)"/>
+        <text x="114.1" y="105" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">16.4</text>
+        <text x="56" y="129" font-size="9" font-weight="500" fill="var(--muted)" text-anchor="end">Series D</text>
+        <line x1="71.5" y1="126" x2="147.4" y2="126" stroke="var(--slate)" stroke-width="2" opacity=".5"/>
+        <line x1="82.0" y1="122" x2="82.0" y2="130" stroke="var(--slate)" stroke-width="1.6"/>
+        <line x1="125.8" y1="122" x2="125.8" y2="130" stroke="var(--slate)" stroke-width="1.6"/>
+        <circle cx="98.2" cy="126" r="9.5" fill="var(--teal)"/>
+        <text x="98.2" y="129" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">11.4</text>
+        <text x="62.0" y="154" font-size="7" fill="var(--faint)" text-anchor="middle">0%</text>
+        <text x="125.5" y="154" font-size="7" fill="var(--faint)" text-anchor="middle">20%</text>
+        <text x="189.0" y="154" font-size="7" fill="var(--faint)" text-anchor="middle">40%</text>
+        <text x="252.5" y="154" font-size="7" fill="var(--faint)" text-anchor="middle">60%</text>
+        <text x="316.0" y="154" font-size="7" fill="var(--faint)" text-anchor="middle">80%</text>
+        <line x1="62.0" y1="144" x2="316.0" y2="144" stroke="var(--rule)" stroke-width="1"/>
+        <text x="62.0" y="164" font-size="7" fill="var(--faint)">Line = 10th&#8211;90th pct &#183; ticks = 25th / 75th &#183; circle = median</text>
+        </svg>
+      <p class="cite">Carta &#183; founding-team ownership by stage &#183; rounds raised 2021&#8211;2025</p>
+    </div>
+
+    <div class="callout">
+      <div class="big">3&#215;</div>
+      <div class="t"><b>The institutional transition, in one line:</b> the A prices at about three times the seed, sells about the same slice of the company &#8212; and takes the founding team below 50% for good. What changes is not the dilution. It is the board seat, the pro-rata, and the bar you now have to clear every quarter.
+      <span>Discussion &#8212; Mercedes Bent, Premise VC</span></div>
+    </div>
+
+  </div>
+  <footer><span><b>Venture Math: What the Numbers Really Look Like, from Formation to IPO</b> &#183; Back of 2</span><span>Data &#169; Carta. Re-visualized with attribution for classroom instruction.</span></footer>
+</section>
+
+</body>
+</html>

@@ -45,6 +45,8 @@ def fmt_date(d):
 
 
 FLYERS_SRC = os.path.join(ROOT, "..", "fliers", "out")
+SHEETS_SRC = os.path.join(ROOT, "..", "handouts")
+SHEETS_DST = os.path.join(ROOT, "sheets")
 FLYERS_DST = os.path.join(ROOT, "fliers")
 # Anything still carrying drafting markers must not reach a public URL.
 PLACEHOLDERS = ("TO REPLACE", "First Lastname", "guest-placeholder", "Lorem")
@@ -90,6 +92,7 @@ for f in sorted(glob.glob(os.path.join(SESSIONS, "*.json"))):
         "logo": asset(d.get("guest_logo")),
         "linkedin": (d.get("linkedin") or "").strip(),
         "lecture": (d.get("lecture_url") or "").strip(),
+        "sheet": "" if unfinished else (d.get("sheet") or "").strip(),
         "virtual": "virtual" in txt(d.get("location")).lower(),
         "sort": (parse_date(txt(d.get("date"))), parse_time(txt(d.get("time")))),
     })
@@ -161,6 +164,7 @@ cards = "\n".join(f'''    <li class="s reveal" style="--i:{i + 2}">
       <div class="aside">
         <span class="tag{' virt' if r["virtual"] else ''}">{"Online" if r["virtual"] else "In person"}</span>
         {f'<a class="watch" href="{e(r["lecture"])}" target="_blank" rel="noopener noreferrer">Watch lecture</a>' if r["lecture"] else ''}
+        {f'<a class="fly" href="sheets/{r["slug"]}.html">Data sheet</a>' if r["sheet"] else ''}
         {f'<a class="fly" href="fliers/{r["flyer"]}.html">Flyer</a>' if r["flyer"] else ''}
       </div>
     </li>''' for i, r in enumerate(rows))
@@ -186,7 +190,18 @@ for r in rows:
             shutil.copy2(src, os.path.join(FLYERS_DST, r["flyer"] + ext))
             copied += 1
 
+# publish each session's data sheet (the handout HTML) under the session's slug
+if os.path.isdir(SHEETS_DST):
+    shutil.rmtree(SHEETS_DST)
+os.makedirs(SHEETS_DST, exist_ok=True)
+sheets = 0
+for r in rows:
+    if r["sheet"]:
+        shutil.copy2(os.path.join(SHEETS_SRC, r["sheet"]), os.path.join(SHEETS_DST, r["slug"] + ".html"))
+        sheets += 1
+
 print(f"index.html — {len(rows)} sessions, {span}")
+print(f"sheets/    — {sheets} data sheets copied")
 print(f"fliers/    — {copied} files copied for {sum(1 for r in rows if r['flyer'])} sessions")
 for slug, why in held:
     print(f"   HELD BACK: {slug} — contains {', '.join(why)}")

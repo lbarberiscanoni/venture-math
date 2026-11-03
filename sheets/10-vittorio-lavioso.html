@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Series C: the border between venture capital and growth equity &#8212; Venture Math</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14283b; --muted:#5b6b7a; --faint:#95a1ad;
+    --paper:#ffffff; --rule:#e4e8ec; --grid:#eef1f4;
+    --teal:#0f7a68; --teal-mid:#3f9585; --teal-soft:#9cc7bd; --teal-deep:#0c5f52;
+    --clay:#b05a38; --clay-mid:#c68562; --clay-soft:#dcae90; --clay-deep:#8f4529;
+    --slate:#aab4bd;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:#f3f5f7; color:var(--ink);
+    font:12.5px/1.4 'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased; letter-spacing:-.004em;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  svg text{font-family:'Inter',ui-sans-serif,system-ui,sans-serif; font-variant-numeric:tabular-nums}
+  .sheet{width:768px; margin:0 auto 20px; padding:15px 28px 8px; background:var(--paper); position:relative}
+
+  .brand{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1.5px solid var(--ink); padding-bottom:7px; margin-bottom:11px}
+  .brand .l .eyebrow{font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--teal); font-weight:600; margin:0 0 3px}
+  .brand .l h1{font-size:21px; letter-spacing:-.02em; margin:0; font-weight:700; color:var(--ink)}
+  .brand .r{text-align:right; font-size:9px; color:var(--faint); line-height:1.5; font-weight:500}
+  .brand .r b{color:var(--muted)}
+  .run{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:11px; padding-bottom:6px; border-bottom:1px solid var(--rule)}
+  .run .l{font-size:12px; font-weight:600; color:var(--ink); letter-spacing:.02em; text-transform:uppercase}
+  .run .l .n{color:var(--clay)}
+  .run .l .sec{color:var(--faint); font-weight:500; text-transform:none; letter-spacing:0}
+  .run .r{font-size:10px; color:var(--faint); letter-spacing:.08em; font-weight:600}
+
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:6px}
+  .card{background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:7px 13px 6px; break-inside:avoid; min-width:0}
+  .card.wide{grid-column:1 / -1}
+  .card h2{font-size:14px; font-weight:600; letter-spacing:-.015em; margin:0 0 2px; color:var(--ink)}
+  .card .cs{font-size:10.5px; color:var(--muted); margin:0 0 5px; line-height:1.35; font-weight:400}
+  .card .cite{font-size:9px; color:var(--faint); margin:6px 0 0; letter-spacing:.03em; font-weight:500; text-transform:uppercase; padding-top:5px; border-top:1px solid var(--grid)}
+  .card svg{display:block; width:100%; height:auto; overflow:visible}
+  .dl{display:flex; gap:12px; flex-wrap:wrap; font-size:9.5px; color:var(--muted); margin:0 0 4px; font-weight:500}
+  .dl i{font-style:normal; display:inline-flex; align-items:center; gap:4px}
+  .dl .sw{width:9px; height:9px; border-radius:2px; display:inline-block}
+
+  .callout{grid-column:1 / -1; border:1px solid var(--clay-soft); background:#fdf7f3; border-radius:8px; padding:6px 13px; display:flex; align-items:center; gap:14px}
+  .callout .big{font-size:30px; font-weight:700; color:var(--clay-deep); letter-spacing:-.03em; line-height:1; flex:none}
+  .callout .t{font-size:11px; color:var(--ink); line-height:1.35; font-weight:500}
+  .callout .t b{font-weight:700}
+  .callout .t span{display:block; font-size:9px; color:var(--faint); margin-top:3px; text-transform:uppercase; letter-spacing:.03em; font-weight:500}
+
+  table.pairs{width:100%; border-collapse:collapse; font-size:9.5px}
+  table.pairs th{text-align:left; font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:0 6px 3px 0; border-bottom:1px solid var(--rule)}
+  table.pairs th.ti{color:var(--teal-deep)} table.pairs th.tc{color:var(--clay-deep)}
+  table.pairs td{padding:2px 6px 2px 0; border-bottom:1px solid var(--grid); vertical-align:top; line-height:1.3}
+  table.pairs td b{display:block; font-weight:700}
+  table.pairs td span{color:var(--muted); font-size:9px}
+  table.pairs td.m{font-weight:600; width:92px}
+  table.pairs td.t{color:var(--ink); font-size:9px; width:190px}
+  table.pairs tr:last-child td{border-bottom:none}
+
+  footer{margin-top:8px; padding-top:6px; border-top:1px solid var(--rule); font-size:9px; color:var(--faint); display:flex; justify-content:space-between; gap:12px; font-weight:500}
+  footer b{color:var(--muted); font-weight:600}
+
+  @page{ size:letter portrait; margin:0.4in }
+  @media print{ body{background:#fff} .sheet{width:auto; margin:0; padding:0; page-break-after:always; break-after:page} .sheet:last-child{page-break-after:auto} }
+  @media screen{ .sheet{box-shadow:0 1px 12px rgba(20,40,59,.08); border-radius:3px} }
+
+  .terms{grid-column:1 / -1; display:grid; grid-template-columns:repeat(4,1fr); gap:8px; border:1px solid var(--rule); border-radius:8px; padding:5px 12px}
+  .terms div{font-size:9.4px; line-height:1.33; color:var(--ink)}
+  .terms b{display:block; font-size:10.5px; color:var(--clay-deep); margin-bottom:1px}
+  .two{display:grid; grid-template-columns:1fr 1.12fr; gap:14px; align-items:start}
+  .pair{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+  .lab{font-size:9px; font-weight:600; color:var(--muted); margin:3px 0 1px}
+  .note{font-size:9.6px; color:var(--muted); line-height:1.35; margin:4px 0 0}
+  .note b{color:var(--ink)}
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:4px 0 2px}
+  .stats.three{grid-template-columns:repeat(3,1fr); align-self:center}
+  .card.bg .two{align-items:center}
+  .steps{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; align-items:start}
+  .step{font-size:9px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--clay-deep); margin:0 0 3px}
+  table.pairs.wait td{font-size:10px}
+  .sankey-row{display:grid; grid-template-columns:1fr 168px; gap:12px; align-items:center}
+  .stats.one{grid-template-columns:1fr; gap:6px}
+  .takeaway{font-size:10.5px; font-weight:600; color:var(--ink); margin:6px 0 0; padding:4px 8px; background:#f1f7f5; border-radius:5px}
+  .stats.two-up{grid-template-columns:1fr 1fr}
+  .stats div{font-size:8.8px; line-height:1.25; color:var(--muted)}
+  .stats b{display:block; font-size:13.5px; font-weight:700; letter-spacing:-.02em; color:var(--ink)}
+  table.pairs td b.inl{display:inline; font-weight:700}
+  table.pairs td .bar{display:inline-block; height:8px; border-radius:1.5px; background:var(--teal); margin-right:4px; vertical-align:-1px}
+
+</style>
+</head>
+<body>
+
+<!-- ===================== FRONT — POINTS 1 AND 2 ===================== -->
+<section class="sheet" id="p1">
+  <div class="brand">
+    <div class="l">
+      <p class="eyebrow">Venture Math &#183; Fall 2026</p>
+      <h1>Series C: the border between venture capital and growth equity</h1>
+    </div>
+    <div class="r">Session 10 &#183; Nov 4 &#183; <b>Vittorio Lavioso</b> (Baillie Gifford)<br>Data: <b>Apollo</b>, <b>World Bank</b>, <b>Census</b>, <b>Jay Ritter</b>, <b>SEC filings</b> &#183; as of Nov 2, 2026</div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <p class="step">1 &#183; The price</p>
+      <h2>A Series C sells about a tenth of the company</h2>
+      <p class="dl"><i><span class="sw" style="background:var(--slate)"></span>Series B</i><i><span class="sw" style="background:var(--teal)"></span>Series C</i><i><span class="sw" style="background:var(--teal-soft)"></span>Series D+</i><i>median % sold</i></p>
+      <svg viewBox="0 0 330 82" role="img">
+        <line x1="26" x2="296" y1="64.1" y2="64.1" stroke="var(--grid)"/>
+        <text x="22" y="67.1" font-size="7.4" fill="var(--faint)" text-anchor="end">5%</text>
+        <line x1="26" x2="296" y1="44.8" y2="44.8" stroke="var(--grid)"/>
+        <text x="22" y="47.8" font-size="7.4" fill="var(--faint)" text-anchor="end">10%</text>
+        <line x1="26" x2="296" y1="25.4" y2="25.4" stroke="var(--grid)"/>
+        <text x="22" y="28.4" font-size="7.4" fill="var(--faint)" text-anchor="end">15%</text>
+        <line x1="26" x2="296" y1="6.0" y2="6.0" stroke="var(--grid)"/>
+        <text x="22" y="9.0" font-size="7.4" fill="var(--faint)" text-anchor="end">20%</text>
+        <text x="26.0" y="79" font-size="7.6" fill="var(--muted)" text-anchor="middle">2021</text>
+        <text x="80.0" y="79" font-size="7.6" fill="var(--muted)" text-anchor="middle">2022</text>
+        <text x="134.0" y="79" font-size="7.6" fill="var(--muted)" text-anchor="middle">2023</text>
+        <text x="188.0" y="79" font-size="7.6" fill="var(--muted)" text-anchor="middle">2024</text>
+        <text x="242.0" y="79" font-size="7.6" fill="var(--muted)" text-anchor="middle">2025</text>
+        <text x="296.0" y="79" font-size="7.6" fill="var(--muted)" text-anchor="middle">H1 26</text>
+        <polyline points="26.0,15.7 80.0,15.7 134.0,10.3 188.0,18.8 242.0,22.7 296.0,31.2" fill="none" stroke="var(--slate)" stroke-width="1.4" stroke-linejoin="round"/>
+        <text x="300" y="34.2" font-size="7.6" font-weight="700" fill="var(--ink)">13.5%</text>
+        <polyline points="26.0,28.1 80.0,30.8 134.0,26.5 188.0,26.5 242.0,38.5 296.0,43.6" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linejoin="round"/>
+        <text x="300" y="46.6" font-size="7.6" font-weight="700" fill="var(--ink)">10.3%</text>
+        <polyline points="26.0,44.8 80.0,45.9 134.0,42.0 188.0,44.8 242.0,52.9 296.0,59.1" fill="none" stroke="var(--teal-soft)" stroke-width="1.4" stroke-linejoin="round"/>
+        <text x="300" y="62.1" font-size="7.6" font-weight="700" fill="var(--ink)">6.3%</text>
+        </svg>
+      <div class="stats three">
+        <div><b>$44.6M</b>median round, H1 2026 ($60M in 2021)</div>
+        <div><b>$400M</b>median post-money ($182M in 2023)</div>
+        <div><b>10.3%</b>median sold (14.3% in 2021)</div>
+      </div>
+      <p class="cite">Carta Round Benchmarking, all US, Oct 2026</p>
+    </div>
+
+    <div class="card">
+      <p class="step">2 &#183; The wait</p>
+      <h2>Two years between rounds, smaller step-ups</h2>
+      <p class="dl"><i><span class="sw" style="background:var(--slate)"></span>B to C</i><i><span class="sw" style="background:var(--teal)"></span>C to D</i><i>median years between rounds</i></p>
+      <svg viewBox="0 0 330 96" role="img">
+        <line x1="26" x2="296" y1="80.0" y2="80.0" stroke="var(--grid)"/>
+        <text x="22" y="83.0" font-size="7.4" fill="var(--faint)" text-anchor="end">1.0y</text>
+        <line x1="26" x2="296" y1="50.0" y2="50.0" stroke="var(--grid)"/>
+        <text x="22" y="53.0" font-size="7.4" fill="var(--faint)" text-anchor="end">1.5y</text>
+        <line x1="26" x2="296" y1="20.0" y2="20.0" stroke="var(--grid)"/>
+        <text x="22" y="23.0" font-size="7.4" fill="var(--faint)" text-anchor="end">2.0y</text>
+        <text x="26.0" y="93" font-size="7.6" fill="var(--muted)" text-anchor="middle">2014</text>
+        <text x="107.0" y="93" font-size="7.6" fill="var(--muted)" text-anchor="middle">2017</text>
+        <text x="161.0" y="93" font-size="7.6" fill="var(--muted)" text-anchor="middle">2019</text>
+        <text x="215.0" y="93" font-size="7.6" fill="var(--muted)" text-anchor="middle">2021</text>
+        <text x="296.0" y="93" font-size="7.6" fill="var(--muted)" text-anchor="middle">2024</text>
+        <polyline points="26.0,56.0 107.0,44.0 161.0,50.0 215.0,56.0 242.0,56.0 269.0,32.0 296.0,20.0" fill="none" stroke="var(--slate)" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="26.0" cy="56.0" r="1.8" fill="var(--slate)"/>
+        <circle cx="107.0" cy="44.0" r="1.8" fill="var(--slate)"/>
+        <circle cx="161.0" cy="50.0" r="1.8" fill="var(--slate)"/>
+        <circle cx="215.0" cy="56.0" r="1.8" fill="var(--slate)"/>
+        <circle cx="242.0" cy="56.0" r="1.8" fill="var(--slate)"/>
+        <circle cx="269.0" cy="32.0" r="1.8" fill="var(--slate)"/>
+        <circle cx="296.0" cy="20.0" r="1.8" fill="var(--slate)"/>
+        <polyline points="26.0,68.0 107.0,44.0 161.0,56.0 215.0,68.0 242.0,62.0 269.0,32.0 296.0,20.0" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linejoin="round"/>
+        <circle cx="26.0" cy="68.0" r="1.8" fill="var(--teal)"/>
+        <circle cx="107.0" cy="44.0" r="1.8" fill="var(--teal)"/>
+        <circle cx="161.0" cy="56.0" r="1.8" fill="var(--teal)"/>
+        <circle cx="215.0" cy="68.0" r="1.8" fill="var(--teal)"/>
+        <circle cx="242.0" cy="62.0" r="1.8" fill="var(--teal)"/>
+        <circle cx="269.0" cy="32.0" r="1.8" fill="var(--teal)"/>
+        <circle cx="296.0" cy="20.0" r="1.8" fill="var(--teal)"/>
+        <text x="300" y="23.0" font-size="8" font-weight="700" fill="var(--ink)">2.0</text>
+        <text x="215.0" y="79.0" font-size="7.4" fill="var(--teal-deep)" text-anchor="middle">1.2 in 2021</text>
+        </svg>
+      <table class="pairs wait"><tr><th></th><th>B &#8594; C</th><th>C &#8594; D</th></tr>
+        <tr><td>Median time, 2024</td><td><b class="inl">2.0 yrs</b></td><td><b class="inl">2.0 yrs</b></td></tr>
+        <tr><td>Median step-up</td><td><b class="inl">1.6&#215;</b> (25th pct 1.1&#215;)</td><td><b class="inl">1.2&#215;</b>*</td></tr></table>
+      <p class="cite">PitchBook-NVCA (raised only; pre-2024 read) &#183; Carta Q2 2024 &#183; *PitchBook, untraced</p>
+    </div>
+
+    <div class="card wide">
+      <p class="step">3 &#183; The odds</p>
+      <h2>Three years after the peak, most unicorns were still waiting</h2>
+      <div class="sankey-row">
+        <div><svg viewBox="0 0 560 198" role="img" aria-label="Outcomes of 616 Dec-2021 unicorns three years on">
+        <rect x="6" y="18" width="9" height="142.9" fill="var(--ink)"/>
+        <text x="6" y="12" font-size="10.5" font-weight="700" fill="var(--ink)">616 unicorns, Dec 2021</text>
+        <path d="M15,18.0 C112.5,18.0 112.5,18.0 210,18.0 L210,104.8 C112.5,104.8 112.5,104.8 15,104.8 Z" fill="var(--slate)" opacity="0.35"/>
+        <rect x="210" y="18.0" width="9" height="86.8" fill="var(--slate)"/>
+        <text x="225" y="65.4" font-size="11" fill="var(--ink)"><tspan font-weight="700">61%</tspan>  No new round (374)</text>
+        <path d="M15,104.8 C112.5,104.8 112.5,113.8 210,113.8 L210,148.6 C112.5,148.6 112.5,139.6 15,139.6 Z" fill="var(--teal-mid)" opacity="0.35"/>
+        <rect x="210" y="113.8" width="9" height="34.8" fill="var(--teal-mid)"/>
+        <text x="204" y="135.2" font-size="11" fill="var(--ink)" text-anchor="end"><tspan font-weight="700">24%</tspan> raised again (150)</text>
+        <path d="M15,139.6 C112.5,139.6 112.5,157.6 210,157.6 L210,175.7 C112.5,175.7 112.5,157.7 15,157.7 Z" fill="var(--teal-deep)" opacity="0.35"/>
+        <rect x="210" y="157.6" width="9" height="18.1" fill="var(--teal-deep)"/>
+        <text x="225" y="170.6" font-size="11" fill="var(--ink)"><tspan font-weight="700">13%</tspan>  Exited: IPO or M&amp;A (78)</text>
+        <path d="M15,157.7 C112.5,157.7 112.5,184.7 210,184.7 L210,187.9 C112.5,187.9 112.5,160.9 15,160.9 Z" fill="var(--ink)" opacity="0.35"/>
+        <rect x="210" y="184.7" width="9" height="3.2" fill="var(--ink)"/>
+        <text x="225" y="195.7" font-size="11" fill="var(--ink)"><tspan font-weight="700">2%</tspan>  Shut down (14)</text>
+        <path d="M219,113.8 C295.5,113.8 295.5,103.8 372,103.8 L372,123.0 C295.5,123.0 295.5,133.0 219,133.0 Z" fill="var(--teal)" opacity="0.45"/>
+        <rect x="372" y="103.8" width="9" height="19.3" fill="var(--teal)"/>
+        <text x="387" y="117.4" font-size="11" fill="var(--ink)"><tspan font-weight="700">13%</tspan>  Flat or up round (83)</text>
+        <path d="M219,133.0 C295.5,133.0 295.5,132.0 372,132.0 L372,147.6 C295.5,147.6 295.5,148.6 219,148.6 Z" fill="var(--clay)" opacity="0.45"/>
+        <rect x="372" y="132.0" width="9" height="15.5" fill="var(--clay)"/>
+        <text x="387" y="143.8" font-size="11" fill="var(--ink)"><tspan font-weight="700">11%</tspan>  Down round (67)</text>
+        </svg></div>
+        <div class="stats one">
+          <div><b>26%</b>of the 2018 cohort&#8217;s Series C companies reached a D by 2025</div>
+          <div><b>22%</b>of Series C rounds in 2023 were down rounds; median cut 49%</div>
+          <div><b>14 of 17</b>unicorns that listed in 2025 did so below their last private price</div>
+        </div>
+      </div>
+      <p class="takeaway">A new round is a markup, not cash. Only an exit above your entry price adds to DPI, and two years of waiting is a cost.</p>
+      <p class="cite">Carta: 616 companies at $1B+ in Dec 2021, status Jan 2025, via Redpoint &#183; Carta &#183; PitchBook</p>
+    </div>
+
+    <div class="card wide bg">
+      <h2>What Baillie Gifford&#8217;s private team buys, and how picky it is</h2>
+      <div class="two">
+        <div class="stats three">
+          <div><b>~$200M</b>median revenue when it first invests</div>
+          <div><b>~70%</b>revenue growth a year</div>
+          <div><b>&#8722;14%</b>EBITDA margin: close to break-even</div>
+        </div>
+        <div><svg viewBox="0 0 330 44" role="img">
+        <text x="65" y="6.6" font-size="7.2" fill="var(--ink)" text-anchor="end">Companies met</text>
+        <rect x="70" y="0.6" width="230.0" height="6.6" rx="1.5" fill="var(--teal-soft)"/>
+        <text x="304.0" y="6.6" font-size="7.4" font-weight="700" fill="var(--ink)">1,000</text>
+        <text x="65" y="15.2" font-size="7.2" fill="var(--ink)" text-anchor="end">Rounds seen</text>
+        <rect x="70" y="9.2" width="138.0" height="6.6" rx="1.5" fill="var(--teal-soft)"/>
+        <text x="212.0" y="15.2" font-size="7.4" font-weight="700" fill="var(--ink)">600</text>
+        <text x="65" y="23.8" font-size="7.2" fill="var(--ink)" text-anchor="end">First cuts</text>
+        <rect x="70" y="17.8" width="14.9" height="6.6" rx="1.5" fill="var(--teal-soft)"/>
+        <text x="89.0" y="23.8" font-size="7.4" font-weight="700" fill="var(--ink)">65</text>
+        <text x="65" y="32.4" font-size="7.2" fill="var(--ink)" text-anchor="end">Deep dives</text>
+        <rect x="70" y="26.4" width="6.9" height="6.6" rx="1.5" fill="var(--teal-soft)"/>
+        <text x="80.9" y="32.4" font-size="7.4" font-weight="700" fill="var(--ink)">30</text>
+        <text x="65" y="41.0" font-size="7.2" fill="var(--ink)" text-anchor="end">Invested</text>
+        <rect x="70" y="35.0" width="2.5" height="6.6" rx="1.5" fill="var(--teal)"/>
+        <text x="76.5" y="41.0" font-size="7.4" font-weight="700" fill="var(--ink)">11</text>
+        </svg></div>
+      </div>
+      <p class="cite">Peter Singlehurst (BG private companies head), 20VC, Mar 2025 &#183; his figures &#183; 2024, 10-person team, $10&#8211;150M cheques</p>
+    </div>
+    <div class="card wide">
+      <h2>No index to own them: what exists instead</h2>
+      <table class="pairs" style="table-layout:auto"><tr><th>Vehicle</th><th>Type</th><th>Holdings</th><th>Fee</th><th>Price vs. NAV / access</th></tr><tr><td><b class="inl">Scottish Mortgage</b> (Baillie Gifford)</td><td>LSE trust</td><td>53 private, 48 listed</td><td>0.33%</td><td>&#8722;7.9% &#183; 30 Sep</td></tr><tr><td><b class="inl">Schiehallion</b> (Baillie Gifford)</td><td>LSE trust</td><td>52</td><td>0.96%</td><td>&#8722;12.6% &#183; 30 Sep</td></tr><tr><td>Destiny Tech100 (DXYZ)</td><td>Listed fund</td><td>37; 57% cash</td><td>2.5% mgmt</td><td>&#8722;24.5% &#183; 2 Nov price, 30 Jun NAV</td></tr><tr><td>Fundrise Innovation (VCX)</td><td>Listed fund</td><td>n/d</td><td>3.40%</td><td>+76% on 8 Sep, +0.6% on 2 Nov, same NAV</td></tr></table>
+      <p class="note"><b>Why a broad index cannot be bought:</b> secondaries traded $8.9B since 2024, ~0.1% of $8.23T; transfers need consent; marks go stale; US open-end funds cap illiquid assets at 15%. The broadest wrappers hold ~3% of the names.</p>
+      <p class="cite">Baillie Gifford reports, factsheets, SEC filings &#183; total fees except DXYZ &#183; Caplight via PitchBook &#183; Rule 22e-4 &#183; not exhaustive</p>
+    </div>
+  </div>
+  <footer><span><b>Venture Math</b> &#8212; Session 10 &#183; Front of 2</span><span>Every number sourced and fact-checked in s10-vittorio-lavioso/ &#183; re-visualized for classroom use</span></footer>
+</section>
+
+<!-- ===================== BACK — POINTS 3, 4, 5 ===================== -->
+<section class="sheet" id="p2">
+  <div class="run"><span class="l"><span class="n">Context</span> <span class="sec">&#8212; who made money, and the wider market</span></span><span class="r">TEAL = PRIVATE &#183; CLAY = LISTED</span></div>
+
+  <div class="grid">
+    <div class="card wide">
+      <h2>Tesla reached public investors at $1.6B. SpaceX reached them at $1.8T</h2>
+      <div class="two">
+        <div>
+          <table class="pairs" style="table-layout:auto"><tr><th></th><th>Tesla</th><th>SpaceX</th></tr><tr><td>Listed, at age</td><td>Jun 2010, 7</td><td>Jun 2026, <b class="inl">24</b></td></tr><tr><td>Revenue, year before</td><td>$112M</td><td>$18.7B</td></tr><tr><td>Market cap at offer</td><td><b class="inl">$1.58B</b></td><td><b class="inl">$1.78T</b></td></tr><tr><td>Multiple since offer</td><td><b class="inl">1,008&#215;</b></td><td><b class="inl">1.04&#215;</b></td></tr></table>
+        </div>
+        <div>
+          <p class="lab" style="margin-top:0">SpaceX private valuation, log scale</p>
+          <svg viewBox="0 0 350 86" role="img">
+        <line x1="28" x2="344" y1="72.0" y2="72.0" stroke="var(--grid)"/>
+        <text x="24" y="75.0" font-size="7.4" fill="var(--faint)" text-anchor="end">$10B</text>
+        <line x1="28" x2="344" y1="47.0" y2="47.0" stroke="var(--grid)"/>
+        <text x="24" y="50.0" font-size="7.4" fill="var(--faint)" text-anchor="end">$100B</text>
+        <line x1="28" x2="344" y1="21.9" y2="21.9" stroke="var(--grid)"/>
+        <text x="24" y="24.9" font-size="7.4" fill="var(--faint)" text-anchor="end">$1T</text>
+        <text x="28.0" y="83" font-size="7.6" fill="var(--muted)" text-anchor="middle">2015</text>
+        <text x="110.8" y="83" font-size="7.6" fill="var(--muted)" text-anchor="middle">2018</text>
+        <text x="193.6" y="83" font-size="7.6" fill="var(--muted)" text-anchor="middle">2021</text>
+        <text x="276.4" y="83" font-size="7.6" fill="var(--muted)" text-anchor="middle">2024</text>
+        <text x="331.6" y="83" font-size="7.6" fill="var(--muted)" text-anchor="middle">2026</text>
+        <polyline points="28.0,70.0 97.0,63.9 149.4,58.9 196.3,50.2 247.4,43.3 302.6,33.4 330.2,24.4 338.5,19.5 344.0,15.7" fill="none" stroke="var(--teal)" stroke-width="1.7" stroke-linejoin="round"/>
+        <circle cx="28.0" cy="70.0" r="1.9" fill="var(--teal)"/>
+        <circle cx="97.0" cy="63.9" r="1.9" fill="var(--teal)"/>
+        <circle cx="149.4" cy="58.9" r="1.9" fill="var(--teal)"/>
+        <circle cx="196.3" cy="50.2" r="1.9" fill="var(--teal)"/>
+        <circle cx="247.4" cy="43.3" r="1.9" fill="var(--teal)"/>
+        <circle cx="302.6" cy="33.4" r="1.9" fill="var(--teal)"/>
+        <circle cx="330.2" cy="24.4" r="1.9" fill="var(--teal)"/>
+        <circle cx="338.5" cy="19.5" r="1.9" fill="var(--teal)"/>
+        <circle cx="344.0" cy="15.7" r="1.9" fill="var(--teal)"/>
+        <circle cx="28.0" cy="70.0" r="2.3" fill="var(--ink)"/>
+        <text x="28.0" y="65.0" font-size="8.2" font-weight="700" fill="var(--ink)" text-anchor="start">$12B</text>
+        <circle cx="149.4" cy="58.9" r="2.3" fill="var(--ink)"/>
+        <text x="149.4" y="53.9" font-size="8.2" font-weight="700" fill="var(--ink)" text-anchor="end">$33B</text>
+        <circle cx="247.4" cy="43.3" r="2.3" fill="var(--ink)"/>
+        <text x="247.4" y="38.3" font-size="8.2" font-weight="700" fill="var(--ink)" text-anchor="end">$140B</text>
+        <circle cx="344.0" cy="15.7" r="2.3" fill="var(--ink)"/>
+        <text x="344.0" y="10.7" font-size="8.2" font-weight="700" fill="var(--ink)" text-anchor="end">$1.78T at IPO</text>
+        </svg>
+        </div>
+      </div>
+      <p class="cite">Two winners, one founder &#183; SpaceX&#8217;s 148&#215; since 2015 is company value incl. xAI, not a return &#183; 424Bs, press, 13Fs</p>
+    </div>
+    <div class="card">
+      <h2>Instacart: same company, opposite outcomes</h2>
+      <svg viewBox="0 0 330 80" role="img">
+        <line x1="6" x2="330" y1="68" y2="68" stroke="var(--grid)"/>
+        <polyline points="6.0,67.9 34.0,67.9 62.0,66.7 90.0,62.0 118.0,59.7 146.0,59.0 174.0,54.7 202.0,46.5 230.0,41.1 258.0,12.0" fill="none" stroke="var(--teal)" stroke-width="1.7" stroke-linejoin="round"/>
+        <polyline points="258.0,12.0 286.0,54.6 314.0,42.2" fill="none" stroke="var(--clay)" stroke-width="1.7" stroke-linejoin="round"/>
+        <circle cx="6.0" cy="67.9" r="2" fill="var(--teal)"/>
+        <text x="6.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">Seed</text>
+        <circle cx="34.0" cy="67.9" r="2" fill="var(--teal)"/>
+        <text x="34.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">A</text>
+        <circle cx="62.0" cy="66.7" r="2" fill="var(--teal)"/>
+        <text x="62.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">B</text>
+        <text x="62.0" y="62.7" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">$2.98</text>
+        <circle cx="90.0" cy="62.0" r="2" fill="var(--teal)"/>
+        <text x="90.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">C</text>
+        <text x="90.0" y="58.0" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">$13.31</text>
+        <circle cx="118.0" cy="59.7" r="2" fill="var(--teal)"/>
+        <text x="118.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">D</text>
+        <text x="118.0" y="55.7" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">$18.52</text>
+        <circle cx="146.0" cy="59.0" r="2" fill="var(--teal)"/>
+        <text x="146.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">E</text>
+        <text x="146.0" y="55.0" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">$20.11</text>
+        <circle cx="174.0" cy="54.7" r="2" fill="var(--teal)"/>
+        <text x="174.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">F</text>
+        <text x="174.0" y="50.7" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">$29.74</text>
+        <circle cx="202.0" cy="46.5" r="2" fill="var(--teal)"/>
+        <text x="202.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">G</text>
+        <text x="202.0" y="42.5" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">$48.09</text>
+        <circle cx="230.0" cy="41.1" r="2" fill="var(--teal)"/>
+        <text x="230.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">H</text>
+        <text x="230.0" y="35.1" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="end">$60</text>
+        <circle cx="258.0" cy="12.0" r="2" fill="var(--teal)"/>
+        <text x="258.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">I</text>
+        <text x="258.0" y="8.0" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">$125</text>
+        <circle cx="286.0" cy="54.6" r="2" fill="var(--clay)"/>
+        <text x="286.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">IPO</text>
+        <text x="286.0" y="64.6" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">$30</text>
+        <circle cx="314.0" cy="42.2" r="2" fill="var(--clay)"/>
+        <text x="314.0" y="78" font-size="7.8" fill="var(--ink)" text-anchor="middle">Now</text>
+        <text x="314.0" y="38.2" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">$57.59</text>
+        </svg>
+      <p class="note"><b>Series I ($125):</b> &#8722;76% at IPO, &#8722;54% now. <b>Series H ($60):</b> &#8722;50%, &#8722;4%. <b>Series F ($29.74):</b> +1%, +94%. Ignores preferred protections.</p>
+      <p class="cite">$ per share &#183; 424B4 for G&#8211;I &#183; earlier per press &#183; Yahoo</p>
+    </div>
+    <div class="card">
+      <h2>How much of today&#8217;s value existed at IPO</h2>
+      <table class="pairs" style="table-layout:auto"><tr><th>Company</th><th>IPO</th><th>At offer</th><th>Nov 2</th><th>Offer cap &#247; now</th></tr><tr><td>Amazon</td><td>1997</td><td>$0.43B</td><td>$2.66T</td><td><span class="bar" style="width:0.0px"></span><b class="inl">0.02%</b></td></tr><tr><td>Tesla</td><td>2010</td><td>$1.58B</td><td>$1.60T</td><td><span class="bar" style="width:0.1px"></span><b class="inl">0.1%</b></td></tr><tr><td>Uber</td><td>2019</td><td>$75.7B</td><td>$136B</td><td><span class="bar" style="width:34.7px"></span><b class="inl">56%</b></td></tr><tr><td>SpaceX</td><td>2026</td><td>$1.78T</td><td>$1.85T</td><td><span class="bar" style="width:59.5px"></span><b class="inl">96%</b></td></tr><tr><td>Figma</td><td>2025</td><td>$16.1B</td><td>$11.8B</td><td><span class="bar" style="width:62.0px"></span><b class="inl">136%</b></td></tr></table>
+      <p class="cite">Over 100% = worth less than at IPO; recent names had little time &#183; prospectuses, Yahoo</p>
+    </div>
+    <div class="card">
+      <h2>Most firms above $100M revenue are private</h2>
+      <p class="cs">By count. <b>&#8220;Private&#8221; means unlisted</b>, Koch and Mars included; no one counts the venture-backed.</p>
+      <svg viewBox="0 0 330 38.5" role="img">
+        <text x="40" y="12.5" font-size="8.6" fill="var(--ink)" text-anchor="end">US</text>
+        <rect x="46" y="4.0" width="196.6" height="6.5" rx="2" fill="var(--teal)"/>
+        <text x="246.6" y="12.5" font-size="8.4" font-weight="700" fill="var(--ink)">87%</text>
+        <text x="328" y="12.5" font-size="8" fill="var(--muted)" text-anchor="end">2024</text>
+        <text x="40" y="24.0" font-size="8.6" fill="var(--ink)" text-anchor="end">Europe</text>
+        <rect x="46" y="15.5" width="217.0" height="6.5" rx="2" fill="var(--teal)"/>
+        <text x="267.0" y="24.0" font-size="8.4" font-weight="700" fill="var(--ink)">96%</text>
+        <text x="328" y="24.0" font-size="8" fill="var(--muted)" text-anchor="end">2024</text>
+        <text x="40" y="35.5" font-size="8.6" fill="var(--ink)" text-anchor="end">Asia</text>
+        <rect x="46" y="27.0" width="196.6" height="6.5" rx="2" fill="var(--teal)"/>
+        <text x="246.6" y="35.5" font-size="8.4" font-weight="700" fill="var(--ink)">87%</text>
+        <text x="328" y="35.5" font-size="8" fill="var(--muted)" text-anchor="end">2025</text>
+        </svg>
+      <p class="lab">Not new: the most the listed share can be (listed &#247; $100M+ firms)</p>
+      <svg viewBox="0 0 330 49" role="img">
+        <text x="26" y="12.5" font-size="8.6" fill="var(--ink)" text-anchor="end">2002</text>
+        <rect x="32" y="4" width="195.5" height="4" rx="2" fill="var(--clay)"/>
+        <text x="231.5" y="12.5" font-size="8.4" font-weight="700" fill="var(--ink)">37.6%</text>
+        <text x="328" y="12.5" font-size="8" fill="var(--muted)" text-anchor="end">15,103 firms</text>
+        <text x="26" y="21.5" font-size="8.6" fill="var(--ink)" text-anchor="end">2007</text>
+        <rect x="32" y="13" width="129.0" height="4" rx="2" fill="var(--clay)"/>
+        <text x="165.0" y="21.5" font-size="8.4" font-weight="700" fill="var(--ink)">24.8%</text>
+        <text x="328" y="21.5" font-size="8" fill="var(--muted)" text-anchor="end">20,605</text>
+        <text x="26" y="30.5" font-size="8.6" fill="var(--ink)" text-anchor="end">2012</text>
+        <rect x="32" y="22" width="95.2" height="4" rx="2" fill="var(--clay)"/>
+        <text x="131.2" y="30.5" font-size="8.4" font-weight="700" fill="var(--ink)">18.3%</text>
+        <text x="328" y="30.5" font-size="8" fill="var(--muted)" text-anchor="end">22,392</text>
+        <text x="26" y="39.5" font-size="8.6" fill="var(--ink)" text-anchor="end">2017</text>
+        <rect x="32" y="31" width="85.8" height="4" rx="2" fill="var(--clay)"/>
+        <text x="121.8" y="39.5" font-size="8.4" font-weight="700" fill="var(--ink)">16.5%</text>
+        <text x="328" y="39.5" font-size="8" fill="var(--muted)" text-anchor="end">26,302</text>
+        <text x="26" y="48.5" font-size="8.6" fill="var(--ink)" text-anchor="end">2022</text>
+        <rect x="32" y="40" width="68.1" height="4" rx="2" fill="var(--clay)"/>
+        <text x="104.1" y="48.5" font-size="8.4" font-weight="700" fill="var(--ink)">13.1%</text>
+        <text x="328" y="48.5" font-size="8" fill="var(--muted)" text-anchor="end">35,420</text>
+        </svg>
+      <p class="cite">Apollo / S&amp;P Capital IQ (no counts or history published) &#183; Census, World Bank, our ceiling; $100M is nominal</p>
+    </div>
+    <div class="card">
+      <h2>Half the listed companies, eight times the value</h2>
+      <p class="cs">US listed companies, 1990&#8211;2025.</p>
+      <svg viewBox="0 0 330 62" role="img">
+        <line x1="28" x2="324" y1="41.7" y2="41.7" stroke="var(--grid)"/>
+        <text x="24" y="44.7" font-size="7.4" fill="var(--faint)" text-anchor="end">4k</text>
+        <line x1="28" x2="324" y1="29.0" y2="29.0" stroke="var(--grid)"/>
+        <text x="24" y="32.0" font-size="7.4" fill="var(--faint)" text-anchor="end">6k</text>
+        <line x1="28" x2="324" y1="16.3" y2="16.3" stroke="var(--grid)"/>
+        <text x="24" y="19.3" font-size="7.4" fill="var(--faint)" text-anchor="end">8k</text>
+        <text x="28.0" y="59" font-size="7.6" fill="var(--muted)" text-anchor="middle">1990</text>
+        <text x="112.6" y="59" font-size="7.6" fill="var(--muted)" text-anchor="middle">2000</text>
+        <text x="197.1" y="59" font-size="7.6" fill="var(--muted)" text-anchor="middle">2010</text>
+        <text x="281.7" y="59" font-size="7.6" fill="var(--muted)" text-anchor="middle">2020</text>
+        <polyline points="28.0,26.3 36.5,25.8 44.9,25.4 53.4,23.2 61.8,21.1 70.3,19.6 78.7,15.8 87.2,16.9 95.7,19.5 104.1,21.2 112.6,23.2 121.0,27.9 129.5,31.0 137.9,33.5 146.4,33.9 154.9,34.4 163.3,34.5 171.8,34.6 180.2,37.4 188.7,39.1 197.1,39.9 205.6,40.6 214.1,41.0 222.5,40.5 231.0,39.3 239.4,39.3 247.9,39.6 256.3,39.5 264.8,41.6 273.3,42.2 281.7,41.0 290.2,36.8 298.6,37.6 307.1,39.7 315.5,41.6 324.0,42.2" fill="none" stroke="var(--clay)" stroke-width="1.7" stroke-linejoin="round"/>
+        <circle cx="78.7" cy="15.8" r="2.3" fill="var(--ink)"/>
+        <text x="78.7" y="10.8" font-size="8.2" font-weight="700" fill="var(--ink)" text-anchor="start">8,090 (1996)</text>
+        <circle cx="324.0" cy="42.2" r="2.3" fill="var(--ink)"/>
+        <text x="324.0" y="36.2" font-size="8.2" font-weight="700" fill="var(--ink)" text-anchor="end">3,908</text>
+        </svg>
+      <div class="stats">
+        <div><b>$8.5T&#8594;$69T</b>value, 1996&#8211;25</div>
+        <div><b>$1.05B&#8594;$17.6B</b>mean company</div>
+        <div><b>19%&#8594;41%</b>S&amp;P top 10</div>
+        <div><b>&#8722;40%</b>UK, since 2008</div>
+      </div>
+      <p class="cite">World Bank, nominal &#183; Doidge, Karolyi &amp; Stulz &#183; Doidge et al. 2018 &#183; RBC/FactSet &#183; UK Listing Review</p>
+    </div>
+    <div class="card wide">
+      <h2>Bigger by a lot, later by a little</h2>
+      <div class="two"><div><p class="lab" style="margin-top:0">US tech IPOs, Coatue&#8217;s count to Sep 2024</p>
+      <svg viewBox="0 0 330 54" role="img">
+        <rect x="1.0" y="37.3" width="9.4" height="4.7" fill="var(--clay)"/>
+        <text x="5.7" y="51" font-size="7.4" fill="var(--muted)" text-anchor="middle">1996</text>
+        <rect x="12.4" y="32.5" width="9.4" height="9.5" fill="var(--clay)"/>
+        <rect x="23.8" y="33.3" width="9.4" height="8.7" fill="var(--clay)"/>
+        <rect x="35.1" y="9.0" width="9.4" height="33.0" fill="var(--clay)"/>
+        <text x="39.8" y="7.0" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">315</text>
+        <rect x="46.5" y="17.3" width="9.4" height="24.7" fill="var(--clay)"/>
+        <text x="51.2" y="51" font-size="7.4" fill="var(--muted)" text-anchor="middle">2000</text>
+        <rect x="57.9" y="39.8" width="9.4" height="2.2" fill="var(--clay)"/>
+        <rect x="69.3" y="40.2" width="9.4" height="1.8" fill="var(--clay)"/>
+        <rect x="80.7" y="39.6" width="9.4" height="2.4" fill="var(--clay)"/>
+        <rect x="92.0" y="36.0" width="9.4" height="6.0" fill="var(--clay)"/>
+        <rect x="103.4" y="36.4" width="9.4" height="5.6" fill="var(--clay)"/>
+        <text x="108.1" y="51" font-size="7.4" fill="var(--muted)" text-anchor="middle">2005</text>
+        <rect x="114.8" y="37.2" width="9.4" height="4.8" fill="var(--clay)"/>
+        <rect x="126.2" y="33.7" width="9.4" height="8.3" fill="var(--clay)"/>
+        <text x="130.9" y="31.7" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">79</text>
+        <rect x="137.6" y="41.1" width="9.4" height="0.9" fill="var(--clay)"/>
+        <rect x="148.9" y="40.4" width="9.4" height="1.6" fill="var(--clay)"/>
+        <rect x="160.3" y="37.1" width="9.4" height="4.9" fill="var(--clay)"/>
+        <text x="165.0" y="51" font-size="7.4" fill="var(--muted)" text-anchor="middle">2010</text>
+        <rect x="171.7" y="37.8" width="9.4" height="4.2" fill="var(--clay)"/>
+        <rect x="183.1" y="37.9" width="9.4" height="4.1" fill="var(--clay)"/>
+        <rect x="194.4" y="36.7" width="9.4" height="5.3" fill="var(--clay)"/>
+        <rect x="205.8" y="36.7" width="9.4" height="5.3" fill="var(--clay)"/>
+        <rect x="217.2" y="39.2" width="9.4" height="2.8" fill="var(--clay)"/>
+        <text x="221.9" y="51" font-size="7.4" fill="var(--muted)" text-anchor="middle">2015</text>
+        <rect x="228.6" y="39.5" width="9.4" height="2.5" fill="var(--clay)"/>
+        <rect x="240.0" y="37.6" width="9.4" height="4.4" fill="var(--clay)"/>
+        <rect x="251.3" y="37.4" width="9.4" height="4.6" fill="var(--clay)"/>
+        <rect x="262.7" y="38.6" width="9.4" height="3.4" fill="var(--clay)"/>
+        <rect x="274.1" y="32.7" width="9.4" height="9.3" fill="var(--clay)"/>
+        <text x="278.8" y="51" font-size="7.4" fill="var(--muted)" text-anchor="middle">2020</text>
+        <rect x="285.5" y="27.3" width="9.4" height="14.7" fill="var(--clay)"/>
+        <text x="290.2" y="25.3" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">140</text>
+        <rect x="296.9" y="41.2" width="9.4" height="0.8" fill="var(--clay)"/>
+        <rect x="308.2" y="41.2" width="9.4" height="0.8" fill="var(--clay)"/>
+        <rect x="319.6" y="41.2" width="9.4" height="0.8" fill="var(--clay)"/>
+        <text x="324.3" y="39.2" font-size="7.6" font-weight="700" fill="var(--ink)" text-anchor="middle">6</text>
+        <text x="324.3" y="51" font-size="7.4" fill="var(--muted)" text-anchor="middle">2024</text>
+        </svg></div><div>
+      <p class="cs">All US IPOs, 1980&#8211;2025, medians. <b style="color:var(--clay-deep)">Value up 7&#215; since 1990, sales only 2&#215;</b> ($90M to $180M); price-to-sales 2.2&#215; to 8.2&#215;.</p>
+      <p class="note">Median age 8&#8211;9 before 1999, 11 since: <b>2&#8211;3 years later.</b></p></div></div>
+      <p class="cite">Ritter &#183; Coatue (large IPOs + SPACs); Ritter: 31 in 2025</p>
+    </div>
+    <div class="card">
+      <h2>Coatue: you&#8217;re more likely to 10x at scale</h2>
+            <svg viewBox="0 0 330 55" role="img">
+        <text x="86" y="12.5" font-size="8.6" fill="var(--ink)" text-anchor="end">Unicorn to $10B</text>
+        <rect x="92" y="4" width="40.8" height="12" rx="2" fill="var(--teal)"/>
+        <text x="136.8" y="12.5" font-size="8.4" font-weight="700" fill="var(--ink)">8%</text>
+        <text x="86" y="29.5" font-size="8.6" fill="var(--ink)" text-anchor="end">Decacorn to $100B</text>
+        <rect x="92" y="21" width="66.3" height="12" rx="2" fill="var(--teal)"/>
+        <text x="162.3" y="29.5" font-size="8.4" font-weight="700" fill="var(--ink)">13%</text>
+        <text x="86" y="46.5" font-size="8.6" fill="var(--ink)" text-anchor="end">$100B to $1T</text>
+        <rect x="92" y="38" width="158.1" height="12" rx="2" fill="var(--clay)"/>
+        <text x="254.1" y="46.5" font-size="8.4" font-weight="700" fill="var(--ink)">31%</text>
+        </svg>
+      <p class="note"><b>Read with care:</b> no published sample or window; top-tier examples include Tesla, Nvidia and Apple. Valuation, not returns, and reaching $100B is itself the filter. Coatue invests at this scale.</p>
+      <p class="cite">Thomas Laffont, All-In summit, Jun 2026, via Coatue</p>
+    </div>
+    <div class="card">
+      <h2>Over 1,700 unicorns, and far from equal</h2>
+      <svg viewBox="0 0 330 50.0" role="img">
+        <text x="88" y="12.5" font-size="8.6" fill="var(--ink)" text-anchor="end">Crunchbase &#183; 2 Nov</text>
+        <rect x="94" y="4.0" width="157.1" height="6.5" rx="2" fill="var(--teal)"/>
+        <text x="255.1" y="12.5" font-size="8.4" font-weight="700" fill="var(--ink)">1,918</text>
+        <text x="328" y="12.5" font-size="8" fill="var(--muted)" text-anchor="end">$9.4T</text>
+        <text x="88" y="24.0" font-size="8.6" fill="var(--ink)" text-anchor="end">PitchBook &#183; 30 Jun</text>
+        <rect x="94" y="15.5" width="142.8" height="6.5" rx="2" fill="var(--teal)"/>
+        <text x="240.8" y="24.0" font-size="8.4" font-weight="700" fill="var(--ink)">1,743</text>
+        <text x="328" y="24.0" font-size="8" fill="var(--muted)" text-anchor="end">$8.23T</text>
+        <text x="88" y="35.5" font-size="8.6" fill="var(--ink)" text-anchor="end">Hurun &#183; Jan</text>
+        <rect x="94" y="27.0" width="131.3" height="6.5" rx="2" fill="var(--teal)"/>
+        <text x="229.3" y="35.5" font-size="8.4" font-weight="700" fill="var(--ink)">1,603</text>
+        <text x="328" y="35.5" font-size="8" fill="var(--muted)" text-anchor="end">$7.9T</text>
+        <text x="88" y="47.0" font-size="8.6" fill="var(--ink)" text-anchor="end">CB Insights &#183; 30 Sep</text>
+        <rect x="94" y="38.5" width="120.5" height="6.5" rx="2" fill="var(--teal)"/>
+        <text x="218.5" y="47.0" font-size="8.4" font-weight="700" fill="var(--ink)">1,471</text>
+        </svg>
+      <div class="stats two-up">
+        <div><b>~35%</b>of value in the top 10; ~$5T outside it</div>
+        <div><b>61.7%</b>of value is AI, on 40.3% of the count</div>
+        <div><b>$1.7B</b>median; mean $4.7B, Anthropic $965B</div>
+        <div><b>47.6%</b>no round in 2+ years; 22.2% of value</div>
+      </div>
+      <p class="note"><b>The queue grows:</b> 178 new vs. 50 exits in H1 2026. The current stock alone takes 17&#8211;23 years to clear.</p>
+      <p class="cite">Tracker pages &#183; PitchBook, Jun 30 &#183; our arithmetic</p>
+    </div>
+  </div>
+  <footer><span><b>Venture Math</b> &#8212; Session 10 &#183; Back of 2</span><span>Course material, not investment advice &#183; research in s10-vittorio-lavioso/</span></footer>
+</section>
+
+</body>
+</html>
