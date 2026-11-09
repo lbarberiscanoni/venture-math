@@ -94,6 +94,7 @@ for f in sorted(glob.glob(os.path.join(SESSIONS, "*.json"))):
         "lecture": (d.get("lecture_url") or "").strip(),
         "sheet": "" if unfinished else (d.get("sheet") or "").strip(),
         "virtual": "virtual" in txt(d.get("location")).lower(),
+        "season": int(d.get("season") or 1),
         "sort": (parse_date(txt(d.get("date"))), parse_time(txt(d.get("time")))),
     })
 rows.sort(key=lambda r: r["sort"])
@@ -154,7 +155,16 @@ def face(r):
 
 faces = "\n".join(face(r) for r in rows if r["photo"])
 
-cards = "\n".join(f'''    <li class="s reveal" style="--i:{i + 2}">
+# Season 2 sessions (postponed, dates to come) are listed under their own heading without a date
+# or flyer: the flyer still prints the old date.
+s1 = [r for r in rows if r["season"] == 1]
+s2 = [r for r in rows if r["season"] == 2]
+for r in s2:
+    r["date"], r["time"], r["flyer"] = "TBA", "Season 2", ""
+
+
+def card(i, r):
+    return f'''    <li class="s reveal" style="--i:{i + 2}">
       <div class="when"><span class="d">{e(r["date"])}</span><span class="t">{e(r["time"])}</span></div>
       <div class="body">
         <p class="topic">{e(r["title"])}</p>
@@ -162,17 +172,26 @@ cards = "\n".join(f'''    <li class="s reveal" style="--i:{i + 2}">
         {guest_block(r)}
       </div>
       <div class="aside">
-        <span class="tag{' virt' if r["virtual"] else ''}">{"Online" if r["virtual"] else "In person"}</span>
+        {f'<span class="tag{" virt" if r["virtual"] else ""}">{"Online" if r["virtual"] else "In person"}</span>' if r["season"] == 1 else ''}
         {f'<a class="watch" href="{e(r["lecture"])}" target="_blank" rel="noopener noreferrer">Watch lecture</a>' if r["lecture"] else ''}
         {f'<a class="fly" href="sheets/{r["slug"]}.html">Data sheet</a>' if r["sheet"] else ''}
         {f'<a class="fly" href="fliers/{r["flyer"]}.html">Flyer</a>' if r["flyer"] else ''}
       </div>
-    </li>''' for i, r in enumerate(rows))
+    </li>'''
 
-span = f'{rows[0]["date"]} – {rows[-1]["date"]}, 2026' if rows else ""
+
+cards = "\n".join(card(i, r) for i, r in enumerate(s1))
+season2 = ""
+if s2:
+    season2 = ('  <h2 class="reveal" style="--i:1">\n    <span>Coming in Season 2</span>\n'
+               '    <span class="count">Dates to come</span>\n  </h2>\n  <ol class="sessions">\n'
+               + "\n".join(card(i, r) for i, r in enumerate(s2)) + "\n  </ol>\n")
+
+span = f'{s1[0]["date"]} – {s1[-1]["date"]}, 2026' if s1 else ""
 page = open(os.path.join(ROOT, "template.html")).read()
 page = (page.replace("<!--FACES-->", faces).replace("<!--SESSIONS-->", cards)
-            .replace("__COUNT__", str(len(rows))).replace("__SPAN__", span))
+            .replace("<!--SEASON2-->", season2)
+            .replace("__COUNT__", str(len(s1))).replace("__GUESTS__", str(len(rows))).replace("__SPAN__", span))
 open(os.path.join(ROOT, "index.html"), "w").write(page)
 
 # publish only the finished flyers, and clear out any previously-copied ones
@@ -200,7 +219,7 @@ for r in rows:
         shutil.copy2(os.path.join(SHEETS_SRC, r["sheet"]), os.path.join(SHEETS_DST, r["slug"] + ".html"))
         sheets += 1
 
-print(f"index.html — {len(rows)} sessions, {span}")
+print(f"index.html — {len(s1)} sessions, {span}; Season 2: {', '.join(r['slug'] for r in s2) or 'none'}")
 print(f"sheets/    — {sheets} data sheets copied")
 print(f"fliers/    — {copied} files copied for {sum(1 for r in rows if r['flyer'])} sessions")
 for slug, why in held:
