@@ -28,6 +28,21 @@ of step. One source, two outputs.
    branch `main`, folder `/ (root)`.
 3. The site appears at `https://venturemath.xyz` after GitHub Pages and Porkbun DNS are configured.
 
+## Keeping the live site in sync
+
+The site only changes when someone runs `python3 build.py` **and** pushes. Rebuilding a
+handout, retitling a session on YouTube or posting a recording does not reach the site by
+itself. Before and after any update, run:
+
+```
+python3 check_sync.py
+```
+
+It compares every data sheet, flyer and the schedule with what venturemath.xyz is serving,
+lists handouts no session links yet, and flags lecture videos on @venturemathlectures that
+are unlinked or titled differently from the schedule. The YouTube title is the final title:
+put it in the session JSON's `session_title`, and the video URL in `lecture_url`.
+
 ## Scope — deliberately just the course info
 
 This repo holds **only** the public course page. It is intentionally separate from the
