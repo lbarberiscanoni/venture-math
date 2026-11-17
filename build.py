@@ -1,0 +1,226 @@
+#!/usr/bin/env python3
+"""Generate index.html from the session flyers.
+
+`../fliers/sessions/*.json` is the source of truth for the schedule — it is what the
+printed flyers are built from — so the public page is generated from the same data
+rather than hand-maintained alongside it.
+
+Sessions with no flyer are simply absent (there is no session 07 / Oct 14), and the
+page shows dates rather than session numbers so the gap in the flyer numbering does
+not surface as a hole in the schedule.
+"""
+import glob, html, json, os, re, shutil
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+SESSIONS = os.path.join(ROOT, "..", "fliers", "sessions")
+MONTHS = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+          "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12}
+
+
+def txt(v):
+    """Flyer fields carry markup and entities; the page needs plain text."""
+    return html.unescape(re.sub(r"<[^>]+>", " ", str(v or ""))).replace(" ", " ").strip()
+
+
+def parse_date(d):
+    m = re.match(r"([A-Za-z]+)\s+(\d+)", d)
+    return (MONTHS[m.group(1)[:3].lower()], int(m.group(2))) if m else (99, 99)
+
+
+def parse_time(t):
+    m = re.match(r"(\d+)(?::(\d+))?\s*(am|pm)?", t.lower())
+    if not m:
+        return 0
+    h, mi = int(m.group(1)), int(m.group(2) or 0)
+    if m.group(3) == "pm" and h != 12:
+        h += 12
+    if h < 8:                       # "4:30 – 6:30pm" — bare hour is afternoon
+        h += 12
+    return h * 60 + mi
+
+
+def fmt_date(d):
+    mo, day = parse_date(d)
+    return f"{[k.title() for k, v in MONTHS.items() if v == mo][0]} {day}"
+
+
+FLYERS_SRC = os.path.join(ROOT, "..", "fliers", "out")
+SHEETS_SRC = os.path.join(ROOT, "..", "handouts")
+SHEETS_DST = os.path.join(ROOT, "sheets")
+FLYERS_DST = os.path.join(ROOT, "fliers")
+# Anything still carrying drafting markers must not reach a public URL.
+PLACEHOLDERS = ("TO REPLACE", "First Lastname", "guest-placeholder", "Lorem")
+
+ASSETS_SRC = os.path.join(ROOT, "..", "fliers", "assets")
+ASSETS_DST = os.path.join(ROOT, "assets")
+
+
+def asset(ref):
+    """Turn a flyer asset ref ("../assets/x.jpg") into a basename that exists in fliers/assets."""
+    if not ref:
+        return ""
+    name = os.path.basename(str(ref))
+    return name if os.path.exists(os.path.join(ASSETS_SRC, name)) else ""
+
+
+def role(title):
+    """First clause of the guest title is the current role; the rest is prior history."""
+    return re.split(r"\s*·\s*", title)[0] if title else ""
+
+
+rows, held = [], []
+for f in sorted(glob.glob(os.path.join(SESSIONS, "*.json"))):
+    if os.path.basename(f).startswith("_"):
+        continue
+    raw = open(f, encoding="utf-8").read()
+    d = json.loads(raw)
+    slug = d.get("slug") or os.path.splitext(os.path.basename(f))[0]
+    unfinished = [m for m in PLACEHOLDERS if m in raw]
+    if unfinished:
+        held.append((slug, unfinished))
+    title = txt(d.get("guest_title"))
+    rows.append({
+        "slug": slug, "flyer": "" if unfinished else slug,
+        "date": fmt_date(txt(d.get("date"))),
+        "time": txt(d.get("time")).replace("PST", "PT"),
+        "title": txt(d.get("session_title")),
+        "detail": txt(d.get("topic_detail")),
+        "guest": txt(d.get("guest_name")),
+        "firm": txt(d.get("guest_logo_alt")),
+        "role": role(title),
+        "photo": asset(d.get("guest_photo")),
+        "logo": asset(d.get("guest_logo")),
+        "linkedin": (d.get("linkedin") or "").strip(),
+        "lecture": (d.get("lecture_url") or "").strip(),
+        "sheet": "" if unfinished else (d.get("sheet") or "").strip(),
+        "virtual": "virtual" in txt(d.get("location")).lower(),
+        "season": int(d.get("season") or 1),
+        "sort": (parse_date(txt(d.get("date"))), parse_time(txt(d.get("time")))),
+    })
+rows.sort(key=lambda r: r["sort"])
+
+# copy the guest photos + firm logos the page references into site/assets/
+if os.path.isdir(ASSETS_DST):
+    shutil.rmtree(ASSETS_DST)
+os.makedirs(ASSETS_DST, exist_ok=True)
+wanted = {a for r in rows for a in (r["photo"], r["logo"]) if a}
+for a in sorted(wanted):
+    shutil.copy2(os.path.join(ASSETS_SRC, a), os.path.join(ASSETS_DST, a))
+
+e = html.escape
+
+
+def linkedin_open(r, extra=""):
+    """Opening <a> tag to a guest's LinkedIn, or "" when they have no profile on file."""
+    return (f'<a{extra} href="{e(r["linkedin"])}" target="_blank" rel="noopener noreferrer" '
+            f'aria-label="{e(r["guest"])} on LinkedIn">') if r["linkedin"] else ""
+
+
+def avatar(r, cls):
+    if not r["photo"]:
+        return ""
+    img = (f'<img class="{cls}" src="assets/{e(r["photo"])}" alt="{e(r["guest"])}" '
+           f'loading="lazy" width="60" height="60">')
+    # when a LinkedIn profile is on file, the face is a link to it
+    return f'{linkedin_open(r, " class=\"avatar-link\"")}{img}</a>' if r["linkedin"] else img
+
+
+def logo_plate(r):
+    return (f'<span class="logo-plate"><img src="assets/{e(r["logo"])}" '
+            f'alt="{e(r["firm"])}" loading="lazy"></span>') if r["logo"] else ""
+
+
+def guest_name(r):
+    """The guest's name, linked to their LinkedIn when one is on file."""
+    return f'{linkedin_open(r)}{e(r["guest"])}</a>' if r["linkedin"] else e(r["guest"])
+
+
+def guest_block(r):
+    if not r["guest"]:
+        return ""
+    # the first clause of the title already names the firm; the logo plate carries the brand mark,
+    # so show the role verbatim and fall back to the bare firm only when there is no role.
+    role = f'<div class="role">{e(r["role"])}</div>' if r["role"] else \
+           (f'<div class="role"><b>{e(r["firm"])}</b></div>' if r["firm"] else "")
+    return (f'<div class="guest">{avatar(r, "avatar")}'
+            f'<div class="who"><div class="name">{guest_name(r)}</div>{role}</div>'
+            f'{logo_plate(r)}</div>')
+
+
+def face(r):
+    img = (f'<img src="assets/{e(r["photo"])}" alt="{e(r["guest"])}" '
+           f'title="{e(r["guest"])} · {e(r["firm"])}" loading="lazy" width="60" height="60">')
+    return f'        {linkedin_open(r, " class=\"face\"")}{img}</a>' if r["linkedin"] else f'        {img}'
+
+
+faces = "\n".join(face(r) for r in rows if r["photo"])
+
+# Season 2 sessions (postponed, dates to come) are listed under their own heading without a date
+# or flyer: the flyer still prints the old date.
+s1 = [r for r in rows if r["season"] == 1]
+s2 = [r for r in rows if r["season"] == 2]
+for r in s2:
+    r["date"], r["time"], r["flyer"] = "TBA", "Season 2", ""
+
+
+def card(i, r):
+    return f'''    <li class="s reveal" style="--i:{i + 2}">
+      <div class="when"><span class="d">{e(r["date"])}</span><span class="t">{e(r["time"])}</span></div>
+      <div class="body">
+        <p class="topic">{e(r["title"])}</p>
+        <p class="detail">{e(r["detail"])}</p>
+        {guest_block(r)}
+      </div>
+      <div class="aside">
+        {f'<span class="tag{" virt" if r["virtual"] else ""}">{"Online" if r["virtual"] else "In person"}</span>' if r["season"] == 1 else ''}
+        {f'<a class="watch" href="{e(r["lecture"])}" target="_blank" rel="noopener noreferrer">Watch lecture</a>' if r["lecture"] else ''}
+        {f'<a class="fly" href="sheets/{r["slug"]}.html">Data sheet</a>' if r["sheet"] else ''}
+        {f'<a class="fly" href="fliers/{r["flyer"]}.html">Flyer</a>' if r["flyer"] else ''}
+      </div>
+    </li>'''
+
+
+cards = "\n".join(card(i, r) for i, r in enumerate(s1))
+season2 = ""
+if s2:
+    season2 = ('  <h2 class="reveal" style="--i:1">\n    <span>Coming in Season 2</span>\n'
+               '    <span class="count">Dates to come</span>\n  </h2>\n  <ol class="sessions">\n'
+               + "\n".join(card(i, r) for i, r in enumerate(s2)) + "\n  </ol>\n")
+
+span = f'{s1[0]["date"]} – {s1[-1]["date"]}, 2026' if s1 else ""
+page = open(os.path.join(ROOT, "template.html")).read()
+page = (page.replace("<!--FACES-->", faces).replace("<!--SESSIONS-->", cards)
+            .replace("<!--SEASON2-->", season2)
+            .replace("__COUNT__", str(len(s1))).replace("__GUESTS__", str(len(rows))).replace("__SPAN__", span))
+open(os.path.join(ROOT, "index.html"), "w").write(page)
+
+# publish only the finished flyers, and clear out any previously-copied ones
+if os.path.isdir(FLYERS_DST):
+    shutil.rmtree(FLYERS_DST)
+os.makedirs(FLYERS_DST, exist_ok=True)
+copied = 0
+for r in rows:
+    if not r["flyer"]:
+        continue
+    # .png is the share-preview image the poster's og:image points at — publish it too.
+    for ext in (".html", ".pdf", ".png"):
+        src = os.path.join(FLYERS_SRC, r["flyer"] + ext)
+        if os.path.exists(src):
+            shutil.copy2(src, os.path.join(FLYERS_DST, r["flyer"] + ext))
+            copied += 1
+
+# publish each session's data sheet (the handout HTML) under the session's slug
+if os.path.isdir(SHEETS_DST):
+    shutil.rmtree(SHEETS_DST)
+os.makedirs(SHEETS_DST, exist_ok=True)
+sheets = 0
+for r in rows:
+    if r["sheet"]:
+        shutil.copy2(os.path.join(SHEETS_SRC, r["sheet"]), os.path.join(SHEETS_DST, r["slug"] + ".html"))
+        sheets += 1
+
+print(f"index.html — {len(s1)} sessions, {span}; Season 2: {', '.join(r['slug'] for r in s2) or 'none'}")
+print(f"sheets/    — {sheets} data sheets copied")
+print(f"fliers/    — {copied} files copied for {sum(1 for r in rows if r['flyer'])} sessions")
+for slug, why in held:
+    print(f"   HELD BACK: {slug} — contains {', '.join(why)}")

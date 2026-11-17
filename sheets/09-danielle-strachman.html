@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pre-Seed: Formation &amp; Founder Equity &#8212; Venture Math</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14283b; --muted:#5b6b7a; --faint:#95a1ad;
+    --paper:#ffffff; --rule:#e4e8ec; --grid:#eef1f4;
+    --teal:#0f7a68; --teal-mid:#3f9585; --teal-soft:#9cc7bd; --teal-deep:#0c5f52;
+    --clay:#b05a38; --clay-mid:#c68562; --clay-soft:#dcae90; --clay-deep:#8f4529;
+    --slate:#aab4bd;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:#f3f5f7; color:var(--ink);
+    font:12.5px/1.4 'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased; letter-spacing:-.004em;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  svg text{font-family:'Inter',ui-sans-serif,system-ui,sans-serif; font-variant-numeric:tabular-nums}
+  .sheet{width:768px; margin:0 auto 20px; padding:15px 28px 8px; background:var(--paper); position:relative}
+
+  .brand{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1.5px solid var(--ink); padding-bottom:7px; margin-bottom:11px}
+  .brand .l .eyebrow{font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--teal); font-weight:600; margin:0 0 3px}
+  .brand .l h1{font-size:21px; letter-spacing:-.02em; margin:0; font-weight:700; color:var(--ink)}
+  .brand .r{text-align:right; font-size:9px; color:var(--faint); line-height:1.5; font-weight:500}
+  .brand .r b{color:var(--muted)}
+  .run{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:11px; padding-bottom:6px; border-bottom:1px solid var(--rule)}
+  .run .l{font-size:12px; font-weight:600; color:var(--ink); letter-spacing:.02em; text-transform:uppercase}
+  .run .l .n{color:var(--clay)}
+  .run .l .sec{color:var(--faint); font-weight:500; text-transform:none; letter-spacing:0}
+  .run .r{font-size:10px; color:var(--faint); letter-spacing:.08em; font-weight:600}
+
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:6px}
+  .card{background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:7px 13px 6px; break-inside:avoid; min-width:0}
+  .card.wide{grid-column:1 / -1}
+  .card h2{font-size:14px; font-weight:600; letter-spacing:-.015em; margin:0 0 2px; color:var(--ink)}
+  .card .cs{font-size:10.5px; color:var(--muted); margin:0 0 5px; line-height:1.35; font-weight:400}
+  .card .cite{font-size:9px; color:var(--faint); margin:6px 0 0; letter-spacing:.03em; font-weight:500; text-transform:uppercase; padding-top:5px; border-top:1px solid var(--grid)}
+  .card svg{display:block; width:100%; height:auto; overflow:visible}
+  .dl{display:flex; gap:12px; flex-wrap:wrap; font-size:9.5px; color:var(--muted); margin:0 0 4px; font-weight:500}
+  .dl i{font-style:normal; display:inline-flex; align-items:center; gap:4px}
+  .dl .sw{width:9px; height:9px; border-radius:2px; display:inline-block}
+
+  .callout{grid-column:1 / -1; border:1px solid var(--clay-soft); background:#fdf7f3; border-radius:8px; padding:6px 13px; display:flex; align-items:center; gap:14px}
+  .callout .big{font-size:30px; font-weight:700; color:var(--clay-deep); letter-spacing:-.03em; line-height:1; flex:none}
+  .callout .t{font-size:11px; color:var(--ink); line-height:1.35; font-weight:500}
+  .callout .t b{font-weight:700}
+  .callout .t span{display:block; font-size:9px; color:var(--faint); margin-top:3px; text-transform:uppercase; letter-spacing:.03em; font-weight:500}
+
+  table.pairs{width:100%; border-collapse:collapse; font-size:9.5px}
+  table.pairs th{text-align:left; font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:0 6px 3px 0; border-bottom:1px solid var(--rule)}
+  table.pairs th.ti{color:var(--teal-deep)} table.pairs th.tc{color:var(--clay-deep)}
+  table.pairs td{padding:2px 6px 2px 0; border-bottom:1px solid var(--grid); vertical-align:top; line-height:1.3}
+  table.pairs td b{display:block; font-weight:700}
+  table.pairs td span{color:var(--muted); font-size:9px}
+  table.pairs td.m{font-weight:600; width:92px}
+  table.pairs td.t{color:var(--ink); font-size:9px; width:190px}
+  table.pairs tr:last-child td{border-bottom:none}
+
+  footer{margin-top:8px; padding-top:6px; border-top:1px solid var(--rule); font-size:9px; color:var(--faint); display:flex; justify-content:space-between; gap:12px; font-weight:500}
+  footer b{color:var(--muted); font-weight:600}
+
+  @page{ size:letter portrait; margin:0.4in }
+  @media print{ body{background:#fff} .sheet{width:auto; margin:0; padding:0; page-break-after:always; break-after:page} .sheet:last-child{page-break-after:auto} }
+  @media screen{ .sheet{box-shadow:0 1px 12px rgba(20,40,59,.08); border-radius:3px} }
+
+  .stack{display:flex; flex-direction:column; gap:6px; min-width:0}
+  .callout.teal{border-color:var(--teal-soft); background:#f2f8f6}
+  .callout.teal .big{color:var(--teal-deep)}
+  .note{font-size:9.2px; color:var(--muted); margin:5px 0 0; line-height:1.35}
+  .note b{color:var(--ink)}
+  .ulist{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
+  .ulist table.pairs{font-size:9.6px} .ulist table.pairs td, .ulist table.pairs th{padding-left:3px; padding-right:3px}
+  .ulist table.pairs td b{display:inline; font-weight:700}
+  .ulist table.pairs td{white-space:nowrap}
+  .ulist .r{text-align:right} .ulist td.n{white-space:nowrap; font-weight:700; color:var(--teal-deep)}
+  .ulist tr.hi td{background:#f2f8f6}
+  table.cbi{font-size:11px; margin:6px 0 4px}
+  table.cbi td{padding:6px 6px 6px 0}
+  table.cbi th{font-size:9px}
+  table.cbi .big2{font-size:20px; color:var(--teal-deep); display:inline}
+  table.cbi .big2.clay{color:var(--clay-deep)}
+  .terms{grid-column:1 / -1; display:grid; grid-template-columns:repeat(4,1fr); gap:8px; border:1px solid var(--rule); border-radius:8px; padding:6px 12px}
+  .terms div{font-size:9.4px; line-height:1.35; color:var(--ink)}
+  .terms b{display:block; font-size:10.5px; color:var(--clay-deep); margin-bottom:1px}
+  .bc{display:grid; grid-template-columns:300px 1fr; gap:16px; align-items:start}
+  table.bfel td{white-space:normal}
+  table.bfel td:first-child{white-space:nowrap; width:68px}
+
+</style>
+</head>
+<body>
+
+<!-- ===================== FRONT — THE THIEL FELLOWSHIP ===================== -->
+<section class="sheet" id="p1">
+  <div class="brand">
+    <div class="l">
+      <p class="eyebrow">Venture Math &#183; Fall 2026</p>
+      <h1>Formation &amp; Founder Equity</h1>
+    </div>
+    <div class="r">Session 09 &#183; Oct 28 &#183; <b>Danielle Strachman</b> (1517 Fund, Thiel Fellowship)<br>Data: <b>Thiel Foundation</b>, <b>SEC filings</b>, <b>Harvard Gazette</b>, <b>Stanford GSB VCI</b> &#183; as of Oct 28, 2026</div>
+  </div>
+  <div class="run"><span class="l"><span class="n">The Thiel Fellowship</span> <span class="sec">&#8212; $100K to skip college, 290 fellows, 2011&#8211;2024</span></span><span class="r">TEAL = THIEL</span></div>
+
+  <div class="grid">
+    <div class="card wide">
+      <h2>38 fellows founded or co-founded a $1B+ company</h2>
+      <p class="cs">33 companies, valued at $1B+ at some point (&#8224; only at peak: Luminar bankrupt, Embark wound down, Loom sold for $975M, Adept licensed to Amazon, Forge sold for ~$660M, RapidAPI to Nokia). Mercor and Etched each have three fellow founders (+2); Speak has two (+1: Zwick, 2012, who met Hsu through the fellowship). <b style="color:var(--teal-deep)">The 2024 class alone: 8 of 20 fellows.</b></p>
+      <div class="ulist">
+      <table class="pairs"><tr><th>Class</th><th>Fellow</th><th>Company</th><th class="r">$1B+ mark</th></tr>
+      <tr><td>2011</td><td>Gu</td><td><b>Upstart</b></td><td class="r n">IPO 2020</td></tr>
+      <tr><td>2011</td><td>Hsu +1</td><td><b>Speak</b></td><td class="r n">$1B</td></tr>
+      <tr><td>2011</td><td>Tyle</td><td><b>Merama</b></td><td class="r n">$1.2B</td></tr>
+      <tr><td>2011</td><td>Proud</td><td><b>Substrate</b></td><td class="r n">$1B</td></tr>
+      <tr><td>2011</td><td>Luan</td><td><b>Adept</b>&#8201;&#8224;</td><td class="r n">$1B</td></tr>
+      <tr><td>2012</td><td>Field</td><td><b>Figma</b></td><td class="r n">$68B</td></tr>
+      <tr><td>2012</td><td>Olah</td><td><b>Anthropic</b></td><td class="r n">S-1 filed</td></tr>
+      <tr><td>2012</td><td>Hewett</td><td><b>RADAR</b></td><td class="r n">$1B</td></tr>
+      <tr><td>2013</td><td>Agarwal</td><td><b>OYO</b></td><td class="r n">$10B</td></tr>
+      </table>
+      <table class="pairs"><tr><th>Class</th><th>Fellow</th><th>Company</th><th class="r">$1B+ mark</th></tr>
+      <tr><td>2013</td><td>Russell</td><td><b>Luminar</b>&#8201;&#8224;</td><td class="r n">$11B</td></tr>
+      <tr><td>2013</td><td>Asparouhov</td><td><b>Varda</b></td><td class="r n">$1.6B</td></tr>
+      <tr><td>2013</td><td>Sohmers</td><td><b>Positron AI</b></td><td class="r n">$5B</td></tr>
+      <tr><td>2013</td><td>Ennis</td><td><b>Freenome</b></td><td class="r n">$1.1B</td></tr>
+      <tr><td>2014</td><td>Guo</td><td><b>Scale AI</b></td><td class="r n">$29B</td></tr>
+      <tr><td>2016</td><td>Rodrigues</td><td><b>Embark</b>&#8201;&#8224;</td><td class="r n">$5.2B</td></tr>
+      <tr><td>2016</td><td>Owens</td><td><b>Paddle</b></td><td class="r n">$1.4B</td></tr>
+      <tr><td>2016</td><td>Prasad</td><td><b>Forge Global</b>&#8201;&#8224;</td><td class="r n">$2B</td></tr>
+      <tr><td>2017</td><td>Khan</td><td><b>Loom</b>&#8201;&#8224;</td><td class="r n">$1.5B</td></tr>
+      </table>
+      <table class="pairs"><tr><th>Class</th><th>Fellow</th><th>Company</th><th class="r">$1B+ mark</th></tr>
+      <tr><td>2017</td><td>Turner</td><td><b>Curative</b></td><td class="r n">$1.3B</td></tr>
+      <tr><td>2017</td><td>Gino</td><td><b>RapidAPI</b>&#8201;&#8224;</td><td class="r n">$1B</td></tr>
+      <tr><td>2017</td><td>Rahman</td><td><b>Flex</b></td><td class="r n">$1.2B</td></tr>
+      <tr><td>2018</td><td>Cox</td><td><b>Fluidstack</b></td><td class="r n">$7.5B</td></tr>
+      <tr><td>2019</td><td>Henry</td><td><b>Stord</b></td><td class="r n">$3B</td></tr>
+      <tr><td>2020</td><td>Guild</td><td><b>Owner.com</b></td><td class="r n">$2.3B</td></tr>
+      <tr><td>2020</td><td>Ferguson</td><td><b>Immutable</b></td><td class="r n">$2.5B</td></tr>
+      <tr><td>2022</td><td>de los Rios</td><td><b>Nowports</b></td><td class="r n">$1.1B</td></tr>
+      <tr><td>2022</td><td>Manohar</td><td><b>Hightouch</b></td><td class="r n">$2.75B</td></tr>
+      </table>
+      <table class="pairs"><tr><th>Class</th><th>Fellow</th><th>Company</th><th class="r">$1B+ mark</th></tr>
+      <tr><td>2023</td><td>Thornton</td><td><b>Mach</b></td><td class="r n">$3.7B</td></tr>
+      <tr><td>2023</td><td>Cardenas</td><td><b>Slash</b></td><td class="r n">$1.4B</td></tr>
+      <tr class="hi"><td>2024</td><td>Foody +2</td><td><b>Mercor</b></td><td class="r n">$10B</td></tr>
+      <tr class="hi"><td>2024</td><td>Uberti +2</td><td><b>Etched</b></td><td class="r n">$10.3B</td></tr>
+      <tr class="hi"><td>2024</td><td>Yan</td><td><b>Cognition</b></td><td class="r n">$10.2B</td></tr>
+      <tr class="hi"><td>2024</td><td>Patil</td><td><b>Applied Compute</b></td><td class="r n">$1.3B</td></tr>
+      </table>
+      </div>
+      <p class="cite">Thiel Foundation class releases &#183; company rounds and filings as reported &#183; a floor: every 2011&#8211;2024 class list checked by name &#183; protocols (Ethereum, Polkadot) not counted</p>
+    </div>
+
+    <div class="card">
+      <h2>Harder to get into than Harvard</h2>
+      <p class="cs"><span style="color:var(--teal-deep);font-weight:600">Fellows &#247; applicants</span> where the Foundation gave a count, vs. <span style="color:var(--clay-deep);font-weight:600">Harvard&#8217;s admit rate</span> every year.</p>
+      <svg viewBox="0 0 330 126" role="img">
+        <rect x="84.5" y="14" width="205.5" height="92" fill="var(--grid)" opacity=".7"/>
+        <text x="22.0" y="10" font-size="7.4" fill="var(--faint)">Age cap: under 20</text>
+        <text x="87.5" y="10" font-size="7.4" fill="var(--faint)">22 or younger (from 2015)</text>
+        <line x1="22" x2="290.0" y1="106.0" y2="106.0" stroke="var(--grid)"/>
+        <text x="18" y="109.0" font-size="7.4" fill="var(--faint)" text-anchor="end">0%</text>
+        <line x1="22" x2="290.0" y1="79.7" y2="79.7" stroke="var(--grid)"/>
+        <text x="18" y="82.7" font-size="7.4" fill="var(--faint)" text-anchor="end">2%</text>
+        <line x1="22" x2="290.0" y1="53.4" y2="53.4" stroke="var(--grid)"/>
+        <text x="18" y="56.4" font-size="7.4" fill="var(--faint)" text-anchor="end">4%</text>
+        <line x1="22" x2="290.0" y1="27.1" y2="27.1" stroke="var(--grid)"/>
+        <text x="18" y="30.1" font-size="7.4" fill="var(--faint)" text-anchor="end">6%</text>
+        <polyline points="22.0,24.8 39.9,28.1 57.7,29.9 75.6,28.5 93.5,35.9 111.3,37.4 129.2,37.6 147.1,45.7 164.9,46.9 182.8,41.3 200.7,61.0 218.5,64.1 236.4,61.2 254.3,58.9 272.1,51.0" fill="none" stroke="var(--clay)" stroke-width="2"/>
+        <text x="277.1" y="54.0" font-size="8.2" font-weight="700" fill="var(--clay-deep)">Harvard</text>
+        <text x="277.1" y="63.0" font-size="7.6" fill="var(--clay-deep)">4.2%</text>
+        <text x="25.0" y="19.8" font-size="7.6" fill="var(--clay-deep)">6.2%</text>
+        <circle cx="22.0" cy="32.6" r="4" fill="var(--teal)" stroke="#fff" stroke-width="1.2"/>
+        <text x="29.0" y="42.6" font-size="8.4" font-weight="700" fill="var(--teal-deep)">5.6% <tspan font-weight="400" font-size="7.6">24 of 430</tspan></text>
+        <circle cx="93.5" cy="92.9" r="4" fill="var(--teal)" stroke="#fff" stroke-width="1.2"/>
+        <text x="100.5" y="95.9" font-size="8.4" font-weight="700" fill="var(--teal-deep)">≤1.0% <tspan font-weight="400" font-size="7.6">20 of 2,000+</tspan></text>
+        <text x="22.0" y="117" font-size="8" fill="var(--ink)" text-anchor="middle">2011</text>
+        <text x="75.6" y="117" font-size="8" fill="var(--ink)" text-anchor="middle">2014</text>
+        <text x="129.2" y="117" font-size="8" fill="var(--ink)" text-anchor="middle">2017</text>
+        <text x="182.8" y="117" font-size="8" fill="var(--ink)" text-anchor="middle">2020</text>
+        <text x="236.4" y="117" font-size="8" fill="var(--ink)" text-anchor="middle">2023</text>
+        <text x="290.0" y="117" font-size="8" fill="var(--ink)" text-anchor="middle">2026</text>
+        </svg>
+      <p class="note">2016 (6,000+ applicants, 29 fellows) is left out: about 60% of that class was recruited.</p>
+      <p class="cite">Foundation releases (Xconomy, TNW) &#183; First Round Review &#183; Harvard Gazette</p>
+    </div>
+
+    <div class="card">
+      <h2>Thiel Fellowship vs. Y Combinator: 5.9% vs. 1.9%</h2>
+      <p class="cs">Unicorn hit rate per person or company funded, as CB Insights counted it.</p>
+      <table class="pairs cbi"><tr><th>Metric</th><th>Thiel Fellowship</th><th>Y Combinator</th></tr><tr><td>People / companies funded</td><td>185</td><td>5,842</td></tr><tr><td>Unicorns (&gt;$1B)</td><td>11</td><td>112</td></tr><tr><td><b>Unicorn hit rate</b></td><td><b class="big2">5.9%</b></td><td><b class="big2 clay">1.9%</b></td></tr></table>
+      <p class="note">CB Insights&#8217; count covers 185 fellows. Through the 2024 class we can name 38 of 290 (13.1%).</p>
+      <p class="cite">Anand Sanwal, Aug 2025 &#183; source data: CB Insights</p>
+    </div>
+
+    <div class="card">
+      <h2>$35M of grants, $46.8B of claimed value</h2>
+      <p class="cs"><span style="color:var(--teal-deep);font-weight:600">Foundation-reported value</span> of fellow companies (excl. Ethereum, log scale) vs. <span style="color:var(--clay-deep);font-weight:600">max grants</span> ($100K each, then $200K, $250K). Hollow: money raised, or Ethereum not stated.</p>
+      <svg viewBox="0 0 330 136" role="img">
+        <line x1="34" x2="278.0" y1="118.0" y2="118.0" stroke="var(--grid)"/>
+        <text x="30" y="121.0" font-size="7.4" fill="var(--faint)" text-anchor="end">$1M</text>
+        <line x1="34" x2="278.0" y1="96.0" y2="96.0" stroke="var(--grid)"/>
+        <text x="30" y="99.0" font-size="7.4" fill="var(--faint)" text-anchor="end">$10M</text>
+        <line x1="34" x2="278.0" y1="74.0" y2="74.0" stroke="var(--grid)"/>
+        <text x="30" y="77.0" font-size="7.4" fill="var(--faint)" text-anchor="end">$100M</text>
+        <line x1="34" x2="278.0" y1="52.0" y2="52.0" stroke="var(--grid)"/>
+        <text x="30" y="55.0" font-size="7.4" fill="var(--faint)" text-anchor="end">$1B</text>
+        <line x1="34" x2="278.0" y1="30.0" y2="30.0" stroke="var(--grid)"/>
+        <text x="30" y="33.0" font-size="7.4" fill="var(--faint)" text-anchor="end">$10B</text>
+        <line x1="34" x2="278.0" y1="8.0" y2="8.0" stroke="var(--grid)"/>
+        <text x="30" y="11.0" font-size="7.4" fill="var(--faint)" text-anchor="end">$100B</text>
+        <polyline points="40.9,109.6 56.4,109.6 56.4,103.8 71.8,103.8 71.8,100.0 87.3,100.0 87.3,97.4 102.7,97.4 102.7,95.4 118.2,95.4 118.2,93.1 133.6,93.1 133.6,91.5 149.1,91.5 149.1,90.4 164.5,90.4 164.5,89.3 179.9,89.3 179.9,88.2 195.4,88.2 195.4,88.2 210.8,88.2 210.8,87.3 226.3,87.3 226.3,86.5 241.7,86.5 241.7,85.9 257.2,85.9 257.2,84.9 272.6,84.9 272.6,83.8 278.0,83.8" fill="none" stroke="var(--clay)" stroke-width="1.8"/>
+        <text x="281.0" y="86.5" font-size="7.8" font-weight="700" fill="var(--clay-deep)">$35M–</text>
+        <text x="281.0" y="95.5" font-size="7.8" font-weight="700" fill="var(--clay-deep)">$37M</text>
+        <text x="281.0" y="104.5" font-size="7.4" fill="var(--clay-deep)">in grants</text>
+        <circle cx="79.0" cy="79.6" r="3.6" fill="#fff" stroke="var(--teal)" stroke-width="1.4"/>
+        <circle cx="86.8" cy="75.3" r="3.6" fill="#fff" stroke="var(--teal)" stroke-width="1.4"/>
+        <circle cx="97.1" cy="77.1" r="3.6" fill="#fff" stroke="var(--teal)" stroke-width="1.4"/>
+        <circle cx="102.2" cy="70.6" r="3.6" fill="#fff" stroke="var(--teal)" stroke-width="1.4"/>
+        <circle cx="117.6" cy="48.8" r="3.6" fill="#fff" stroke="var(--teal)" stroke-width="1.4"/>
+        <circle cx="148.5" cy="41.5" r="3.6" fill="var(--teal)" stroke="var(--teal)" stroke-width="1.4"/>
+        <text x="154.5" y="44.5" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="start">$3B</text>
+        <text x="154.5" y="53.5" font-size="7.4" fill="var(--teal-deep)" text-anchor="start">167×</text>
+        <circle cx="187.1" cy="19.8" r="3.6" fill="var(--teal)" stroke="var(--teal)" stroke-width="1.4"/>
+        <text x="181.1" y="22.8" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="end">$29B</text>
+        <text x="181.1" y="31.8" font-size="7.4" fill="var(--teal-deep)" text-anchor="end">1,283×</text>
+        <circle cx="203.9" cy="15.3" r="3.6" fill="var(--teal)" stroke="var(--teal)" stroke-width="1.4"/>
+        <text x="209.9" y="18.3" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="start">$46.8B</text>
+        <text x="209.9" y="27.3" font-size="7.4" fill="var(--teal-deep)" text-anchor="start">1,880×</text>
+        <text x="86.5" y="65.2" font-size="7.4" fill="var(--muted)" text-anchor="middle">money raised, not value</text>
+        <text x="244.0" y="1.4" font-size="7.4" fill="var(--muted)" font-style="italic" text-anchor="middle">2023–26: “hundreds of billions”</text>
+        <text x="34.0" y="129" font-size="8" fill="var(--ink)" text-anchor="middle">2011</text>
+        <text x="80.3" y="129" font-size="8" fill="var(--ink)" text-anchor="middle">2014</text>
+        <text x="126.7" y="129" font-size="8" fill="var(--ink)" text-anchor="middle">2017</text>
+        <text x="173.0" y="129" font-size="8" fill="var(--ink)" text-anchor="middle">2020</text>
+        <text x="219.3" y="129" font-size="8" fill="var(--ink)" text-anchor="middle">2023</text>
+        <text x="265.6" y="129" font-size="8" fill="var(--ink)" text-anchor="middle">2026</text>
+        </svg>
+      <p class="cite">Foundation releases (Business Wire) &#183; claim &#247; spend, not a return: no equity taken</p>
+    </div>
+
+    <div class="stack">
+    <div class="card">
+      <h2>At least a quarter studied again anyway</h2>
+      <p class="cs">First four classes: <span style="color:var(--teal-deep);font-weight:600">returned or earned a degree after starting</span> &#183; <span style="color:var(--clay-deep);font-weight:600">didn&#8217;t</span> &#183; degree before &#183; unknown.</p>
+      <svg viewBox="0 0 330 72" role="img">
+        <text x="28" y="12.5" font-size="8.6" fill="var(--ink)" text-anchor="end">2011</text>
+        <rect x="34.0" y="4" width="65.0" height="12" fill="var(--teal)"/>
+        <text x="67.0" y="12.5" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">6</text>
+        <rect x="100.0" y="4" width="98.0" height="12" fill="var(--clay)"/>
+        <text x="149.5" y="12.5" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">9</text>
+        <rect x="199.0" y="4" width="21.0" height="12" fill="var(--slate)"/>
+        <text x="210.0" y="12.5" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text>
+        <rect x="221.0" y="4" width="76.0" height="12" fill="var(--grid)"/>
+        <text x="259.5" y="12.5" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">7</text>
+        <text x="302.0" y="12.5" font-size="7.6" fill="var(--muted)">of 24</text>
+        <text x="28" y="29.5" font-size="8.6" fill="var(--ink)" text-anchor="end">2012</text>
+        <rect x="34.0" y="21" width="65.0" height="12" fill="var(--teal)"/>
+        <text x="67.0" y="29.5" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">6</text>
+        <rect x="100.0" y="21" width="109.0" height="12" fill="var(--clay)"/>
+        <text x="155.0" y="29.5" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">10</text>
+        <rect x="210.0" y="21" width="10.0" height="12" fill="var(--slate)"/>
+        <rect x="221.0" y="21" width="32.0" height="12" fill="var(--grid)"/>
+        <text x="237.5" y="29.5" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text>
+        <text x="258.0" y="29.5" font-size="7.6" fill="var(--muted)">of 20</text>
+        <text x="28" y="46.5" font-size="8.6" fill="var(--ink)" text-anchor="end">2013</text>
+        <rect x="34.0" y="38" width="43.0" height="12" fill="var(--teal)"/>
+        <text x="56.0" y="46.5" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+        <rect x="78.0" y="38" width="76.0" height="12" fill="var(--clay)"/>
+        <text x="116.5" y="46.5" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">7</text>
+        <rect x="155.0" y="38" width="120.0" height="12" fill="var(--grid)"/>
+        <text x="215.5" y="46.5" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">11</text>
+        <text x="280.0" y="46.5" font-size="7.6" fill="var(--muted)">of 22</text>
+        <text x="28" y="63.5" font-size="8.6" fill="var(--ink)" text-anchor="end">2014</text>
+        <rect x="34.0" y="55" width="76.0" height="12" fill="var(--teal)"/>
+        <text x="72.5" y="63.5" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">7</text>
+        <rect x="111.0" y="55" width="54.0" height="12" fill="var(--clay)"/>
+        <text x="138.5" y="63.5" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+        <rect x="166.0" y="55" width="21.0" height="12" fill="var(--slate)"/>
+        <text x="177.0" y="63.5" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text>
+        <rect x="188.0" y="55" width="65.0" height="12" fill="var(--grid)"/>
+        <text x="221.0" y="63.5" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">6</text>
+        <text x="258.0" y="63.5" font-size="7.6" fill="var(--muted)">of 20</text>
+        </svg>
+      <p class="note"><b>23 of 86 (&#8805;27%)</b>; 18 if only dropouts who came back count. The big outcomes didn&#8217;t (Field, Olah, Buterin, Agarwal); the researchers did.</p>
+      <p class="cite">Public bios, press &#183; WSJ (Feb 2024): &#8220;about a quarter&#8221;</p>
+    </div>
+    <div class="callout teal">
+      <div class="big">$14.3B</div>
+      <div class="t"><b>Chris Olah&#8217;s Anthropic stake</b> (Thiel 2012), implied at the Series H-1 price: about 400&#215; every Thiel grant ever made.
+      <span>Anthropic S-1, Oct 26, 2026 &#183; IPO not priced</span></div>
+    </div>
+    </div>
+  </div>
+  <footer><span><b>Venture Math</b> &#8212; Session 09 &#183; Front of 2</span><span>Every number sourced and fact-checked in s09-danielle-strachman/ &#183; re-visualized for classroom use</span></footer>
+</section>
+
+<!-- ===================== BACK — WHO FOUNDERS ARE, AND HOW TEAMS FORM ===================== -->
+<section class="sheet" id="p2">
+  <div class="run"><span class="l"><span class="n">Who founders are</span> <span class="sec">&#8212; the age and origin the Fellowship bets against, and what a Thiel co-founder kept</span></span><span class="r">TEAL = UNDER 25</span></div>
+
+  <div class="grid">
+    <div class="card wide">
+      <h2>Unicorn founders peak at 30&#8211;34. Teenagers are almost absent.</h2>
+      <p class="cs">Age at founding, 1,345 founders of 523 US unicorns (1997&#8211;2019). <b style="color:var(--teal-deep)">Only 8 started at 18&#8211;19</b>, the Fellowship&#8217;s core age.</p>
+      <svg viewBox="0 0 700 100" role="img">
+        <rect x="13.0" y="80.4" width="47.7" height="1.6" rx="2" fill="var(--teal)"/>
+        <text x="36.8" y="77.4" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">8</text>
+        <text x="36.8" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">18–19</text>
+        <rect x="70.7" y="60.7" width="47.7" height="21.3" rx="2" fill="var(--teal)"/>
+        <text x="94.5" y="57.7" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">104</text>
+        <text x="94.5" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">20–24</text>
+        <rect x="128.3" y="30.3" width="47.7" height="51.7" rx="2" fill="var(--slate)"/>
+        <text x="152.2" y="27.3" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">253</text>
+        <text x="152.2" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">25–29</text>
+        <rect x="186.0" y="18.0" width="47.7" height="64.0" rx="2" fill="var(--slate)"/>
+        <text x="209.8" y="15.0" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">313</text>
+        <text x="209.8" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">30–34</text>
+        <rect x="243.7" y="26.8" width="47.7" height="55.2" rx="2" fill="var(--slate)"/>
+        <text x="267.5" y="23.8" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">270</text>
+        <text x="267.5" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">35–39</text>
+        <rect x="301.3" y="46.6" width="47.7" height="35.4" rx="2" fill="var(--slate)"/>
+        <text x="325.2" y="43.6" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">173</text>
+        <text x="325.2" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">40–44</text>
+        <rect x="359.0" y="59.9" width="47.7" height="22.1" rx="2" fill="var(--slate)"/>
+        <text x="382.8" y="56.9" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">108</text>
+        <text x="382.8" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">45–49</text>
+        <rect x="416.7" y="70.3" width="47.7" height="11.7" rx="2" fill="var(--slate)"/>
+        <text x="440.5" y="67.3" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">57</text>
+        <text x="440.5" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">50–54</text>
+        <rect x="474.3" y="75.3" width="47.7" height="6.7" rx="2" fill="var(--slate)"/>
+        <text x="498.2" y="72.3" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">33</text>
+        <text x="498.2" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">55–59</text>
+        <rect x="532.0" y="78.7" width="47.7" height="3.3" rx="2" fill="var(--slate)"/>
+        <text x="555.8" y="75.7" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">16</text>
+        <text x="555.8" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">60–64</text>
+        <rect x="589.7" y="80.8" width="47.7" height="1.5" rx="2" fill="var(--slate)"/>
+        <text x="613.5" y="77.8" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">6</text>
+        <text x="613.5" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">65–69</text>
+        <rect x="647.3" y="81.2" width="47.7" height="1.5" rx="2" fill="var(--slate)"/>
+        <text x="671.2" y="78.2" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text>
+        <text x="671.2" y="93" font-size="8.2" fill="var(--ink)" text-anchor="middle">70–74</text>
+        <line x1="121.3" x2="121.3" y1="10" y2="82" stroke="var(--teal-deep)" stroke-dasharray="2.5 2"/>
+        <text x="117.3" y="18" font-size="8" fill="var(--teal-deep)" font-weight="600" text-anchor="end">Thiel Fellowship age window</text>
+        <text x="117.3" y="28" font-size="8" fill="var(--teal-deep)" text-anchor="end">112 founders = 8.3%</text>
+        </svg>
+      <p class="cite">Ilya Strebulaev, Stanford GSB Venture Capital Initiative (10/2021)</p>
+    </div>
+
+    <div class="card wide">
+      <h2>44% of US unicorn founders weren&#8217;t born in the US</h2>
+      <p class="cs">Founders born abroad, top 10 countries; 1,078 founders of 500 US unicorns (1997&#8211;2019). Israel also founds US unicorns at ~10&#215; a matched random sample (29 vs. 3).</p>
+      <svg viewBox="0 0 700 61.5" role="img">
+        <text x="46" y="11.5" font-size="8.6" fill="var(--ink)" text-anchor="end">India</text>
+        <rect x="52" y="4.0" width="258.0" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="314.0" y="11.5" font-size="8.4" font-weight="700" fill="var(--ink)">90</text>
+        <text x="46" y="23.0" font-size="8.6" fill="var(--ink)" text-anchor="end">Israel</text>
+        <rect x="52" y="15.5" width="149.1" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="205.1" y="23.0" font-size="8.4" font-weight="700" fill="var(--ink)">52</text>
+        <text x="46" y="34.5" font-size="8.6" fill="var(--ink)" text-anchor="end">Canada</text>
+        <rect x="52" y="27.0" width="120.4" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="176.4" y="34.5" font-size="8.4" font-weight="700" fill="var(--ink)">42</text>
+        <text x="46" y="46.0" font-size="8.6" fill="var(--ink)" text-anchor="end">UK</text>
+        <rect x="52" y="38.5" width="88.9" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="144.9" y="46.0" font-size="8.4" font-weight="700" fill="var(--ink)">31</text>
+        <text x="46" y="57.5" font-size="8.6" fill="var(--ink)" text-anchor="end">China</text>
+        <rect x="52" y="50.0" width="77.4" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="133.4" y="57.5" font-size="8.4" font-weight="700" fill="var(--ink)">27</text>
+        <text x="396" y="11.5" font-size="8.6" fill="var(--ink)" text-anchor="end">Germany</text>
+        <rect x="402" y="4.0" width="51.6" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="457.6" y="11.5" font-size="8.4" font-weight="700" fill="var(--ink)">18</text>
+        <text x="396" y="23.0" font-size="8.6" fill="var(--ink)" text-anchor="end">France</text>
+        <rect x="402" y="15.5" width="48.7" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="454.7" y="23.0" font-size="8.4" font-weight="700" fill="var(--ink)">17</text>
+        <text x="396" y="34.5" font-size="8.6" fill="var(--ink)" text-anchor="end">Russia</text>
+        <rect x="402" y="27.0" width="40.1" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="446.1" y="34.5" font-size="8.4" font-weight="700" fill="var(--ink)">14</text>
+        <text x="396" y="46.0" font-size="8.6" fill="var(--ink)" text-anchor="end">Taiwan</text>
+        <rect x="402" y="38.5" width="34.4" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="440.4" y="46.0" font-size="8.4" font-weight="700" fill="var(--ink)">12</text>
+        <text x="396" y="57.5" font-size="8.6" fill="var(--ink)" text-anchor="end">Ukraine</text>
+        <rect x="402" y="50.0" width="34.4" height="6.5" rx="2" fill="var(--clay)"/>
+        <text x="440.4" y="57.5" font-size="8.4" font-weight="700" fill="var(--ink)">12</text>
+        </svg>
+      <p class="cite">Ilya Strebulaev, Stanford GSB Venture Capital Initiative (01/2022; 10/2022)</p>
+    </div>
+
+    <div class="card">
+      <h2>Figma: the co-founder left, the stake stayed</h2>
+      <p class="cs">Evan Wallace co-founded Figma with Dylan Field (Thiel 2012) and left around 2021 (his site: &#8220;2012&#8211;2021&#8221;). Value of his family trust&#8217;s Class B stake. <b style="color:var(--teal-deep)">It sold 0 shares in the IPO.</b></p>
+      <svg viewBox="0 0 330 92" role="img">
+        <text x="112" y="11" font-size="8.6" fill="var(--ink)" text-anchor="end">Adobe deal terms</text>
+        <text x="112" y="20" font-size="7.4" fill="var(--muted)" text-anchor="end">Sep 2022 · never paid · 41.0M sh</text>
+        <rect x="118" y="6" width="84.4" height="12" rx="2" fill="var(--slate)"/>
+        <text x="206.4" y="15.5" font-size="9" font-weight="700" fill="var(--ink)">$1.6B</text>
+        <text x="112" y="33" font-size="8.6" fill="var(--ink)" text-anchor="end">IPO price, $33</text>
+        <text x="112" y="42" font-size="7.4" fill="var(--muted)" text-anchor="end">Jul 2025 · 26.7M sh</text>
+        <rect x="118" y="28" width="46.2" height="12" rx="2" fill="var(--teal)"/>
+        <text x="168.2" y="37.5" font-size="9" font-weight="700" fill="var(--ink)">$882M</text>
+        <text x="112" y="55" font-size="8.6" fill="var(--ink)" text-anchor="end">First-day close, $115.50</text>
+        <text x="112" y="64" font-size="7.4" fill="var(--muted)" text-anchor="end">Jul 31, 2025 · 26.7M sh</text>
+        <rect x="118" y="50" width="162.0" height="12" rx="2" fill="var(--teal)"/>
+        <text x="284.0" y="59.5" font-size="9" font-weight="700" fill="var(--ink)">$3.1B</text>
+        <text x="112" y="77" font-size="8.6" fill="var(--ink)" text-anchor="end">Close, $23.52</text>
+        <text x="112" y="86" font-size="7.4" fill="var(--muted)" text-anchor="end">Oct 26, 2026 · 22.3M sh</text>
+        <rect x="118" y="72" width="27.5" height="12" rx="2" fill="var(--teal)"/>
+        <text x="149.5" y="81.5" font-size="9" font-weight="700" fill="var(--ink)">$525M</text>
+        </svg>
+      <p class="note">Plus two gifts: 13.4M shares to a charity in June 2025, sold in the IPO for <b>$441M</b> (donor named only by Fortune), and 4.4M in June 2026 (~$90M).</p>
+      <p class="cite">Figma 424B4, 13D/A No. 2, 2026 proxy &#183; Adobe 424B3 (Jan 2023) &#183; prices: IPO Scoop, stockanalysis</p>
+    </div>
+
+    <div class="card">
+      <h2>&#8230;and Field votes it</h2>
+      <p class="cs">Share of Figma&#8217;s votes: <span style="color:var(--teal-deep);font-weight:600">Field&#8217;s own</span> &#183; <span style="color:var(--clay-deep);font-weight:600">Wallace&#8217;s, via proxy</span> &#183; everyone else. Class B carries 15 votes a share.</p>
+      <svg viewBox="0 0 330 80" role="img">
+        <text x="90" y="14" font-size="8.6" fill="var(--ink)" text-anchor="end">At the IPO</text>
+        <rect x="96.0" y="4" width="113.1" height="14" fill="var(--teal)"/>
+        <text x="153.0" y="14" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">49.6%</text>
+        <rect x="210.1" y="4" width="57.6" height="14" fill="var(--clay)"/>
+        <text x="239.4" y="14" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">25.5%</text>
+        <rect x="268.7" y="4" width="56.3" height="14" fill="var(--grid)"/>
+        <text x="297.4" y="14" font-size="7.8" font-weight="700" fill="var(--muted)" text-anchor="middle">24.9%</text>
+        <text x="328" y="14" font-size="0"></text>
+        <text x="90" y="36" font-size="8.6" fill="var(--ink)" text-anchor="end">Jun 30, 2026</text>
+        <rect x="96.0" y="26" width="114.2" height="14" fill="var(--teal)"/>
+        <text x="153.6" y="36" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">50.1%</text>
+        <rect x="211.2" y="26" width="46.6" height="14" fill="var(--clay)"/>
+        <text x="235.0" y="36" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">20.7%</text>
+        <rect x="258.8" y="26" width="66.2" height="14" fill="var(--grid)"/>
+        <text x="292.4" y="36" font-size="7.8" font-weight="700" fill="var(--muted)" text-anchor="middle">29.2%</text>
+        <text x="328" y="36" font-size="0"></text>
+        <text x="90" y="58" font-size="8.6" fill="var(--ink)" text-anchor="end">If the trust sold all</text>
+        <rect x="96.0" y="48" width="140.4" height="14" fill="var(--teal)"/>
+        <text x="166.7" y="58" font-size="7.8" font-weight="700" fill="#fff" text-anchor="middle">61.5%</text>
+        <rect x="237.4" y="48" width="87.5" height="14" fill="var(--grid)"/>
+        <text x="281.7" y="58" font-size="7.8" font-weight="700" fill="var(--muted)" text-anchor="middle">38.5%</text>
+        <line x1="211.0" x2="211.0" y1="0" y2="68" stroke="var(--ink)" stroke-dasharray="2.5 2" stroke-width="1"/>
+        <text x="211.0" y="77" font-size="7.4" fill="var(--ink)" text-anchor="middle">50% of votes</text>
+        </svg>
+      <p class="note">A 2022 irrevocable proxy (Field paid <b>$250,000</b>) lets him vote the trust&#8217;s shares &#8220;in his sole discretion&#8221;, with no end date. Shares Wallace sells convert to 1-vote Class A and leave the proxy, so a full sale would leave Field ~61% on his own.</p>
+      <p class="cite">S-1 Ex. 99.1 (proxy) &#183; 424B4 &#183; Q2 2026 10-Q &#183; last line our arithmetic</p>
+    </div>
+
+    <div class="card wide">
+      <h2>A 2018 fellow says he has backed 33 fellows, ~10% of all of them</h2>
+      <p class="cs">Joshua Browder (Thiel 2018, DoNotPay) runs Browder Capital, a solo pre-seed fund. His first check was his own Fellowship stipend, into Adam Guild&#8217;s company in 2018; Guild became a fellow in 2020. Funds by SEC filing, to scale (Fund IV LPs include Sequoia); <span style="color:var(--teal-deep);font-weight:600">fellow founders</span> by year of first known check.</p>
+      <div class="bc">
+        <svg viewBox="0 0 300 112" role="img">
+        <text x="33.6" y="82" font-size="8" fill="var(--muted)" text-anchor="middle">not stated</text>
+        <text x="33.6" y="97" font-size="8.2" font-weight="600" fill="var(--ink)" text-anchor="middle">Stipend</text>
+        <text x="33.6" y="107" font-size="7.6" fill="var(--muted)" text-anchor="middle">2018</text>
+        <rect x="69.2" y="81.7" width="47.2" height="4.3" rx="2" fill="var(--slate)"/>
+        <text x="92.8" y="78.7" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">$1.9M</text>
+        <text x="92.8" y="97" font-size="8.2" font-weight="600" fill="var(--ink)" text-anchor="middle">Fund I</text>
+        <text x="92.8" y="107" font-size="7.6" fill="var(--muted)" text-anchor="middle">2020</text>
+        <rect x="128.4" y="66.9" width="47.2" height="19.1" rx="2" fill="var(--slate)"/>
+        <text x="152.0" y="63.9" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">$8.2M</text>
+        <text x="152.0" y="97" font-size="8.2" font-weight="600" fill="var(--ink)" text-anchor="middle">Fund II</text>
+        <text x="152.0" y="107" font-size="7.6" fill="var(--muted)" text-anchor="middle">2021</text>
+        <text x="211.2" y="82" font-size="8" fill="var(--muted)" text-anchor="middle">size unknown</text>
+        <text x="211.2" y="97" font-size="8.2" font-weight="600" fill="var(--ink)" text-anchor="middle">Fund III</text>
+        <text x="211.2" y="107" font-size="7.6" fill="var(--muted)" text-anchor="middle">no filing</text>
+        <rect x="246.8" y="16.0" width="47.2" height="70.0" rx="2" fill="var(--slate)"/>
+        <text x="270.4" y="13.0" font-size="8.4" font-weight="700" fill="var(--ink)" text-anchor="middle">$30M</text>
+        <text x="270.4" y="97" font-size="8.2" font-weight="600" fill="var(--ink)" text-anchor="middle">Fund IV</text>
+        <text x="270.4" y="107" font-size="7.6" fill="var(--muted)" text-anchor="middle">2025</text>
+        <line x1="4" x2="300" y1="86" y2="86" stroke="var(--rule)"/>
+        </svg>
+        <table class="pairs bfel"><tr><th>First check</th><th>Fellow founders (class) and company</th></tr><tr><td><b>2018</b></td><td><b style="display:inline;color:var(--teal-deep)">Guild</b> '20 <span>Owner $2.3B</span></td></tr><tr><td><b>2021&#8211;22</b></td><td><b style="display:inline;color:var(--teal-deep)">Sadeghi</b> '23 <span>Nucleus</span> &#183; <b style="display:inline;color:var(--teal-deep)">McElhone</b> '23 <span>CropSafe</span></td></tr><tr><td><b>by early 2023</b></td><td><b style="display:inline;color:var(--teal-deep)">Du</b> '23 <span>Alloy</span> &#183; <b style="display:inline;color:var(--teal-deep)">Favret</b> '23 <span>Tavus</span> &#183; <b style="display:inline;color:var(--teal-deep)">Dinesh</b> '23 <span>Spellbound</span> &#183; <b style="display:inline;color:var(--teal-deep)">Dinakaran</b> '23 <span>Luminai</span> &#183; <b style="display:inline;color:var(--teal-deep)">Adler</b> '23 <span>Neusleep</span> &#183; <b style="display:inline;color:var(--teal-deep)">Field</b> '12 <span>Figma, late stage</span></td></tr><tr><td><b>2024&#8211;25</b></td><td><b style="display:inline;color:var(--teal-deep)">Wu</b> '24 <span>Orchard</span> &#183; <b style="display:inline;color:var(--teal-deep)">Cardenas</b> '23 <span>Slash $1.4B*</span></td></tr><tr><td><b>unknown</b></td><td><b style="display:inline;color:var(--teal-deep)">Shieh</b> '26 <span>Antifraud Co.*</span></td></tr></table>
+      </div>
+      <p class="note">33 and ~10% (of ~317 fellows through 2026) are Browder&#8217;s claim. <b>12 are independently verified (~4%)</b>. He said 35% (7/20) of the 2023 class in Feb 2023, 50% in May 2025; 7&#8211;8 of 20 can be documented. No Fund III Form D exists; which fund made each check isn&#8217;t public. * aggregator or third-party list only.</p>
+      <p class="cite">SEC Form D (2020&#8211;25) &#183; Browder on X (Feb 2023, May 2025) &#183; AngelList case study &#183; Thiel Foundation releases &#183; Goldman Sachs (Owner, Aug 2026)</p>
+    </div>
+
+
+
+
+  </div>
+  <footer><span><b>Venture Math</b> &#8212; Session 09 &#183; Back of 2</span><span>Sources on each card &#183; research and fact-checks in s09-danielle-strachman/</span></footer>
+</section>
+
+</body>
+</html>

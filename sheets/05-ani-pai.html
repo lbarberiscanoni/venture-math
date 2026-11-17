@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crypto, Tokens &amp; Frontier Tech Capital &#8212; Venture Math</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14283b; --muted:#5b6b7a; --faint:#95a1ad;
+    --paper:#ffffff; --rule:#e4e8ec; --grid:#eef1f4;
+    --teal:#0f7a68; --teal-mid:#3f9585; --teal-soft:#9cc7bd; --teal-deep:#0c5f52;
+    --clay:#b05a38; --clay-mid:#c68562; --clay-soft:#dcae90; --clay-deep:#8f4529;
+    --slate:#aab4bd;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:#f3f5f7; color:var(--ink);
+    font:12.5px/1.4 'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased; letter-spacing:-.004em;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  svg text{font-family:'Inter',ui-sans-serif,system-ui,sans-serif; font-variant-numeric:tabular-nums}
+  .sheet{width:768px; margin:0 auto 20px; padding:15px 28px 8px; background:var(--paper); position:relative}
+
+  .brand{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1.5px solid var(--ink); padding-bottom:7px; margin-bottom:11px}
+  .brand .l .eyebrow{font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--teal); font-weight:600; margin:0 0 3px}
+  .brand .l h1{font-size:21px; letter-spacing:-.02em; margin:0; font-weight:700; color:var(--ink)}
+  .brand .r{text-align:right; font-size:9px; color:var(--faint); line-height:1.5; font-weight:500}
+  .brand .r b{color:var(--muted)}
+  .run{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:11px; padding-bottom:6px; border-bottom:1px solid var(--rule)}
+  .run .l{font-size:12px; font-weight:600; color:var(--ink); letter-spacing:.02em; text-transform:uppercase}
+  .run .l .n{color:var(--clay)}
+  .run .l .sec{color:var(--faint); font-weight:500; text-transform:none; letter-spacing:0}
+  .run .r{font-size:10px; color:var(--faint); letter-spacing:.08em; font-weight:600}
+
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:6px}
+  .card{background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:7px 13px 6px; break-inside:avoid; min-width:0}
+  .card.wide{grid-column:1 / -1}
+  .card h2{font-size:14px; font-weight:600; letter-spacing:-.015em; margin:0 0 2px; color:var(--ink)}
+  .card .cs{font-size:10.5px; color:var(--muted); margin:0 0 5px; line-height:1.35; font-weight:400}
+  .card .cite{font-size:9px; color:var(--faint); margin:6px 0 0; letter-spacing:.03em; font-weight:500; text-transform:uppercase; padding-top:5px; border-top:1px solid var(--grid)}
+  .card svg{display:block; width:100%; height:auto; overflow:visible}
+  .dl{display:flex; gap:12px; flex-wrap:wrap; font-size:9.5px; color:var(--muted); margin:0 0 4px; font-weight:500}
+  .dl i{font-style:normal; display:inline-flex; align-items:center; gap:4px}
+  .dl .sw{width:9px; height:9px; border-radius:2px; display:inline-block}
+
+  .callout{grid-column:1 / -1; border:1px solid var(--clay-soft); background:#fdf7f3; border-radius:8px; padding:6px 13px; display:flex; align-items:center; gap:14px}
+  .callout .big{font-size:30px; font-weight:700; color:var(--clay-deep); letter-spacing:-.03em; line-height:1; flex:none}
+  .callout .t{font-size:11px; color:var(--ink); line-height:1.35; font-weight:500}
+  .callout .t b{font-weight:700}
+  .callout .t span{display:block; font-size:9px; color:var(--faint); margin-top:3px; text-transform:uppercase; letter-spacing:.03em; font-weight:500}
+
+  table.pairs{width:100%; border-collapse:collapse; font-size:9.5px}
+  table.pairs th{text-align:left; font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:0 6px 3px 0; border-bottom:1px solid var(--rule)}
+  table.pairs th.ti{color:var(--teal-deep)} table.pairs th.tc{color:var(--clay-deep)}
+  table.pairs td{padding:2px 6px 2px 0; border-bottom:1px solid var(--grid); vertical-align:top; line-height:1.3}
+  table.pairs td b{display:block; font-weight:700}
+  table.pairs td span{color:var(--muted); font-size:9px}
+  table.pairs td.m{font-weight:600; width:92px}
+  table.pairs td.t{color:var(--ink); font-size:9px; width:190px}
+  table.pairs tr:last-child td{border-bottom:none}
+
+  footer{margin-top:8px; padding-top:6px; border-top:1px solid var(--rule); font-size:9px; color:var(--faint); display:flex; justify-content:space-between; gap:12px; font-weight:500}
+  footer b{color:var(--muted); font-weight:600}
+
+  @page{ size:letter portrait; margin:0.4in }
+  @media print{ body{background:#fff} .sheet{width:auto; margin:0; padding:0; page-break-after:always; break-after:page} .sheet:last-child{page-break-after:auto} }
+  @media screen{ .sheet{box-shadow:0 1px 12px rgba(20,40,59,.08); border-radius:3px} }
+</style>
+</head>
+<body>
+
+<!-- ===================== FRONT — THE RETURNS ===================== -->
+<section class="sheet" id="p1">
+  <div class="brand">
+    <div class="l">
+      <p class="eyebrow">Venture Math &#183; Fall 2026</p>
+      <h1>Crypto, Tokens &amp; Frontier Tech Capital</h1>
+    </div>
+    <div class="r">Session 05 &#183; Sept 30 &#183; <b>Ani Pai</b> (Robot Ventures, ex-Dragonfly)<br>Data: <b>project docs</b>, <b>CryptoRank</b>, <b>CoinGecko</b>, <b>Carta</b> &#183; prices as of Sept 27, 2026</div>
+  </div>
+  <div class="run"><span class="l"><span class="n">The returns</span> <span class="sec">&#8212; who made money, through which door, and against whom</span></span><span class="r">CLAY = TOKENS &#183; BELOW 1&#215;</span></div>
+
+  <div class="grid">
+
+    <div class="card wide">
+      <h2>Crypto returns follow the same power law as venture</h2>
+      <p class="cs">Thirty of the biggest crypto deals, by multiple on the earliest investor&#8217;s price. With equal money in each, <b style="color:var(--clay-deep)">Ethereum alone is 42% of the value returned today</b> and the top five are 91%. Most of the peaks were never realized: ten of these deals are now under 10&#215;.</p>
+      <svg viewBox="0 0 700 186" role="img" aria-label="Top 30 crypto investments by return multiple, log scale">
+        <line x1="44.0" y1="150.0" x2="690.0" y2="150.0" stroke="var(--ink)" stroke-width="1"/>
+        <text x="39.0" y="153.0" font-size="7.5" fill="var(--faint)" text-anchor="end">1&#215;</text>
+        <line x1="44.0" y1="122.8" x2="690.0" y2="122.8" stroke="var(--grid)" stroke-width="1"/>
+        <text x="39.0" y="125.8" font-size="7.5" fill="var(--faint)" text-anchor="end">10&#215;</text>
+        <line x1="44.0" y1="95.6" x2="690.0" y2="95.6" stroke="var(--grid)" stroke-width="1"/>
+        <text x="39.0" y="98.6" font-size="7.5" fill="var(--faint)" text-anchor="end">100&#215;</text>
+        <line x1="44.0" y1="68.4" x2="690.0" y2="68.4" stroke="var(--grid)" stroke-width="1"/>
+        <text x="39.0" y="71.4" font-size="7.5" fill="var(--faint)" text-anchor="end">1,000&#215;</text>
+        <line x1="44.0" y1="41.2" x2="690.0" y2="41.2" stroke="var(--grid)" stroke-width="1"/>
+        <text x="39.0" y="44.2" font-size="7.5" fill="var(--faint)" text-anchor="end">10,000&#215;</text>
+        <line x1="44.0" y1="14.0" x2="690.0" y2="14.0" stroke="var(--grid)" stroke-width="1"/>
+        <text x="39.0" y="17.0" font-size="7.5" fill="var(--faint)" text-anchor="end">100,000&#215;</text>
+        <line x1="44.0" y1="31.2" x2="44.0" y2="94.9" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="44.0" cy="94.9" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="44.0" cy="31.2" r="3.6" fill="var(--clay)"/>
+        <text x="49.0" y="26.2" font-size="7.8" font-weight="700" fill="var(--ink)">ICP</text>
+        <line x1="66.3" y1="35.7" x2="66.3" y2="42.9" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="66.3" cy="42.9" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="66.3" cy="35.7" r="3.6" fill="var(--clay)"/>
+        <text x="71.3" y="30.7" font-size="7.8" font-weight="700" fill="var(--ink)">Ethereum</text>
+        <line x1="88.6" y1="42.3" x2="88.6" y2="49.0" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="88.6" cy="49.0" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="88.6" cy="42.3" r="3.6" fill="var(--clay)"/>
+        <text x="93.6" y="37.3" font-size="7.8" font-weight="700" fill="var(--ink)">BNB</text>
+        <line x1="110.8" y1="44.9" x2="110.8" y2="55.5" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="110.8" cy="55.5" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="110.8" cy="44.9" r="3.6" fill="var(--clay)"/>
+        <text x="115.8" y="39.9" font-size="7.8" font-weight="700" fill="var(--ink)">Solana</text>
+        <line x1="133.1" y1="53.0" x2="133.1" y2="90.6" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="133.1" cy="90.6" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="133.1" cy="53.0" r="3.6" fill="var(--clay)"/>
+        <line x1="155.4" y1="58.8" x2="155.4" y2="68.5" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="155.4" cy="68.5" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="155.4" cy="58.8" r="3.6" fill="var(--teal)"/>
+        <text x="160.4" y="53.8" font-size="7.8" font-weight="700" fill="var(--ink)">Coinbase</text>
+        <line x1="177.7" y1="59.9" x2="177.7" y2="118.3" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="177.7" cy="118.3" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="177.7" cy="59.9" r="3.6" fill="var(--clay)"/>
+        <line x1="199.9" y1="61.8" x2="199.9" y2="99.0" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="199.9" cy="99.0" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="199.9" cy="61.8" r="3.6" fill="var(--clay)"/>
+        <line x1="222.2" y1="65.4" x2="222.2" y2="94.9" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="222.2" cy="94.9" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="222.2" cy="65.4" r="3.6" fill="var(--clay)"/>
+        <line x1="244.5" y1="66.3" x2="244.5" y2="156.0" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <text x="244.5" y="159.0" font-size="7" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">&#215;</text>
+        <circle cx="244.5" cy="66.3" r="3.6" fill="var(--clay)"/>
+        <text x="249.5" y="61.3" font-size="7.8" font-weight="700" fill="var(--ink)">Terra</text>
+        <line x1="266.8" y1="67.0" x2="266.8" y2="70.9" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="266.8" cy="70.9" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="266.8" cy="67.0" r="3.6" fill="var(--teal)"/>
+        <text x="271.8" y="80.0" font-size="7.8" font-weight="700" fill="var(--ink)">Polymarket*</text>
+        <line x1="289.0" y1="68.5" x2="289.0" y2="75.5" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="289.0" cy="75.5" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="289.0" cy="68.5" r="3.6" fill="var(--teal)"/>
+        <line x1="311.3" y1="73.8" x2="311.3" y2="92.0" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="311.3" cy="92.0" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="311.3" cy="73.8" r="3.6" fill="var(--clay)"/>
+        <text x="316.3" y="68.8" font-size="7.8" font-weight="700" fill="var(--ink)">Uniswap</text>
+        <line x1="333.6" y1="74.7" x2="333.6" y2="90.3" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="333.6" cy="90.3" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="333.6" cy="74.7" r="3.6" fill="var(--clay)"/>
+        <line x1="355.9" y1="75.2" x2="355.9" y2="143.7" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="355.9" cy="143.7" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="355.9" cy="75.2" r="3.6" fill="var(--clay)"/>
+        <line x1="378.1" y1="78.1" x2="378.1" y2="108.6" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="378.1" cy="108.6" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="378.1" cy="78.1" r="3.6" fill="var(--clay)"/>
+        <line x1="400.4" y1="79.0" x2="400.4" y2="95.1" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="400.4" cy="95.1" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="400.4" cy="79.0" r="3.6" fill="var(--clay)"/>
+        <line x1="422.7" y1="79.0" x2="422.7" y2="96.1" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="422.7" cy="96.1" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="422.7" cy="79.0" r="3.6" fill="var(--clay)"/>
+        <line x1="445.0" y1="82.0" x2="445.0" y2="145.2" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="445.0" cy="145.2" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="445.0" cy="82.0" r="3.6" fill="var(--clay)"/>
+        <line x1="467.2" y1="85.9" x2="467.2" y2="88.9" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="467.2" cy="88.9" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="467.2" cy="85.9" r="3.6" fill="var(--clay)"/>
+        <line x1="489.5" y1="88.0" x2="489.5" y2="132.8" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="489.5" cy="132.8" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="489.5" cy="88.0" r="3.6" fill="var(--clay)"/>
+        <line x1="511.8" y1="93.6" x2="511.8" y2="110.8" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="511.8" cy="110.8" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="511.8" cy="93.6" r="3.6" fill="var(--clay)"/>
+        <line x1="534.1" y1="101.3" x2="534.1" y2="143.7" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="534.1" cy="143.7" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="534.1" cy="101.3" r="3.6" fill="var(--clay)"/>
+        <text x="539.1" y="96.3" font-size="7.8" font-weight="700" fill="var(--ink)">Compound</text>
+        <circle cx="556.3" cy="105.9" r="3.6" fill="var(--teal)"/>
+        <text x="561.3" y="118.9" font-size="7.8" font-weight="700" fill="var(--ink)">Tether*</text>
+        <line x1="578.6" y1="111.6" x2="578.6" y2="112.5" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="578.6" cy="112.5" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="578.6" cy="111.6" r="3.6" fill="var(--clay)"/>
+        <text x="583.6" y="106.6" font-size="7.8" font-weight="700" fill="var(--ink)">Hyperliquid</text>
+        <line x1="600.9" y1="122.8" x2="600.9" y2="156.0" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <text x="600.9" y="159.0" font-size="7" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">&#215;</text>
+        <circle cx="600.9" cy="122.8" r="3.6" fill="var(--clay)"/>
+        <line x1="623.2" y1="123.3" x2="623.2" y2="137.4" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="623.2" cy="137.4" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="623.2" cy="123.3" r="3.6" fill="var(--teal)"/>
+        <text x="628.2" y="136.3" font-size="7.8" font-weight="700" fill="var(--ink)">Circle</text>
+        <line x1="645.4" y1="131.0" x2="645.4" y2="156.0" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <text x="645.4" y="159.0" font-size="7" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">&#215;</text>
+        <circle cx="645.4" cy="131.0" r="3.6" fill="var(--clay)"/>
+        <line x1="667.7" y1="140.7" x2="667.7" y2="147.8" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <circle cx="667.7" cy="147.8" r="2.6" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+        <circle cx="667.7" cy="140.7" r="3.6" fill="var(--clay)"/>
+        <line x1="690.0" y1="143.1" x2="690.0" y2="156.0" stroke="var(--slate)" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+        <text x="690.0" y="159.0" font-size="7" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">&#215;</text>
+        <circle cx="690.0" cy="143.1" r="3.6" fill="var(--teal)"/>
+        <text x="695.0" y="138.1" font-size="7.8" font-weight="700" fill="var(--ink)">FTX</text>
+        <polyline points="44.0,31.2 66.3,35.7 88.6,42.3 110.8,44.9 133.1,53.0 155.4,58.8 177.7,59.9 199.9,61.8 222.2,65.4 244.5,66.3 266.8,67.0 289.0,68.5 311.3,73.8 333.6,74.7 355.9,75.2 378.1,78.1 400.4,79.0 422.7,79.0 445.0,82.0 467.2,85.9 489.5,88.0 511.8,93.6 534.1,101.3 556.3,105.9 578.6,111.6 600.9,122.8 623.2,123.3 645.4,131.0 667.7,140.7 690.0,143.1" fill="none" stroke="var(--clay)" stroke-width=".8" opacity=".5"/>
+        <text x="44" y="170" font-size="7.8" fill="var(--muted)">Filled dot = multiple at peak (<tspan fill="var(--clay-deep)" font-weight="700">token</tspan> / <tspan fill="var(--teal-deep)" font-weight="700">equity</tspan>) &#183; open dot = today &#183; &#215; = below 1&#215; today (Terra, EOS, FTX, Aptos).</text>
+        <text x="44" y="181" font-size="7.5" fill="var(--faint)">* Tether: last priced ~$12B (Cantor&#8217;s convertible stake); no close reported on the $500B raise. Polymarket &amp; Kalshi: valuation multiples from reported rounds and talks.</text>
+        </svg>
+      <p class="cite">CoinGecko (Sept 27, 2026), CryptoRank, ICO Drops, SEC filings &#183; list built from winners, so it shows the tail, not the odds</p>
+    </div>
+
+    <div class="card">
+      <h2>Public token sales: boom, bust, revival &#8212; and bust again</h2>
+      <p class="cs">Money raised through ICOs, exchange sales and launchpads. The 2025 revival (Pump.fun raised $600M in 12 minutes) faded fast: <b style="color:var(--clay-deep)">Q2 2026 was the weakest quarter in years</b>, while private rounds carried on.</p>
+      <svg viewBox="0 0 340 158" role="img" aria-label="Money raised in public token sales per year, 2014 to 2026">
+        <line x1="30.0" y1="118.0" x2="332.0" y2="118.0" stroke="var(--ink)" stroke-width="1"/>
+        <text x="26.0" y="121.0" font-size="7" fill="var(--faint)" text-anchor="end">$0B</text>
+        <line x1="30.0" y1="92.5" x2="332.0" y2="92.5" stroke="var(--grid)" stroke-width="1"/>
+        <text x="26.0" y="95.5" font-size="7" fill="var(--faint)" text-anchor="end">$2.5B</text>
+        <line x1="30.0" y1="67.0" x2="332.0" y2="67.0" stroke="var(--grid)" stroke-width="1"/>
+        <text x="26.0" y="70.0" font-size="7" fill="var(--faint)" text-anchor="end">$5B</text>
+        <line x1="30.0" y1="41.5" x2="332.0" y2="41.5" stroke="var(--grid)" stroke-width="1"/>
+        <text x="26.0" y="44.5" font-size="7" fill="var(--faint)" text-anchor="end">$7.5B</text>
+        <line x1="30.0" y1="16.0" x2="332.0" y2="16.0" stroke="var(--grid)" stroke-width="1"/>
+        <text x="26.0" y="19.0" font-size="7" fill="var(--faint)" text-anchor="end">$10B</text>
+        <rect x="32.0" y="117.8" width="19.2" height="0.8" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="41.6" y="114.8" font-size="6.6" font-weight="500" fill="var(--muted)" text-anchor="middle">$18M</text>
+        <text x="41.6" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;14</text>
+        <rect x="55.2" y="117.9" width="19.2" height="0.8" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="64.8" y="114.9" font-size="6.6" font-weight="500" fill="var(--muted)" text-anchor="middle"></text>
+        <text x="64.8" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;15</text>
+        <rect x="78.5" y="117.3" width="19.2" height="0.8" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="88.1" y="114.3" font-size="6.6" font-weight="500" fill="var(--muted)" text-anchor="middle"></text>
+        <text x="88.1" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;16</text>
+        <rect x="101.7" y="75.2" width="19.2" height="42.8" rx="1.5" fill="var(--clay)"/>
+        <text x="111.3" y="72.2" font-size="6.6" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">$4.2B</text>
+        <text x="111.3" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;17</text>
+        <rect x="124.9" y="19.0" width="19.2" height="99.0" rx="1.5" fill="var(--clay)"/>
+        <text x="134.5" y="16.0" font-size="6.6" font-weight="700" fill="var(--clay-deep)" text-anchor="middle">$9.7B</text>
+        <text x="134.5" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;18</text>
+        <rect x="148.2" y="110.9" width="19.2" height="7.1" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="157.8" y="107.9" font-size="6.6" font-weight="500" fill="var(--muted)" text-anchor="middle">$697M</text>
+        <text x="157.8" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;19</text>
+        <rect x="171.4" y="114.5" width="19.2" height="3.5" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="181.0" y="111.5" font-size="6.6" font-weight="500" fill="var(--muted)" text-anchor="middle"></text>
+        <text x="181.0" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;20</text>
+        <rect x="194.6" y="89.8" width="19.2" height="28.2" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="204.2" y="86.8" font-size="6.6" font-weight="700" fill="var(--muted)" text-anchor="middle">$2.8B</text>
+        <text x="204.2" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;21</text>
+        <rect x="217.8" y="110.1" width="19.2" height="7.9" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="227.5" y="107.1" font-size="6.6" font-weight="500" fill="var(--muted)" text-anchor="middle"></text>
+        <text x="227.5" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;22</text>
+        <rect x="241.1" y="114.2" width="19.2" height="3.8" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="250.7" y="111.2" font-size="6.6" font-weight="500" fill="var(--muted)" text-anchor="middle"></text>
+        <text x="250.7" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;23</text>
+        <rect x="264.3" y="104.9" width="19.2" height="13.1" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="273.9" y="101.9" font-size="6.6" font-weight="700" fill="var(--muted)" text-anchor="middle">$1.3B</text>
+        <text x="273.9" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;24</text>
+        <rect x="287.5" y="94.9" width="19.2" height="23.1" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="297.2" y="91.9" font-size="6.6" font-weight="700" fill="var(--muted)" text-anchor="middle">$2.3B</text>
+        <text x="297.2" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;25</text>
+        <rect x="310.8" y="111.6" width="19.2" height="6.4" rx="1.5" fill="var(--clay-soft)"/>
+        <text x="320.4" y="108.6" font-size="6.6" font-weight="500" fill="var(--muted)" text-anchor="middle">$629M</text>
+        <text x="320.4" y="127.0" font-size="6.8" fill="var(--faint)" text-anchor="middle">&#8217;26*</text>
+        <line x1="32.0" y1="132.0" x2="97.7" y2="132.0" stroke="var(--slate)" stroke-width="1.2"/>
+        <text x="64.8" y="141.0" font-size="6.6" fill="var(--muted)" text-anchor="middle">early ICOs</text>
+        <line x1="101.7" y1="132.0" x2="144.2" y2="132.0" stroke="var(--slate)" stroke-width="1.2"/>
+        <text x="122.9" y="141.0" font-size="6.6" fill="var(--muted)" text-anchor="middle">ICO boom</text>
+        <line x1="148.2" y1="132.0" x2="190.6" y2="132.0" stroke="var(--slate)" stroke-width="1.2"/>
+        <text x="169.4" y="141.0" font-size="6.6" fill="var(--muted)" text-anchor="middle">exchange sales</text>
+        <line x1="194.6" y1="132.0" x2="213.8" y2="132.0" stroke="var(--slate)" stroke-width="1.2"/>
+        <text x="204.2" y="141.0" font-size="6.6" fill="var(--muted)" text-anchor="middle">IDOs</text>
+        <line x1="217.8" y1="132.0" x2="283.5" y2="132.0" stroke="var(--slate)" stroke-width="1.2"/>
+        <text x="250.7" y="141.0" font-size="6.6" fill="var(--muted)" text-anchor="middle">airdrops &amp; VC listings</text>
+        <line x1="287.5" y1="132.0" x2="330.0" y2="132.0" stroke="var(--slate)" stroke-width="1.2"/>
+        <text x="308.8" y="141.0" font-size="6.6" fill="var(--muted)" text-anchor="middle">revival?</text>
+        <text x="8" y="154" font-size="7.2" fill="var(--faint)">* 2026 to Sept 27. Other trackers put 2018 as high as ~$21B &#8212; trust the shape more than the level.</text>
+        </svg>
+      <p class="cite">CryptoRank ICO analytics &#183; ICOData archive for 2014&#8211;18 cross-check</p>
+    </div>
+
+    <div class="card">
+      <h2>How you got the token matters more than which token</h2>
+      <p class="cs">Median return today by distribution channel. Only launches with <b style="color:var(--teal-deep)">no VCs or presale</b> are clearly up; buyers at listing of VC-backed tokens kept a median 7 cents on the dollar.</p>
+      <svg viewBox="0 0 340 199.0" role="img" aria-label="Median return by token distribution channel">
+        <line x1="150.0" y1="13" x2="150.0" y2="181.0" stroke="var(--grid)" stroke-width="1"/>
+        <text x="150.0" y="9" font-size="6.8" fill="var(--faint)" text-anchor="middle">0.03&#215;</text>
+        <line x1="179.3" y1="13" x2="179.3" y2="181.0" stroke="var(--grid)" stroke-width="1"/>
+        <text x="179.3" y="9" font-size="6.8" fill="var(--faint)" text-anchor="middle">0.1&#215;</text>
+        <line x1="206.0" y1="13" x2="206.0" y2="181.0" stroke="var(--grid)" stroke-width="1"/>
+        <text x="206.0" y="9" font-size="6.8" fill="var(--faint)" text-anchor="middle">.3</text>
+        <line x1="235.3" y1="13" x2="235.3" y2="181.0" stroke="var(--ink)" stroke-width="1.2"/>
+        <text x="235.3" y="9" font-size="6.8" fill="var(--faint)" text-anchor="middle">1&#215;</text>
+        <line x1="262.0" y1="13" x2="262.0" y2="181.0" stroke="var(--grid)" stroke-width="1"/>
+        <text x="262.0" y="9" font-size="6.8" fill="var(--faint)" text-anchor="middle">3&#215;</text>
+        <line x1="291.3" y1="13" x2="291.3" y2="181.0" stroke="var(--grid)" stroke-width="1"/>
+        <text x="291.3" y="9" font-size="6.8" fill="var(--faint)" text-anchor="middle">10&#215;</text>
+        <text x="145.0" y="21.5" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">Fair launch (Hyperliquid, Yearn)</text>
+        <text x="145.0" y="28.0" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. listing-day close &#183; n=2</text>
+        <rect x="235.3" y="17.0" width="60.3" height="10" rx="2" fill="var(--teal)"/>
+        <text x="299.5" y="25.0" font-size="7.8" font-weight="700" fill="var(--teal-deep)">11.91&#215;</text>
+        <text x="145.0" y="38.0" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">CoinList, 5 best-known</text>
+        <text x="145.0" y="44.5" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. sale price, winners only &#183; n=5</text>
+        <rect x="235.3" y="33.5" width="12.9" height="10" rx="2" fill="var(--teal)"/>
+        <text x="252.2" y="41.5" font-size="7.8" font-weight="700" fill="var(--teal-deep)">1.7&#215;</text>
+        <text x="145.0" y="54.5" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">ICOs, 2014&#8211;18 (survivors)</text>
+        <text x="145.0" y="61.0" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. sale price &#183; n=26</text>
+        <rect x="231.3" y="50.0" width="4.0" height="10" rx="2" fill="var(--clay)"/>
+        <text x="239.3" y="58.0" font-size="7.8" font-weight="700" fill="var(--clay-deep)">0.85&#215;</text>
+        <text x="145.0" y="71.0" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">Public sales, 2025&#8211;26</text>
+        <text x="145.0" y="77.5" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. sale price &#183; n=16</text>
+        <rect x="229.5" y="66.5" width="5.7" height="10" rx="2" fill="var(--clay)"/>
+        <text x="239.3" y="74.5" font-size="7.8" font-weight="700" fill="var(--clay-deep)">0.79&#215;</text>
+        <text x="145.0" y="87.5" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">Binance Launchpad, all 35</text>
+        <text x="145.0" y="94.0" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. sale price, dead = 0 &#183; n=35</text>
+        <rect x="216.9" y="83.0" width="18.4" height="10" rx="2" fill="var(--clay)"/>
+        <text x="239.3" y="91.0" font-size="7.8" font-weight="700" fill="var(--clay-deep)">0.47&#215;</text>
+        <text x="145.0" y="104.0" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">Public sales, 2025&#8211;26</text>
+        <text x="145.0" y="110.5" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. listing-day close &#183; n=14</text>
+        <rect x="201.6" y="99.5" width="33.7" height="10" rx="2" fill="var(--clay)"/>
+        <text x="239.3" y="107.5" font-size="7.8" font-weight="700" fill="var(--clay-deep)">0.25&#215;</text>
+        <text x="145.0" y="120.5" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">Memecoin launchpads</text>
+        <text x="145.0" y="127.0" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. listing-day close &#183; n=10</text>
+        <rect x="193.6" y="116.0" width="41.7" height="10" rx="2" fill="var(--clay)"/>
+        <text x="239.3" y="124.0" font-size="7.8" font-weight="700" fill="var(--clay-deep)">0.18&#215;</text>
+        <text x="145.0" y="137.0" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">Airdrops / points</text>
+        <text x="145.0" y="143.5" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. listing-day close &#183; n=17</text>
+        <rect x="190.7" y="132.5" width="44.6" height="10" rx="2" fill="var(--clay)"/>
+        <text x="239.3" y="140.5" font-size="7.8" font-weight="700" fill="var(--clay-deep)">0.16&#215;</text>
+        <text x="145.0" y="153.5" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">VC-backed low-float listings</text>
+        <text x="145.0" y="160.0" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. listing-day close &#183; n=17</text>
+        <rect x="170.6" y="149.0" width="64.7" height="10" rx="2" fill="var(--clay)"/>
+        <text x="239.3" y="157.0" font-size="7.8" font-weight="700" fill="var(--clay-deep)">0.07&#215;</text>
+        <text x="145.0" y="170.0" font-size="7.5" font-weight="600" fill="var(--ink)" text-anchor="end">IDO launchpads, 2021</text>
+        <text x="145.0" y="176.5" font-size="6.2" fill="var(--faint)" text-anchor="end">vs. sale price &#183; n=5</text>
+        <rect x="162.4" y="165.5" width="72.9" height="10" rx="2" fill="var(--clay)"/>
+        <text x="239.3" y="173.5" font-size="7.8" font-weight="700" fill="var(--clay-deep)">0.05&#215;</text>
+        <text x="8" y="195.0" font-size="7" fill="var(--faint)">Median, today&#8217;s price &#247; entry. Hand-picked set of 115 tokens; dead tokens mostly missing.</text>
+        </svg>
+      <p class="cite">Venture Math calculation &#183; CoinGecko, OKX &amp; Gate.io price history, CryptoRank</p>
+    </div>
+
+
+    <div class="callout">
+      <div class="big">$78M</div>
+      <div class="t"><b>Hyperliquid&#8217;s revenue per employee in 2025</b> (Artemis) &#8212; no VC round, 31% of supply airdropped, nearly all revenue spent buying back its own token. Ani called it &#8220;the most efficient business ever made at scale,&#8221; then helped with a paper showing its liquidation engine cost users millions in the Oct 10, 2025 crash.
+      <span>Discussion &#8212; If the best token launch skipped VCs entirely, what is a crypto VC actually selling?</span></div>
+    </div>
+
+    <div class="callout">
+      <div class="big">~10%</div>
+      <div class="t"><b>What the public receives directly.</b> The median token gives ~38% to team and investors and ~45% to a foundation the insiders run &#8212; the &#8220;community&#8221; slice in the deck. Only ~10% goes out as a sale or airdrop; the rest, the public buys from everyone above.
+      <span>Median of 24 tokens &#183; the exceptions: Hyperliquid (31% airdropped, no VCs), Jupiter (40%), Pump.fun (33% public sale)</span></div>
+    </div>
+  </div>
+  <footer><span><b>Venture Math</b> &#8212; Session 05 &#183; Front of 2</span><span>Every number sourced in the session research files &#183; re-visualized for classroom use</span></footer>
+</section>
+
+<!-- ===================== BACK — THE LAUNCH ===================== -->
+<section class="sheet" id="p2">
+  <div class="run"><span class="l"><span class="n">The market</span> <span class="sec">&#8212; who invests, how the supply is split, and who keeps the profit</span></span><span class="r">TEAL = EQUITY &#183; CLAY = TOKENS</span></div>
+
+  <div class="grid">
+
+    <div class="card wide">
+      <h2>Who has done the most crypto deals, year by year</h2>
+      <p class="cs">Top 12 of 7,271 disclosed rounds since 2014. <b style="color:var(--clay-deep)">Dragonfly (#8) and Robot (#11)</b> rank near the top; everyone piled into 2021; Alameda stopped dead in 2022; Tether now leads most deals it joins.</p>
+      <svg viewBox="0 0 700 268" role="img" aria-label="Crypto investor deal activity by year, 2014 to 2026">
+        <rect x="153" y="24.1" width="28" height="0.9" rx="1.5" fill="var(--slate)"/>
+        <text x="167.0" y="22.1" font-size="6.5" fill="var(--muted)" text-anchor="middle">62</text>
+        <text x="167.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;14</text>
+        <rect x="187" y="23.5" width="28" height="1.5" rx="1.5" fill="var(--slate)"/>
+        <text x="201.0" y="21.5" font-size="6.5" fill="var(--muted)" text-anchor="middle">99</text>
+        <text x="201.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;15</text>
+        <rect x="221" y="22.6" width="28" height="2.4" rx="1.5" fill="var(--slate)"/>
+        <text x="235.0" y="20.6" font-size="6.5" fill="var(--muted)" text-anchor="middle">157</text>
+        <text x="235.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;16</text>
+        <rect x="255" y="18.5" width="28" height="6.5" rx="1.5" fill="var(--slate)"/>
+        <text x="269.0" y="16.5" font-size="6.5" fill="var(--muted)" text-anchor="middle">428</text>
+        <text x="269.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;17</text>
+        <rect x="289" y="15.1" width="28" height="9.9" rx="1.5" fill="var(--slate)"/>
+        <text x="303.0" y="13.1" font-size="6.5" fill="var(--muted)" text-anchor="middle">648</text>
+        <text x="303.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;18</text>
+        <rect x="323" y="21.7" width="28" height="3.3" rx="1.5" fill="var(--slate)"/>
+        <text x="337.0" y="19.7" font-size="6.5" fill="var(--muted)" text-anchor="middle">214</text>
+        <text x="337.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;19</text>
+        <rect x="357" y="18.6" width="28" height="6.4" rx="1.5" fill="var(--slate)"/>
+        <text x="371.0" y="16.6" font-size="6.5" fill="var(--muted)" text-anchor="middle">419</text>
+        <text x="371.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;20</text>
+        <rect x="391" y="5.0" width="28" height="20.0" rx="1.5" fill="var(--slate)"/>
+        <text x="405.0" y="3.0" font-size="6.5" fill="var(--muted)" text-anchor="middle">1,312</text>
+        <text x="405.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;21</text>
+        <rect x="425" y="13.6" width="28" height="11.4" rx="1.5" fill="var(--slate)"/>
+        <text x="439.0" y="11.6" font-size="6.5" fill="var(--muted)" text-anchor="middle">751</text>
+        <text x="439.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;22</text>
+        <rect x="459" y="13.2" width="28" height="11.8" rx="1.5" fill="var(--slate)"/>
+        <text x="473.0" y="11.2" font-size="6.5" fill="var(--muted)" text-anchor="middle">771</text>
+        <text x="473.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;23</text>
+        <rect x="493" y="10.0" width="28" height="15.0" rx="1.5" fill="var(--slate)"/>
+        <text x="507.0" y="8.0" font-size="6.5" fill="var(--muted)" text-anchor="middle">982</text>
+        <text x="507.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;24</text>
+        <rect x="527" y="11.5" width="28" height="13.5" rx="1.5" fill="var(--slate)"/>
+        <text x="541.0" y="9.5" font-size="6.5" fill="var(--muted)" text-anchor="middle">888</text>
+        <text x="541.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;25</text>
+        <rect x="561" y="16.8" width="28" height="8.2" rx="1.5" fill="var(--slate)"/>
+        <text x="575.0" y="14.8" font-size="6.5" fill="var(--muted)" text-anchor="middle">540</text>
+        <text x="575.0" y="35" font-size="7.3" font-weight="600" fill="var(--faint)" text-anchor="middle">&#8217;26*</text>
+        <text x="144" y="21" font-size="7.5" font-weight="600" fill="var(--muted)" text-anchor="end">All disclosed rounds</text>
+        <text x="618" y="35" font-size="7" font-weight="700" fill="var(--faint)" text-anchor="middle">TOTAL</text>
+        <text x="660" y="35" font-size="7" font-weight="700" fill="var(--faint)" text-anchor="middle">% LED</text>
+        <text x="144" y="48.6" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">1. Coinbase Ventures</text>
+        <rect x="151" y="40.0" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="40.0" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="40.0" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="40.0" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="287" y="40.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="303.0" y="48.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">13</text>
+        <rect x="321" y="40.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="337.0" y="48.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">11</text>
+        <rect x="355" y="40.0" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="371.0" y="48.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">25</text>
+        <rect x="389" y="40.0" width="32" height="11.2" rx="2" fill="#8f4529"/>
+        <text x="405.0" y="48.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">82</text>
+        <rect x="423" y="40.0" width="32" height="11.2" rx="2" fill="#8f4529"/>
+        <text x="439.0" y="48.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">59</text>
+        <rect x="457" y="40.0" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="473.0" y="48.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">38</text>
+        <rect x="491" y="40.0" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="507.0" y="48.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">40</text>
+        <rect x="525" y="40.0" width="32" height="11.2" rx="2" fill="#8f4529"/>
+        <text x="541.0" y="48.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">72</text>
+        <rect x="559" y="40.0" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="575.0" y="48.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">42</text>
+        <text x="618" y="48.6" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">382</text>
+        <text x="660" y="48.6" font-size="7.8" fill="var(--muted)" text-anchor="middle">9%</text>
+        <text x="144" y="61.8" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">2. Animoca Brands</text>
+        <rect x="151" y="53.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="53.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="53.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="53.2" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="269.0" y="61.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="287" y="53.2" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="303.0" y="61.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="321" y="53.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="337.0" y="61.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">4</text>
+        <rect x="355" y="53.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="389" y="53.2" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="405.0" y="61.6" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">49</text>
+        <rect x="423" y="53.2" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="439.0" y="61.6" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">40</text>
+        <rect x="457" y="53.2" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="473.0" y="61.6" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">30</text>
+        <rect x="491" y="53.2" width="32" height="11.2" rx="2" fill="#8f4529"/>
+        <text x="507.0" y="61.6" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">72</text>
+        <rect x="525" y="53.2" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="541.0" y="61.6" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">36</text>
+        <rect x="559" y="53.2" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="575.0" y="61.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">21</text>
+        <text x="618" y="61.8" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">254</text>
+        <text x="660" y="61.8" font-size="7.8" fill="var(--muted)" text-anchor="middle">23%</text>
+        <text x="144" y="75.0" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">3. a16z</text>
+        <rect x="151" y="66.4" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="167.0" y="74.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="185" y="66.4" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="201.0" y="74.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">3</text>
+        <rect x="219" y="66.4" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="235.0" y="74.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">3</text>
+        <rect x="253" y="66.4" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="269.0" y="74.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">2</text>
+        <rect x="287" y="66.4" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="303.0" y="74.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">17</text>
+        <rect x="321" y="66.4" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="337.0" y="74.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">4</text>
+        <rect x="355" y="66.4" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="371.0" y="74.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">4</text>
+        <rect x="389" y="66.4" width="32" height="11.2" rx="2" fill="#8f4529"/>
+        <text x="405.0" y="74.8" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">53</text>
+        <rect x="423" y="66.4" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="439.0" y="74.8" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">32</text>
+        <rect x="457" y="66.4" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="473.0" y="74.8" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">31</text>
+        <rect x="491" y="66.4" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="507.0" y="74.8" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">32</text>
+        <rect x="525" y="66.4" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="541.0" y="74.8" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">49</text>
+        <rect x="559" y="66.4" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="575.0" y="74.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">19</text>
+        <text x="618" y="75.0" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">250</text>
+        <text x="660" y="75.0" font-size="7.8" fill="var(--muted)" text-anchor="middle">51%</text>
+        <text x="144" y="88.2" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">4. Polychain Capital</text>
+        <rect x="151" y="79.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="79.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="79.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="79.6" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="269.0" y="88.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">3</text>
+        <rect x="287" y="79.6" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="303.0" y="88.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">18</text>
+        <rect x="321" y="79.6" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="337.0" y="88.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">9</text>
+        <rect x="355" y="79.6" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="371.0" y="88.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">12</text>
+        <rect x="389" y="79.6" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="405.0" y="88.0" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">47</text>
+        <rect x="423" y="79.6" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="439.0" y="88.0" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">27</text>
+        <rect x="457" y="79.6" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="473.0" y="88.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">22</text>
+        <rect x="491" y="79.6" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="507.0" y="88.0" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">46</text>
+        <rect x="525" y="79.6" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="541.0" y="88.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">18</text>
+        <rect x="559" y="79.6" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="575.0" y="88.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">5</text>
+        <text x="618" y="88.2" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">207</text>
+        <text x="660" y="88.2" font-size="7.8" fill="var(--muted)" text-anchor="middle">51%</text>
+        <text x="144" y="101.4" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">5. Pantera Capital</text>
+        <rect x="151" y="92.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="167.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">5</text>
+        <rect x="185" y="92.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="201.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">6</text>
+        <rect x="219" y="92.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="235.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">7</text>
+        <rect x="253" y="92.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="269.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">5</text>
+        <rect x="287" y="92.8" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="303.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">18</text>
+        <rect x="321" y="92.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="337.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">12</text>
+        <rect x="355" y="92.8" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="371.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">16</text>
+        <rect x="389" y="92.8" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="405.0" y="101.2" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">37</text>
+        <rect x="423" y="92.8" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="439.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">23</text>
+        <rect x="457" y="92.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="473.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">10</text>
+        <rect x="491" y="92.8" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="507.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">21</text>
+        <rect x="525" y="92.8" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="541.0" y="101.2" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">26</text>
+        <rect x="559" y="92.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="575.0" y="101.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">9</text>
+        <text x="618" y="101.4" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">195</text>
+        <text x="660" y="101.4" font-size="7.8" fill="var(--muted)" text-anchor="middle">46%</text>
+        <text x="144" y="114.6" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">6. DCG</text>
+        <rect x="151" y="106.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="167.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">12</text>
+        <rect x="185" y="106.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="201.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">11</text>
+        <rect x="219" y="106.0" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="235.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">20</text>
+        <rect x="253" y="106.0" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="269.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">18</text>
+        <rect x="287" y="106.0" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="303.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">20</text>
+        <rect x="321" y="106.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="337.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">8</text>
+        <rect x="355" y="106.0" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="371.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">16</text>
+        <rect x="389" y="106.0" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="405.0" y="114.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">36</text>
+        <rect x="423" y="106.0" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="439.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">14</text>
+        <rect x="457" y="106.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="473.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">5</text>
+        <rect x="491" y="106.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="507.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">13</text>
+        <rect x="525" y="106.0" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="541.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">14</text>
+        <rect x="559" y="106.0" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="575.0" y="114.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">2</text>
+        <text x="618" y="114.6" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">189</text>
+        <text x="660" y="114.6" font-size="7.8" fill="var(--muted)" text-anchor="middle">14%</text>
+        <text x="144" y="127.8" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">7. Binance Labs / YZi</text>
+        <rect x="151" y="119.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="119.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="119.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="119.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="287" y="119.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="303.0" y="127.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">6</text>
+        <rect x="321" y="119.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="337.0" y="127.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">6</text>
+        <rect x="355" y="119.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="371.0" y="127.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">4</text>
+        <rect x="389" y="119.2" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="405.0" y="127.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">15</text>
+        <rect x="423" y="119.2" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="439.0" y="127.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">22</text>
+        <rect x="457" y="119.2" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="473.0" y="127.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">24</text>
+        <rect x="491" y="119.2" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="507.0" y="127.6" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">48</text>
+        <rect x="525" y="119.2" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="541.0" y="127.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">15</text>
+        <rect x="559" y="119.2" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="575.0" y="127.6" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">36</text>
+        <text x="618" y="127.8" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">176</text>
+        <text x="660" y="127.8" font-size="7.8" fill="var(--muted)" text-anchor="middle">66%</text>
+        <rect x="0" y="131.4" width="700" height="13.2" fill="#fdf1ea"/>
+        <text x="144" y="141.0" font-size="7.8" font-weight="700" fill="var(--clay-deep)" text-anchor="end">8. Dragonfly Capital</text>
+        <rect x="151" y="132.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="132.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="132.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="132.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="287" y="132.4" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="303.0" y="140.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">2</text>
+        <rect x="321" y="132.4" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="337.0" y="140.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">5</text>
+        <rect x="355" y="132.4" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="371.0" y="140.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">13</text>
+        <rect x="389" y="132.4" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="405.0" y="140.8" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">38</text>
+        <rect x="423" y="132.4" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="439.0" y="140.8" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">32</text>
+        <rect x="457" y="132.4" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="473.0" y="140.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">15</text>
+        <rect x="491" y="132.4" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="507.0" y="140.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">20</text>
+        <rect x="525" y="132.4" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="541.0" y="140.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">17</text>
+        <rect x="559" y="132.4" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="575.0" y="140.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">9</text>
+        <text x="618" y="141.0" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">151</text>
+        <text x="660" y="141.0" font-size="7.8" fill="var(--muted)" text-anchor="middle">43%</text>
+        <text x="144" y="154.2" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">9. GSR</text>
+        <rect x="151" y="145.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="145.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="145.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="145.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="287" y="145.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="321" y="145.6" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="337.0" y="154.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="355" y="145.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="389" y="145.6" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="405.0" y="154.0" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">25</text>
+        <rect x="423" y="145.6" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="439.0" y="154.0" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">35</text>
+        <rect x="457" y="145.6" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="473.0" y="154.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">10</text>
+        <rect x="491" y="145.6" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="507.0" y="154.0" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">36</text>
+        <rect x="525" y="145.6" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="541.0" y="154.0" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">28</text>
+        <rect x="559" y="145.6" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="575.0" y="154.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">10</text>
+        <text x="618" y="154.2" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">145</text>
+        <text x="660" y="154.2" font-size="7.8" fill="var(--muted)" text-anchor="middle">6%</text>
+        <text x="144" y="167.4" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">10. Jump</text>
+        <rect x="151" y="158.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="158.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="158.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="158.8" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="269.0" y="167.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="287" y="158.8" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="303.0" y="167.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="321" y="158.8" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="337.0" y="167.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="355" y="158.8" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="371.0" y="167.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="389" y="158.8" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="405.0" y="167.2" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">36</text>
+        <rect x="423" y="158.8" width="32" height="11.2" rx="2" fill="#8f4529"/>
+        <text x="439.0" y="167.2" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">53</text>
+        <rect x="457" y="158.8" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="473.0" y="167.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">17</text>
+        <rect x="491" y="158.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="507.0" y="167.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">9</text>
+        <rect x="525" y="158.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="541.0" y="167.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">10</text>
+        <rect x="559" y="158.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="575.0" y="167.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">8</text>
+        <text x="618" y="167.4" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">137</text>
+        <text x="660" y="167.4" font-size="7.8" fill="var(--muted)" text-anchor="middle">29%</text>
+        <rect x="0" y="171.0" width="700" height="13.2" fill="#fdf1ea"/>
+        <text x="144" y="180.6" font-size="7.8" font-weight="700" fill="var(--clay-deep)" text-anchor="end">11. Robot Ventures</text>
+        <rect x="151" y="172.0" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="172.0" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="172.0" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="172.0" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="287" y="172.0" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="321" y="172.0" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="337.0" y="180.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">2</text>
+        <rect x="355" y="172.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="371.0" y="180.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">8</text>
+        <rect x="389" y="172.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="405.0" y="180.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">13</text>
+        <rect x="423" y="172.0" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="439.0" y="180.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">12</text>
+        <rect x="457" y="172.0" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="473.0" y="180.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">26</text>
+        <rect x="491" y="172.0" width="32" height="11.2" rx="2" fill="#b05a38"/>
+        <text x="507.0" y="180.4" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">43</text>
+        <rect x="525" y="172.0" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="541.0" y="180.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">20</text>
+        <rect x="559" y="172.0" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="575.0" y="180.4" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">3</text>
+        <text x="618" y="180.6" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">127</text>
+        <text x="660" y="180.6" font-size="7.8" fill="var(--muted)" text-anchor="middle">9%</text>
+        <text x="144" y="193.8" font-size="7.8" font-weight="500" fill="var(--ink)" text-anchor="end">12. Galaxy Digital</text>
+        <rect x="151" y="185.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="185.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="185.2" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="185.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="269.0" y="193.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">4</text>
+        <rect x="287" y="185.2" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="303.0" y="193.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">15</text>
+        <rect x="321" y="185.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="337.0" y="193.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">8</text>
+        <rect x="355" y="185.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="371.0" y="193.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">6</text>
+        <rect x="389" y="185.2" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="405.0" y="193.6" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">29</text>
+        <rect x="423" y="185.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="439.0" y="193.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">10</text>
+        <rect x="457" y="185.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="473.0" y="193.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">9</text>
+        <rect x="491" y="185.2" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="507.0" y="193.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">15</text>
+        <rect x="525" y="185.2" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="541.0" y="193.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">18</text>
+        <rect x="559" y="185.2" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="575.0" y="193.6" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">11</text>
+        <text x="618" y="193.8" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">125</text>
+        <text x="660" y="193.8" font-size="7.8" fill="var(--muted)" text-anchor="middle">34%</text>
+        <text x="144" y="212.0" font-size="7.8" font-weight="500" fill="var(--muted)" text-anchor="end">Alameda Research</text>
+        <rect x="151" y="203.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="203.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="203.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="203.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="287" y="203.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="321" y="203.4" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="337.0" y="211.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="355" y="203.4" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="371.0" y="211.8" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">13</text>
+        <rect x="389" y="203.4" width="32" height="11.2" rx="2" fill="#8f4529"/>
+        <text x="405.0" y="211.8" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">76</text>
+        <rect x="423" y="203.4" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="439.0" y="211.8" font-size="6.8" font-weight="600" fill="#fff" text-anchor="middle">25</text>
+        <rect x="457" y="203.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="491" y="203.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="525" y="203.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="559" y="203.4" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <text x="618" y="212.0" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">115</text>
+        <text x="660" y="212.0" font-size="7.8" fill="var(--muted)" text-anchor="middle">16%</text>
+        <text x="144" y="225.2" font-size="7.8" font-weight="500" fill="var(--muted)" text-anchor="end">Tiger Global</text>
+        <rect x="151" y="216.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="216.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="216.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="216.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="287" y="216.6" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="303.0" y="225.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">2</text>
+        <rect x="321" y="216.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="355" y="216.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="389" y="216.6" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="405.0" y="225.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">20</text>
+        <rect x="423" y="216.6" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="439.0" y="225.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">14</text>
+        <rect x="457" y="216.6" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="473.0" y="225.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="491" y="216.6" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="507.0" y="225.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="525" y="216.6" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="559" y="216.6" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="575.0" y="225.0" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <text x="618" y="225.2" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">39</text>
+        <text x="660" y="225.2" font-size="7.8" fill="var(--muted)" text-anchor="middle">36%</text>
+        <text x="144" y="238.4" font-size="7.8" font-weight="500" fill="var(--muted)" text-anchor="end">Tether</text>
+        <rect x="151" y="229.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="185" y="229.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="219" y="229.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="253" y="229.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="287" y="229.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="321" y="229.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="355" y="229.8" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="371.0" y="238.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="389" y="229.8" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="405.0" y="238.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="423" y="229.8" width="32" height="11.2" rx="2" fill="var(--grid)"/>
+        <rect x="457" y="229.8" width="32" height="11.2" rx="2" fill="#f3dccd"/>
+        <text x="473.0" y="238.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">1</text>
+        <rect x="491" y="229.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="507.0" y="238.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">5</text>
+        <rect x="525" y="229.8" width="32" height="11.2" rx="2" fill="#e6b89b"/>
+        <text x="541.0" y="238.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">9</text>
+        <rect x="559" y="229.8" width="32" height="11.2" rx="2" fill="#d38d69"/>
+        <text x="575.0" y="238.2" font-size="6.8" font-weight="600" fill="var(--ink)" text-anchor="middle">17</text>
+        <text x="618" y="238.4" font-size="7.8" font-weight="700" fill="var(--ink)" text-anchor="middle">34</text>
+        <text x="660" y="238.4" font-size="7.8" fill="var(--muted)" text-anchor="middle">79%</text>
+        <text x="8" y="258" font-size="7.3" fill="var(--faint)">Rounds joined (lead or follow) by year announced &#183; * 2026 through Sept 24 &#183; % led is a floor: DefiLlama&#8217;s lead data is incomplete. Bottom three rows: outside the top 12.</text>
+        </svg>
+      <p class="cite">DefiLlama funding-rounds database &#183; Jan 2014&#8211;Sept 24, 2026 &#183; aliases merged (a16z + a16z crypto, Binance Labs + YZi, Jump entities)</p>
+    </div>
+
+    <div class="card">
+      <h2>Insiders get ~4&#215; the public&#8217;s direct share</h2>
+      <p class="dl"><i><span class="sw" style="background:var(--ink)"></span>Team</i><i><span class="sw" style="background:var(--teal)"></span>Investors</i><i><span class="sw" style="background:var(--slate)"></span>Foundation</i><i><span class="sw" style="background:var(--clay)"></span>Public</i></p>
+      <svg viewBox="0 0 340 180" role="img" aria-label="How token supply is split between team, investors, foundation and public">
+        <text x="70.0" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">0%</text>
+        <text x="135.0" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">25%</text>
+        <text x="200.0" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">50%</text>
+        <text x="265.0" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">75%</text>
+        <text x="330.0" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">100%</text>
+        <text x="65.0" y="24.5" font-size="8.5" font-weight="700" fill="var(--ink)" text-anchor="end">Median (24)</text>
+        <rect x="70.0" y="16" width="52.0" height="11" fill="var(--ink)"/>
+        <text x="96.0" y="24" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">20</text>
+        <rect x="122.0" y="16" width="46.2" height="11" fill="var(--teal)"/>
+        <text x="145.1" y="24" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">18</text>
+        <rect x="168.2" y="16" width="117.0" height="11" fill="var(--slate)"/>
+        <text x="226.7" y="24" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">45</text>
+        <rect x="285.2" y="16" width="25.7" height="11" fill="var(--clay)"/>
+        <text x="298.1" y="24" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">10</text>
+        <rect x="311.0" y="16" width="19.0" height="11" fill="var(--grid)"/>
+        <text x="65.0" y="44.5" font-size="8" font-weight="500" fill="var(--muted)" text-anchor="end">Solana</text>
+        <rect x="70.0" y="36" width="33.3" height="11" fill="var(--ink)"/>
+        <text x="86.6" y="44" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">13</text>
+        <rect x="103.3" y="36" width="94.1" height="11" fill="var(--teal)"/>
+        <text x="150.3" y="44" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">36</text>
+        <rect x="197.4" y="36" width="128.3" height="11" fill="var(--slate)"/>
+        <text x="261.6" y="44" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">49</text>
+        <rect x="325.7" y="36" width="4.3" height="11" fill="var(--clay)"/>
+        <rect x="330.0" y="36" width="0.0" height="11" fill="var(--grid)"/>
+        <text x="65.0" y="58.5" font-size="8" font-weight="500" fill="var(--muted)" text-anchor="end">Arbitrum</text>
+        <rect x="70.0" y="50" width="70.0" height="11" fill="var(--ink)"/>
+        <text x="105.0" y="58" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">27</text>
+        <rect x="140.0" y="50" width="45.6" height="11" fill="var(--teal)"/>
+        <text x="162.8" y="58" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">18</text>
+        <rect x="185.6" y="50" width="114.2" height="11" fill="var(--slate)"/>
+        <text x="242.7" y="58" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">44</text>
+        <rect x="299.8" y="50" width="30.2" height="11" fill="var(--clay)"/>
+        <text x="314.9" y="58" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">12</text>
+        <text x="65.0" y="72.5" font-size="8" font-weight="500" fill="var(--muted)" text-anchor="end">Uniswap</text>
+        <rect x="70.0" y="64" width="55.3" height="11" fill="var(--ink)"/>
+        <text x="97.7" y="72" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">21</text>
+        <rect x="125.3" y="64" width="46.9" height="11" fill="var(--teal)"/>
+        <text x="148.8" y="72" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">18</text>
+        <rect x="172.2" y="64" width="117.0" height="11" fill="var(--slate)"/>
+        <text x="230.7" y="72" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">45</text>
+        <rect x="289.2" y="64" width="39.0" height="11" fill="var(--clay)"/>
+        <text x="308.7" y="72" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">15</text>
+        <rect x="328.2" y="64" width="1.8" height="11" fill="var(--grid)"/>
+        <text x="65.0" y="86.5" font-size="8" font-weight="500" fill="var(--muted)" text-anchor="end">Aptos</text>
+        <rect x="70.0" y="78" width="49.4" height="11" fill="var(--ink)"/>
+        <text x="94.7" y="86" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">19</text>
+        <rect x="119.4" y="78" width="35.0" height="11" fill="var(--teal)"/>
+        <text x="136.9" y="86" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">13</text>
+        <rect x="154.4" y="78" width="175.6" height="11" fill="var(--slate)"/>
+        <text x="242.2" y="86" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">68</text>
+        <text x="65.0" y="100.5" font-size="8" font-weight="500" fill="var(--muted)" text-anchor="end">Monad</text>
+        <rect x="70.0" y="92" width="70.2" height="11" fill="var(--ink)"/>
+        <text x="105.1" y="100" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">27</text>
+        <rect x="140.2" y="92" width="51.2" height="11" fill="var(--teal)"/>
+        <text x="165.8" y="100" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">20</text>
+        <rect x="191.4" y="92" width="110.5" height="11" fill="var(--slate)"/>
+        <text x="246.7" y="100" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">42</text>
+        <rect x="301.9" y="92" width="28.1" height="11" fill="var(--clay)"/>
+        <text x="316.0" y="100" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">11</text>
+        <text x="65.0" y="114.5" font-size="8" font-weight="500" fill="var(--muted)" text-anchor="end">Ethena</text>
+        <rect x="70.0" y="106" width="78.0" height="11" fill="var(--ink)"/>
+        <text x="109.0" y="114" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">30</text>
+        <rect x="148.0" y="106" width="65.0" height="11" fill="var(--teal)"/>
+        <text x="180.5" y="114" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">25</text>
+        <rect x="213.0" y="106" width="111.8" height="11" fill="var(--slate)"/>
+        <text x="268.9" y="114" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">43</text>
+        <rect x="324.8" y="106" width="5.2" height="11" fill="var(--grid)"/>
+        <text x="65.0" y="128.5" font-size="8" font-weight="500" fill="var(--muted)" text-anchor="end">Pump.fun</text>
+        <rect x="70.0" y="120" width="52.0" height="11" fill="var(--ink)"/>
+        <text x="96.0" y="128" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">20</text>
+        <rect x="122.0" y="120" width="33.8" height="11" fill="var(--teal)"/>
+        <text x="138.9" y="128" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">13</text>
+        <rect x="155.8" y="120" width="73.8" height="11" fill="var(--slate)"/>
+        <text x="192.7" y="128" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">28</text>
+        <rect x="229.6" y="120" width="85.8" height="11" fill="var(--clay)"/>
+        <text x="272.5" y="128" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">33</text>
+        <rect x="315.4" y="120" width="14.6" height="11" fill="var(--grid)"/>
+        <text x="65.0" y="142.5" font-size="8" font-weight="500" fill="var(--muted)" text-anchor="end">Jupiter</text>
+        <rect x="70.0" y="134" width="52.0" height="11" fill="var(--ink)"/>
+        <text x="96.0" y="142" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">20</text>
+        <rect x="122.0" y="134" width="78.0" height="11" fill="var(--slate)"/>
+        <text x="161.0" y="142" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">30</text>
+        <rect x="200.0" y="134" width="104.0" height="11" fill="var(--clay)"/>
+        <text x="252.0" y="142" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">40</text>
+        <rect x="304.0" y="134" width="26.0" height="11" fill="var(--grid)"/>
+        <text x="65.0" y="156.5" font-size="8" font-weight="500" fill="var(--muted)" text-anchor="end">Hyperliquid</text>
+        <rect x="70.0" y="148" width="61.9" height="11" fill="var(--ink)"/>
+        <text x="100.9" y="156" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">24</text>
+        <rect x="131.9" y="148" width="117.5" height="11" fill="var(--slate)"/>
+        <text x="190.6" y="156" font-size="6.8" font-weight="700" fill="var(--ink)" text-anchor="middle">45</text>
+        <rect x="249.4" y="148" width="80.6" height="11" fill="var(--clay)"/>
+        <text x="289.7" y="156" font-size="6.8" font-weight="700" fill="#fff" text-anchor="middle">31</text>
+        <text x="8" y="170" font-size="7.5" fill="var(--faint)">Foundation = &#8220;community/ecosystem&#8221; + treasury. Public = public sale + airdrop.</text>
+        </svg>
+      <p class="cite">Tokenomics docs &amp; whitepapers, via Messari / ICO Drops &#183; % of total supply</p>
+    </div>
+
+    <div class="card">
+      <h2>Tokens step up faster &#8212; then the public pays</h2>
+      <p class="cs">The biggest markup is at listing; after it, <b style="color:var(--clay-deep)">77% trade below their listing price</b>.</p>
+      <svg viewBox="0 0 340 162" role="img" aria-label="Median valuation step-ups for tokens versus Carta seed to Series A">
+        <line x1="128.0" y1="14" x2="128.0" y2="142" stroke="var(--grid)" stroke-width="1"/>
+        <text x="128.0" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">0.1&#215;</text>
+        <line x1="176.2" y1="14" x2="176.2" y2="142" stroke="var(--grid)" stroke-width="1"/>
+        <text x="176.2" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">0.3&#215;</text>
+        <line x1="229.0" y1="14" x2="229.0" y2="142" stroke="var(--ink)" stroke-width="1.2"/>
+        <text x="229.0" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">1&#215;</text>
+        <line x1="277.2" y1="14" x2="277.2" y2="142" stroke="var(--grid)" stroke-width="1"/>
+        <text x="277.2" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">3&#215;</text>
+        <line x1="330.0" y1="14" x2="330.0" y2="142" stroke="var(--grid)" stroke-width="1"/>
+        <text x="330.0" y="9" font-size="7" fill="var(--faint)" text-anchor="middle">10&#215;</text>
+        <text x="122.0" y="24" font-size="8" font-weight="600" fill="var(--ink)" text-anchor="end">Seed &#8594; Series A</text>
+        <text x="122.0" y="32.5" font-size="7" fill="var(--faint)" text-anchor="end">Carta, US equity, Q2 2024</text>
+        <rect x="229.0" y="18" width="45.2" height="13" rx="2" fill="var(--teal)"/>
+        <text x="279.2" y="28" font-size="9" font-weight="700" fill="var(--teal-deep)">2.8&#215;</text>
+        <text x="122.0" y="48" font-size="8" font-weight="600" fill="var(--ink)" text-anchor="end">First &#8594; next private round</text>
+        <text x="122.0" y="56.5" font-size="7" fill="var(--faint)" text-anchor="end">tokens, n=14</text>
+        <rect x="229.0" y="42" width="58.6" height="13" rx="2" fill="var(--clay)"/>
+        <text x="292.6" y="52" font-size="9" font-weight="700" fill="var(--clay-deep)">3.8&#215;</text>
+        <text x="122.0" y="68" font-size="8" font-weight="600" fill="var(--ink)" text-anchor="end">Last private &#8594; listing day</text>
+        <text x="122.0" y="76.5" font-size="7" fill="var(--faint)" text-anchor="end">n=18</text>
+        <rect x="229.0" y="62" width="60.8" height="13" rx="2" fill="var(--clay)"/>
+        <text x="294.8" y="72" font-size="9" font-weight="700" fill="var(--clay-deep)">4&#215;</text>
+        <text x="122.0" y="88" font-size="8" font-weight="600" fill="var(--ink)" text-anchor="end">Public sale &#8594; listing day</text>
+        <text x="122.0" y="96.5" font-size="7" fill="var(--faint)" text-anchor="end">n=9</text>
+        <rect x="229.0" y="82" width="80.0" height="13" rx="2" fill="var(--clay)"/>
+        <text x="314.0" y="92" font-size="9" font-weight="700" fill="var(--clay-deep)">6.2&#215;</text>
+        <text x="122.0" y="108" font-size="8" font-weight="600" fill="var(--ink)" text-anchor="end">Last private &#8594; today</text>
+        <text x="122.0" y="116.5" font-size="7" fill="var(--faint)" text-anchor="end">n=19</text>
+        <rect x="229.0" y="102" width="17.8" height="13" rx="2" fill="var(--clay)"/>
+        <text x="251.8" y="112" font-size="9" font-weight="700" fill="var(--clay-deep)">1.5&#215;<tspan font-weight="500" fill="var(--muted)" font-size="7">  42% below 1&#215;</tspan></text>
+        <text x="122.0" y="128" font-size="8" font-weight="600" fill="var(--ink)" text-anchor="end">Listing day &#8594; today</text>
+        <text x="122.0" y="136.5" font-size="7" fill="var(--faint)" text-anchor="end">n=26</text>
+        <rect x="176.2" y="122" width="52.8" height="13" rx="2" fill="var(--clay)"/>
+        <text x="171.2" y="132" font-size="9" font-weight="700" fill="var(--clay-deep)" text-anchor="end">0.3&#215;</text>
+        <text x="234.0" y="132" font-size="7" fill="var(--muted)">77% below 1&#215;</text>
+        <text x="8" y="158" font-size="7.5" fill="var(--faint)">Medians, log scale. Private &#8220;rounds&#8221; are often equity + token warrants.</text>
+        </svg>
+      <p class="cite">26 tokens, ICO Drops &amp; press, CoinGecko &#183; Carta, step-up multiples Q2 2024</p>
+    </div>
+
+
+
+    <div class="card wide">
+      <h2>Regulated vs. on-chain: the same market, very different economics</h2>
+      <table class="pairs"><thead><tr><th>Market</th><th class="ti">Regulated / TradFi</th><th class="tc">On-chain / offshore</th><th>What it teaches</th></tr></thead><tbody><tr><td class="m">Stablecoins</td><td><b>Circle</b><span>$73B supply &#183; $48M net income (Q2)</span></td><td><b>Tether</b><span>$185B supply &#183; ~$1.5B profit (Q2, attested)</span></td><td class="t">Regulated and public vs. offshore and ~30&#215; more profitable.</td></tr><tr><td class="m">Spot trading</td><td><b>Coinbase</b><span>$146B volume &#183; $599M revenue (Q2)</span></td><td><b>Uniswap</b><span>$130B volume &#183; $52M since fee switch (Dec.)</span></td><td class="t">Same volume; the protocol keeps almost none of it.</td></tr><tr><td class="m">Perpetual futures</td><td><b>CME / Coinbase</b><span>CME ~$15B OI &#183; Coinbase ~$1.1M/employee</span></td><td><b>Hyperliquid</b><span>$9&#8211;10B OI &#183; ~$55M/contributor (H1)</span></td><td class="t">11 core contributors run a book two-thirds the size of CME&#8217;s.</td></tr><tr><td class="m">Tokenized T-bills</td><td><b>BlackRock, Franklin</b><span>$2.24B BUIDL &#183; $2.52B Franklin</span></td><td><b>Ondo, Circle</b><span>$2.28B USDY &#183; $2.40B USYC</span></td><td class="t">The counterexample: regulated brands hold their own.</td></tr><tr><td class="m">Prediction markets</td><td><b>Kalshi (CFTC)</b><span>$22B (last closed round)</span></td><td><b>Polymarket</b><span>$15B closed &#183; $21B in talks</span></td><td class="t">Both sides&#8217; volume figures are disputed &#8212; use with care.</td></tr></tbody></table>
+      <p class="cite">Circle, Coinbase &amp; CME filings &#183; Tether attestation &#183; DefiLlama &#183; rwa.xyz &#183; press &#183; Q2/H1 2026 or Sept 27, 2026</p>
+    </div>
+
+
+  </div>
+  <footer><span><b>Venture Math</b> &#8212; Session 05 &#183; Back of 2</span><span>Artemis via Cointelegraph (rev./employee) &#183; @ani_pai, Dec 9, 2025 &#183; sources on each card</span></footer>
+</section>
+
+</body>
+</html>
